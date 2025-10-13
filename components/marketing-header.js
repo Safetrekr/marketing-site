@@ -42,7 +42,7 @@ export class MarketingHeader {
 
             <!-- CTA Actions -->
             <div class="st-marketing-nav-actions">
-              <a href="../index.html" class="st-marketing-cta-tertiary st-marketing-cta-sm">
+              <a href="#" class="st-marketing-cta-tertiary st-marketing-cta-sm">
                 Sign In
               </a>
               <a href="./request-quote.html" class="st-marketing-cta-primary st-marketing-cta-sm">
@@ -79,7 +79,7 @@ export class MarketingHeader {
             <li><a href="./about.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'about' ? 'active' : ''}">About</a></li>
           </ul>
           <div class="st-marketing-mobile-menu-actions">
-            <a href="../index.html" class="st-marketing-cta-secondary">
+            <a href="#" class="st-marketing-cta-secondary">
               Sign In
             </a>
             <a href="./request-quote.html" class="st-marketing-cta-primary">
