@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>How SafeTrekr Works - From Itinerary to Safety Binder in 4 Steps</title>
+  <meta name="description" content="See how SafeTrekr turns your trip itinerary into a comprehensive safety binder in 4 simple steps: input trip details, analyst review, custom packet generation, and download. 3-5 day turnaround with professional safety analysis.">
+  <meta name="keywords" content="trip safety process, how SafeTrekr works, trip planning steps, safety analyst review, trip packet generation, travel safety management">
+  <link rel="canonical" href="https://jessedo81.github.io/safetrekr-app/marketing/how-it-works.html">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="How SafeTrekr Works - 4 Steps to Safer Trips">
+  <meta property="og:description" content="From trip idea to confident departure: Input details, get analyst review, receive custom trip packet, download and travel safely.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jessedo81.github.io/safetrekr-app/marketing/how-it-works.html">
+  <meta property="og:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How SafeTrekr Works - 4 Steps to Safer Trips">
+  <meta name="twitter:description" content="Professional trip safety management in 4 simple steps with analyst review and compliant documentation.">
+  <meta name="twitter:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <link rel="stylesheet" href="./styles/marketing.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How SafeTrekr Creates Trip Safety Plans",
+      "description": "Four-step process to create comprehensive trip safety packets with professional analyst review",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Input Your Trip",
+          "text": "Upload your itinerary or fill a guided form. Takes 10-15 minutes.",
+          "position": 1
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Analyst Review",
+          "text": "Professional safety analyst reviews your trip, validates locations, identifies risks. 3-5 day turnaround.",
+          "position": 2
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Custom Trip Packet",
+          "text": "Receive comprehensive PDF with maps, itineraries, emergency protocols, and compliance documentation.",
+          "position": 3
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Download & Travel",
+          "text": "Download packet, share with stakeholders, travel with confidence. Optional add-ons available.",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much prep do we need before submitting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A basic itinerary is enough—dates, destinations, lodging, and venues. We'll ask for anything missing. You can upload a PDF, CSV, or Google Sheet, or fill our guided form."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if we change hotels or add a stop after submission?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Re-upload or edit in your dashboard. We'll update the binder and notify your trip leads. Rush fees may apply for short-notice changes close to departure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you cover international trips?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Timelines may be longer depending on location data availability. We include country intel in AM/PM briefs, embassy/consulate info, local ER/LE contacts, and visa/passport checklists. We confirm specifics at intake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who sees our traveler information?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only your designated admins/leads and SafeTrekr analysts with role-based access. Background check results are further restricted to authorized admins only. We never share data with third parties."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the internet is down during our trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your binder is downloadable as a PDF. The mobile HTML view works offline once loaded (PWA). We recommend downloading the PDF before departure as a backup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you store full medical records?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We only store high-level flags if you provide them (e.g., 'allergy flag'). Full medical records remain with your organization. We practice data minimization by design."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we see a sample binder before committing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide redacted sample binders for different trip types. Request a sample binder via our request form."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file formats do you accept for itineraries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PDF, CSV, Excel, Google Sheets, or paste directly into our form. We extract dates, locations, and contacts automatically. If we can't parse something, we'll ask you to clarify."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are background checks required for all trips?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Background checks are an optional add-on. Add them when your policy requires screening, for overnight trips with youth, or when venues mandate them. Adult consent is always required before screening."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do you retain our trip data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We follow your retention policy. Standard: audit logs for 7 years (compliance), trip details purged on schedule (typically 90 days post-trip). You receive cryptographic purge-proofs as evidence of deletion."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+</head>
+<body class="st-marketing-page">
+
+  <!-- Hero Section -->
+  <section class="st-marketing-hero">
+    <div class="st-marketing-hero-background"></div>
+    <div class="st-marketing-container st-marketing-hero-content">
+      <h1 class="st-marketing-hero-title">
+        From Trip Idea to<br>Confident Departure<br>in 4 Steps
+      </h1>
+      <p class="st-marketing-hero-subtitle">
+        We turn dates and addresses into a clear, checkable safety binder—with daily AM/PM updates,
+        professional analyst review, and audit-ready documentation. Most trips finalized in 3-5 business days.
+      </p>
+      <div class="st-marketing-hero-actions">
+        <a href="./request-quote.html" class="st-marketing-cta-primary">
+          Start a Trip
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <a href="#binder-preview" class="st-marketing-cta-secondary">
+          See Sample Binder
+        </a>
+      </div>
+      <p class="st-marketing-hero-note">
+        Draft binder in under 60 minutes • Final review in 1-3 days
+      </p>
+    </div>
+  </section>
+
+  <!-- Four Steps Section -->
+  <section class="st-marketing-section">
+    <div class="st-marketing-container">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">The Process</span>
+        <h2 class="st-marketing-section-title">Four steps from itinerary to safety plan</h2>
+        <p class="st-marketing-section-subtitle">
+          Upload your trip basics, we handle the verification and planning, you download a complete safety packet.
+        </p>
+      </div>
+
+      <div class="st-marketing-feature-grid">
+        <!-- Step 1 -->
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">edit_note</span>
+          </div>
+          <h3 class="st-marketing-feature-title">1. Input Your Trip</h3>
+          <p class="st-marketing-feature-description">
+            Upload your itinerary (PDF/CSV/Google Sheet) or fill our guided form with dates, lodging,
+            venues, and headcount. Takes 10-15 minutes. We extract the details and create your trip shell.
+          </p>
+          <ul style="margin-top: var(--st-spacing-md); padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); font-size: var(--st-font-size-sm);">
+            <li>Trip dates and destination(s)</li>
+            <li>Lodging addresses and venue locations</li>
+            <li>Transportation method and routes</li>
+            <li>Participant count and group type</li>
+          </ul>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">search</span>
+          </div>
+          <h3 class="st-marketing-feature-title">2. Analyst Review</h3>
+          <p class="st-marketing-feature-description">
+            A professional safety analyst reviews your trip, validates all locations, checks lodging safety
+            (egress, floor policy, neighborhood), identifies nearby ER/LE, and provides recommendations.
+            Standard turnaround: 3-5 business days. Rush available.
+          </p>
+          <ul style="margin-top: var(--st-spacing-md); padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); font-size: var(--st-font-size-sm);">
+            <li>Route validation and fallback options</li>
+            <li>Lodging safety checks and floor guidance</li>
+            <li>Emergency resource proximity scans</li>
+            <li>Risk identification and mitigation advice</li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
+          </div>
+          <h3 class="st-marketing-feature-title">3. Custom Trip Packet</h3>
+          <p class="st-marketing-feature-description">
+            Receive a professional PDF trip packet with interactive maps, detailed itineraries, emergency
+            contacts, safety protocols, compliance documentation, and audit logs. Available as PDF and mobile-friendly HTML.
+          </p>
+          <ul style="margin-top: var(--st-spacing-md); padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); font-size: var(--st-font-size-sm);">
+            <li>Maps with routes, lodging, and ER/LE locations</li>
+            <li>Lodging and venue safety checklists</li>
+            <li>Emergency call tree and contact cards</li>
+            <li>Time-stamped audit logs and purge proofs</li>
+          </ul>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">download</span>
+          </div>
+          <h3 class="st-marketing-feature-title">4. Download & Travel</h3>
+          <p class="st-marketing-feature-description">
+            Download your packet, share with board members and stakeholders, and travel with confidence.
+            Optional add-ons: background checks (with consent), parent communications kit, incident debrief,
+            and translation packs.
+          </p>
+          <ul style="margin-top: var(--st-spacing-md); padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); font-size: var(--st-font-size-sm);">
+            <li>PDF and mobile-friendly HTML formats</li>
+            <li>Day-of AM/PM brief emails</li>
+            <li>Export options for mass-notify systems</li>
+            <li>Optional background checks and comms kits</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--st-spacing-2xl);">
+        <a href="./request-quote.html" class="st-marketing-cta-primary">
+          Start Your First Trip
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Does What Section -->
+  <section class="st-marketing-section st-marketing-section-alt">
+    <div class="st-marketing-container">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">Roles & Timeline</span>
+        <h2 class="st-marketing-section-title">Who does what and how long it takes</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--st-spacing-xl); margin-top: var(--st-spacing-xl);">
+        <!-- Your Responsibilities -->
+        <div class="st-marketing-feature-card">
+          <h3 class="st-marketing-feature-title" style="margin-bottom: var(--st-spacing-md);">You Provide</h3>
+          <ul style="padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); line-height: 1.8;">
+            <li>Itinerary basics (dates, locations, venues)</li>
+            <li>Lodging and venue addresses</li>
+            <li>Traveler list (optional for roster features)</li>
+            <li>Any known constraints or special needs</li>
+          </ul>
+        </div>
+
+        <!-- SafeTrekr Responsibilities -->
+        <div class="st-marketing-feature-card">
+          <h3 class="st-marketing-feature-title" style="margin-bottom: var(--st-spacing-md);">SafeTrekr Delivers</h3>
+          <ul style="padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); line-height: 1.8;">
+            <li>Route vetting and fallback planning</li>
+            <li>Venue and area safety checks</li>
+            <li>Local contact verification (ER/LE proximity)</li>
+            <li>Complete binder assembly with audit logs</li>
+            <li>Day-of AM/PM brief updates</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div style="margin-top: var(--st-spacing-2xl); padding: var(--st-spacing-xl); background-color: var(--st-bg-card); border-radius: var(--st-radius-lg); border: 1px solid var(--st-border-subtle);">
+        <h3 class="st-marketing-feature-title" style="text-align: center; margin-bottom: var(--st-spacing-lg);">Typical Timeline</h3>
+        <div class="st-marketing-stats-grid">
+          <div class="st-marketing-stat">
+            <div class="st-marketing-stat-value" style="font-size: 2rem;">&lt; 60 min</div>
+            <div class="st-marketing-stat-label">Draft binder generated from your itinerary</div>
+          </div>
+          <div class="st-marketing-stat">
+            <div class="st-marketing-stat-value" style="font-size: 2rem;">1-3 days</div>
+            <div class="st-marketing-stat-label">Final binder with analyst review complete</div>
+          </div>
+          <div class="st-marketing-stat">
+            <div class="st-marketing-stat-value" style="font-size: 2rem;">Day-of</div>
+            <div class="st-marketing-stat-label">AM/PM briefs delivered to trip leads</div>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: var(--st-spacing-lg); color: var(--st-text-muted); font-size: var(--st-font-size-sm);">
+          Complex itineraries or international venues may extend timelines; we confirm upon intake. Rush service available (+$150/trip).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's in the Binder Section -->
+  <section class="st-marketing-section" id="binder-preview">
+    <div class="st-marketing-container">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">Deliverables</span>
+        <h2 class="st-marketing-section-title">What's in your trip safety binder</h2>
+        <p class="st-marketing-section-subtitle">
+          Every binder includes maps, checklists, protocols, and audit-ready documentation—customized for your trip.
+        </p>
+      </div>
+
+      <div class="st-marketing-feature-grid">
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">map</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Maps & Routes</h3>
+          <p class="st-marketing-feature-description">
+            Primary and fallback routes with turn-by-turn directions. Points of interest: hospitals,
+            law enforcement stations, safe rendezvous locations. Drive-time rings for emergency access.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">hotel</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Lodging Checks</h3>
+          <p class="st-marketing-feature-description">
+            Floor placement guidance (not above fire-truck ladder reach), exits and egress routes,
+            neighborhood safety considerations, and night-arrival protocols.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">location_on</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Venue Checklists</h3>
+          <p class="st-marketing-feature-description">
+            Ingress and egress points, assembly areas, emergency contact information,
+            local facility security contacts, and accessibility notes.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">contact_phone</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Local Contacts</h3>
+          <p class="st-marketing-feature-description">
+            Nearest emergency room and urgent care facilities, law enforcement contacts,
+            facility security numbers, and embassy/consulate info for international trips.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">call</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Emergency Call Tree</h3>
+          <p class="st-marketing-feature-description">
+            Clear escalation paths: who calls whom, with primary and alternate contact numbers,
+            role assignments, and accountability roster.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Evidence & Audit Logs</h3>
+          <p class="st-marketing-feature-description">
+            Time-stamped log of all safety checks and updates. Version history with hash chains.
+            Purge-proofs for post-trip data retention compliance.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--st-spacing-2xl);">
+        <a href="./request-quote.html" class="st-marketing-cta-primary">
+          See Sample Binder
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <a href="./pricing.html" style="margin-left: var(--st-spacing-md);" class="st-marketing-cta-secondary">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AM/PM Briefs Section -->
+  <section class="st-marketing-section st-marketing-section-alt">
+    <div class="st-marketing-container">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">Live Updates</span>
+        <h2 class="st-marketing-section-title">Day-of AM/PM briefs keep you informed</h2>
+        <p class="st-marketing-section-subtitle">
+          Concise, actionable updates delivered to trip leads every morning and evening during your trip.
+        </p>
+      </div>
+
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="st-marketing-feature-card">
+          <h3 class="st-marketing-feature-title" style="margin-bottom: var(--st-spacing-md);">What's in a Brief</h3>
+          <ul style="padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); line-height: 1.8;">
+            <li><strong>Morning Plan:</strong> Weather, events near venues, transit advisories, any overnight changes</li>
+            <li><strong>Evening Review:</strong> Next-day outlook, route conditions, local event notices</li>
+            <li><strong>Alerts:</strong> Urgent changes with proposed actions (reroute, hotel floor change, etc.)</li>
+            <li><strong>Read Confirmation:</strong> Simple one-tap "I read it" with roll-call for chaperones</li>
+          </ul>
+          <p style="margin-top: var(--st-spacing-md); padding: var(--st-spacing-md); background-color: var(--st-bg-secondary); border-radius: var(--st-radius-md); font-size: var(--st-font-size-sm); color: var(--st-text-secondary);">
+            <strong>Privacy by design:</strong> Only designated leads receive updates. Everything is logged for accountability.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Background Checks Add-On Section -->
+  <section class="st-marketing-section">
+    <div class="st-marketing-container">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">Optional Add-On</span>
+        <h2 class="st-marketing-section-title">Background checks when you need them</h2>
+        <p class="st-marketing-section-subtitle">
+          For overnight trips, youth events, or when your policy requires screening—add background checks with clear consent workflows.
+        </p>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="st-marketing-feature-card">
+          <h3 class="st-marketing-feature-title" style="margin-bottom: var(--st-spacing-md);">What We Run</h3>
+          <ul style="padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); line-height: 1.8; margin-bottom: var(--st-spacing-lg);">
+            <li><strong>Adults only</strong> (staff, coaches, chaperones) with explicit consent</li>
+            <li>Identity verification</li>
+            <li>Nationwide criminal database search</li>
+            <li>Sex offender registry screens</li>
+            <li>Alias/SSN trace where legally required</li>
+          </ul>
+
+          <h3 class="st-marketing-feature-title" style="margin-bottom: var(--st-spacing-md);">Consent & Privacy</h3>
+          <ul style="padding-left: var(--st-spacing-lg); color: var(--st-text-secondary); line-height: 1.8; margin-bottom: var(--st-spacing-lg);">
+            <li>Clear consent forms collected before any screening</li>
+            <li>Role-based access: results shared only with designated admins</li>
+            <li>Data retention per your policy with documented purge schedules</li>
+            <li>We follow legal screening best practices—this is not medical or credit data</li>
+          </ul>
+
+          <div class="st-marketing-stats-grid" style="margin-top: var(--st-spacing-xl);">
+            <div class="st-marketing-stat">
+              <div class="st-marketing-stat-value" style="font-size: 2rem;">24-72 hrs</div>
+              <div class="st-marketing-stat-label">Typical turnaround (varies by jurisdiction)</div>
+            </div>
+            <div class="st-marketing-stat">
+              <div class="st-marketing-stat-value" style="font-size: 2rem;">Per person</div>
+              <div class="st-marketing-stat-label">See pricing for domestic/international rates</div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: var(--st-spacing-xl);">
+            <a href="./pricing.html#trip-addons" class="st-marketing-cta-tertiary">
+              View Add-On Pricing
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="st-marketing-section st-marketing-section-alt">
+    <div class="st-marketing-container st-marketing-container-narrow">
+      <div class="st-marketing-section-header">
+        <span class="st-marketing-section-eyebrow">FAQ</span>
+        <h2 class="st-marketing-section-title">Common questions about the process</h2>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--st-spacing-md);">
+        <!-- FAQ 1 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>How much prep do we need before submitting?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            A basic itinerary is enough—dates, destinations, lodging, and venues. We'll ask for anything missing.
+            You can upload a PDF, CSV, or Google Sheet, or fill our guided form.
+          </p>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>What if we change hotels or add a stop after submission?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            Re-upload or edit in your dashboard. We'll update the binder and notify your trip leads.
+            Rush fees may apply for short-notice changes close to departure.
+          </p>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>Do you cover international trips?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            Yes. Timelines may be longer depending on location data availability. We include country intel
+            in AM/PM briefs, embassy/consulate info, local ER/LE contacts, and visa/passport checklists.
+            We confirm specifics at intake.
+          </p>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>Who sees our traveler information?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            Only your designated admins/leads and SafeTrekr analysts with role-based access. Background check
+            results are further restricted to authorized admins only. We never share data with third parties.
+          </p>
+        </details>
+
+        <!-- FAQ 5 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>What if the internet is down during our trip?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            Your binder is downloadable as a PDF. The mobile HTML view works offline once loaded (PWA).
+            We recommend downloading the PDF before departure as a backup.
+          </p>
+        </details>
+
+        <!-- FAQ 6 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>Do you store full medical records?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            No. We only store high-level flags if you provide them (e.g., "allergy flag").
+            Full medical records remain with your organization. We practice data minimization by design.
+          </p>
+        </details>
+
+        <!-- FAQ 7 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>Can we see a sample binder before committing?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            Yes. We provide redacted sample binders for different trip types.
+            <a href="./request-quote.html" style="color: var(--st-primary); text-decoration: underline;">Request a sample binder here</a>.
+          </p>
+        </details>
+
+        <!-- FAQ 8 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>What file formats do you accept for itineraries?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            PDF, CSV, Excel, Google Sheets, or paste directly into our form. We extract dates, locations,
+            and contacts automatically. If we can't parse something, we'll ask you to clarify.
+          </p>
+        </details>
+
+        <!-- FAQ 9 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>Are background checks required for all trips?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            No. Background checks are an optional add-on. Add them when your policy requires screening,
+            for overnight trips with youth, or when venues mandate them. Adult consent is always required before screening.
+          </p>
+        </details>
+
+        <!-- FAQ 10 -->
+        <details class="st-marketing-feature-card" style="cursor: pointer;">
+          <summary style="font-weight: 600; color: var(--st-text-heading); list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            <span>How long do you retain our trip data?</span>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <p style="margin-top: var(--st-spacing-md); color: var(--st-text-secondary); padding-left: var(--st-spacing-sm);">
+            We follow your retention policy. Standard: audit logs for 7 years (compliance), trip details purged
+            on schedule (typically 90 days post-trip). You receive cryptographic purge-proofs as evidence of deletion.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="st-marketing-section">
+    <div class="st-marketing-container st-marketing-container-narrow">
+      <div style="text-align: center;">
+        <h2 class="st-marketing-section-title">Ready to start your first trip?</h2>
+        <p class="st-marketing-section-subtitle">
+          Most organizations have their first binder in hand within 3 days. Draft available in under an hour.
+        </p>
+        <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
+          <a href="./request-quote.html" class="st-marketing-cta-primary">
+            Start a Trip
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a href="./pricing.html" class="st-marketing-cta-secondary">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script type="module">
+    import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
+
+    // Initialize header
+    const header = new MarketingHeader({ currentPage: 'how-it-works' });
+    header.mount('body');
+
+    // Initialize footer
+    const footer = new MarketingFooter();
+    footer.mount('body');
+
+    // Initialize analytics
+    Analytics.init('how-it-works');
+
+    // FAQ accordion behavior (smooth animation)
+    document.querySelectorAll('details').forEach(detail => {
+      detail.addEventListener('toggle', function() {
+        const icon = this.querySelector('.material-symbols-outlined');
+        if (this.open) {
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+    console.log('SafeTrekr Marketing How It Works: Initialized');
+  </script>
+
+</body>
+</html>

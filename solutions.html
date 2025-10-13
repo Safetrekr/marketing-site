@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>Solutions - SafeTrekr Trip Safety Management for Every Organization</title>
+  <meta name="description" content="Discover SafeTrekr solutions tailored for K-12 schools, higher education, churches & mission organizations, and corporate & sports teams. Professional trip safety management for every sector.">
+  <meta name="keywords" content="trip safety solutions, K-12 field trips, study abroad safety, mission trip planning, corporate travel safety, sports team travel">
+  <link rel="canonical" href="https://jessedo81.github.io/safetrekr-app/marketing/solutions.html">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="SafeTrekr Solutions - Tailored Trip Safety for Every Sector">
+  <meta property="og:description" content="Professional trip safety management solutions for K-12, higher education, churches, and corporate organizations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jessedo81.github.io/safetrekr-app/marketing/solutions.html">
+  <meta property="og:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SafeTrekr Solutions - Tailored Trip Safety">
+  <meta name="twitter:description" content="Professional trip safety management solutions for K-12, higher education, churches, and corporate organizations.">
+  <meta name="twitter:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <link rel="stylesheet" href="./styles/marketing.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "SafeTrekr Solutions",
+    "description": "Trip safety management solutions for K-12 schools, higher education, churches, and corporate organizations",
+    "url": "https://jessedo81.github.io/safetrekr-app/marketing/solutions.html",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jessedo81.github.io/safetrekr-app/marketing/"
+      }, {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Solutions",
+        "item": "https://jessedo81.github.io/safetrekr-app/marketing/solutions.html"
+      }]
+    }
+  }
+  </script>
+
+  <style>
+    /* Segment Selector Tabs */
+    .st-segment-selector {
+      display: flex;
+      justify-content: center;
+      gap: var(--st-spacing-sm);
+      flex-wrap: wrap;
+      margin-top: var(--st-spacing-xl);
+    }
+
+    .st-segment-tab {
+      display: flex;
+      align-items: center;
+      gap: var(--st-spacing-sm);
+      padding: var(--st-spacing-md) var(--st-spacing-xl);
+      font-size: var(--st-font-size-base);
+      font-weight: 600;
+      color: var(--st-text-secondary);
+      background-color: var(--st-bg-card);
+      border: 2px solid var(--st-border-subtle);
+      border-radius: var(--st-radius-lg);
+      cursor: pointer;
+      transition: all var(--st-transition-fast);
+      text-decoration: none;
+    }
+
+    .st-segment-tab:hover {
+      border-color: var(--st-primary);
+      color: var(--st-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--st-shadow-md);
+    }
+
+    .st-segment-tab.active {
+      background-color: var(--st-primary);
+      border-color: var(--st-primary);
+      color: white;
+      box-shadow: var(--st-shadow-lg);
+    }
+
+    .st-segment-tab .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    /* Segment Content Sections */
+    .st-segment-content {
+      display: none;
+    }
+
+    .st-segment-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Pain Points Grid */
+    .st-pain-points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--st-spacing-lg);
+      margin-top: var(--st-spacing-xl);
+    }
+
+    .st-pain-point {
+      background-color: var(--st-bg-card);
+      border-left: 4px solid var(--st-error);
+      border-radius: var(--st-radius-md);
+      padding: var(--st-spacing-lg);
+    }
+
+    .st-pain-point-title {
+      font-weight: 600;
+      color: var(--st-text-heading);
+      margin-bottom: var(--st-spacing-sm);
+    }
+
+    .st-pain-point-description {
+      font-size: var(--st-font-size-sm);
+      color: var(--st-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Solution Benefits Grid */
+    .st-benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--st-spacing-lg);
+      margin-top: var(--st-spacing-xl);
+    }
+
+    .st-benefit {
+      background-color: var(--st-bg-card);
+      border-left: 4px solid var(--st-success);
+      border-radius: var(--st-radius-md);
+      padding: var(--st-spacing-lg);
+    }
+
+    .st-benefit-title {
+      font-weight: 600;
+      color: var(--st-text-heading);
+      margin-bottom: var(--st-spacing-sm);
+    }
+
+    .st-benefit-description {
+      font-size: var(--st-font-size-sm);
+      color: var(--st-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Features List */
+    .st-features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--st-spacing-md);
+      margin-top: var(--st-spacing-xl);
+    }
+
+    .st-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--st-spacing-md);
+      padding: var(--st-spacing-md);
+      background-color: var(--st-bg-card);
+      border-radius: var(--st-radius-md);
+      border: 1px solid var(--st-border-subtle);
+    }
+
+    .st-feature-item .material-symbols-outlined {
+      color: var(--st-primary);
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .st-feature-item-text {
+      flex: 1;
+    }
+
+    .st-feature-item-title {
+      font-weight: 600;
+      color: var(--st-text-heading);
+      margin-bottom: var(--st-spacing-xs);
+    }
+
+    .st-feature-item-description {
+      font-size: var(--st-font-size-sm);
+      color: var(--st-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Use Cases */
+    .st-use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--st-spacing-lg);
+      margin-top: var(--st-spacing-xl);
+    }
+
+    .st-use-case {
+      background-color: var(--st-bg-card);
+      border: 1px solid var(--st-border-subtle);
+      border-radius: var(--st-radius-lg);
+      padding: var(--st-spacing-lg);
+      transition: all var(--st-transition-normal);
+    }
+
+    .st-use-case:hover {
+      border-color: var(--st-primary);
+      box-shadow: var(--st-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .st-use-case-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(75, 164, 103, 0.1);
+      border-radius: var(--st-radius-md);
+      margin-bottom: var(--st-spacing-md);
+    }
+
+    .st-use-case-icon .material-symbols-outlined {
+      font-size: 28px;
+      color: var(--st-primary);
+    }
+
+    .st-use-case-title {
+      font-weight: 600;
+      color: var(--st-text-heading);
+      margin-bottom: var(--st-spacing-sm);
+    }
+
+    .st-use-case-description {
+      font-size: var(--st-font-size-sm);
+      color: var(--st-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+      .st-segment-selector {
+        flex-direction: column;
+      }
+
+      .st-segment-tab {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .st-pain-points-grid,
+      .st-benefits-grid,
+      .st-features-list,
+      .st-use-cases-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="st-marketing-page">
+
+  <!-- Hero Section with Segment Selector -->
+  <section class="st-marketing-hero">
+    <div class="st-marketing-hero-background"></div>
+    <div class="st-marketing-container st-marketing-hero-content">
+      <h1 class="st-marketing-hero-title">
+        Solutions built for your organization
+      </h1>
+      <p class="st-marketing-hero-subtitle">
+        SafeTrekr adapts to the unique needs of different sectors, providing tailored workflows,
+        compliance features, and safety protocols specific to your organization's requirements.
+      </p>
+
+      <!-- Segment Selector Tabs -->
+      <div class="st-segment-selector">
+        <button class="st-segment-tab" data-segment="k12">
+          <span class="material-symbols-outlined">school</span>
+          K-12 Schools
+        </button>
+        <button class="st-segment-tab" data-segment="higher-ed">
+          <span class="material-symbols-outlined">account_balance</span>
+          Higher Education
+        </button>
+        <button class="st-segment-tab" data-segment="churches">
+          <span class="material-symbols-outlined">church</span>
+          Churches & Mission
+        </button>
+        <button class="st-segment-tab" data-segment="corporate">
+          <span class="material-symbols-outlined">business_center</span>
+          Corporate & Sports
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- K-12 Schools Content -->
+  <div id="segment-k12" class="st-segment-content">
+    <!-- Pain Points Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Challenge</span>
+          <h2 class="st-marketing-section-title">Pain points for K-12 schools</h2>
+        </div>
+
+        <div class="st-pain-points-grid">
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Manual documentation burden</div>
+            <div class="st-pain-point-description">
+              Teachers and administrators spend hours creating trip packets, tracking permissions, and assembling safety documentation for board approval.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Background check chaos</div>
+            <div class="st-pain-point-description">
+              Managing volunteer chaperone background checks across multiple vendors with inconsistent tracking and compliance gaps.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Parent communication overload</div>
+            <div class="st-pain-point-description">
+              Endless email chains, missing forms, and constant questions from parents about trip details and safety protocols.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Liability concerns</div>
+            <div class="st-pain-point-description">
+              Board members and administrators worry about liability exposure without professional safety review or compliant documentation.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How SafeTrekr Helps Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Solution</span>
+          <h2 class="st-marketing-section-title">How SafeTrekr helps K-12 schools</h2>
+        </div>
+
+        <div class="st-benefits-grid">
+          <div class="st-benefit">
+            <div class="st-benefit-title">Automated trip packets</div>
+            <div class="st-benefit-description">
+              Generate professional, board-ready trip packets in minutes with maps, itineraries, emergency protocols, and all compliance documentation.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Integrated background checks</div>
+            <div class="st-benefit-description">
+              Streamlined background check management for chaperones with automated tracking, reminders, and FERPA-compliant record keeping.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Parent portal & communications</div>
+            <div class="st-benefit-description">
+              Parents access trip information, upload documents, and digitally sign forms through a mobile-friendly portal, reducing email overload.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Professional safety review</div>
+            <div class="st-benefit-description">
+              Every trip reviewed by a professional safety analyst, reducing liability and providing peace of mind for administrators and board members.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Key Features</span>
+          <h2 class="st-marketing-section-title">K-12-specific features</h2>
+        </div>
+
+        <div class="st-features-list">
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">shield_with_heart</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">FERPA Compliance</div>
+              <div class="st-feature-item-description">Student privacy protection built into every workflow</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">family_restroom</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Parent Communication Tools</div>
+              <div class="st-feature-item-description">Digital permissions, forms, and trip information portal</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">verified_user</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Background Check Management</div>
+              <div class="st-feature-item-description">Integrated screening for chaperones and volunteers</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">description</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Board Policy Templates</div>
+              <div class="st-feature-item-description">Pre-built templates aligned with school board requirements</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">local_hospital</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Medical Information Tracking</div>
+              <div class="st-feature-item-description">Secure storage of student medical needs and allergies</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">payments</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Budget & Expense Tracking</div>
+              <div class="st-feature-item-description">Trip budgets, fundraising tracking, and expense reports</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Use Cases</span>
+          <h2 class="st-marketing-section-title">Perfect for every K-12 trip type</h2>
+        </div>
+
+        <div class="st-use-cases-grid">
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">science</span>
+            </div>
+            <div class="st-use-case-title">Field Trips & Excursions</div>
+            <div class="st-use-case-description">
+              Museum visits, science center trips, historical sites, and local educational excursions with full safety documentation and chaperone management.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">sports_soccer</span>
+            </div>
+            <div class="st-use-case-title">Athletic Competitions</div>
+            <div class="st-use-case-description">
+              Away games, tournaments, and championship events with transportation safety, emergency protocols, and parent communications.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">hotel</span>
+            </div>
+            <div class="st-use-case-title">Overnight & Multi-Day Trips</div>
+            <div class="st-use-case-description">
+              Class trips, senior trips, and educational tours with lodging verification, itinerary management, and comprehensive safety planning.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">forest</span>
+            </div>
+            <div class="st-use-case-title">Outdoor Education Programs</div>
+            <div class="st-use-case-description">
+              Camp trips, nature centers, and outdoor learning experiences with specialized risk assessment and environmental safety protocols.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div class="st-marketing-testimonial">
+          <p class="st-marketing-testimonial-quote">
+            "SafeTrekr has transformed how we handle field trips. What used to take our office staff 3-4 hours per trip now takes 15 minutes. Parents love the digital portal, and our board members appreciate the professional safety documentation. It's a game-changer for our district."
+          </p>
+          <div class="st-marketing-testimonial-author">
+            <div class="st-marketing-testimonial-avatar">JM</div>
+            <div class="st-marketing-testimonial-author-info">
+              <div class="st-marketing-testimonial-author-name">Jennifer Martinez</div>
+              <div class="st-marketing-testimonial-author-title">Assistant Principal, Lincoln Middle School</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div style="text-align: center;">
+          <h2 class="st-marketing-section-title">Ready to simplify K-12 trip management?</h2>
+          <p class="st-marketing-section-subtitle">
+            Join hundreds of schools using SafeTrekr to plan safer trips with less administrative burden.
+          </p>
+          <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
+            <a href="./request-quote.html?segment=k12" class="st-marketing-cta-primary">
+              Request a Quote for K-12
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="./how-it-works.html" class="st-marketing-cta-secondary">
+              See How it Works
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Higher Education Content -->
+  <div id="segment-higher-ed" class="st-segment-content">
+    <!-- Pain Points Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Challenge</span>
+          <h2 class="st-marketing-section-title">Pain points for higher education</h2>
+        </div>
+
+        <div class="st-pain-points-grid">
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Complex compliance requirements</div>
+            <div class="st-pain-point-description">
+              Navigating Clery Act, Title IX considerations, and institutional policies while managing study abroad and research trips across multiple departments.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Decentralized trip planning</div>
+            <div class="st-pain-point-description">
+              Each department manages trips differently, leading to inconsistent safety standards, documentation gaps, and risk management blind spots.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Global risk intelligence gaps</div>
+            <div class="st-pain-point-description">
+              Limited resources for monitoring international destinations, political instability, health advisories, and location-specific risks.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Incident response coordination</div>
+            <div class="st-pain-point-description">
+              No standardized protocols for managing emergencies during trips, leading to delayed response and potential liability exposure.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How SafeTrekr Helps Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Solution</span>
+          <h2 class="st-marketing-section-title">How SafeTrekr helps higher education</h2>
+        </div>
+
+        <div class="st-benefits-grid">
+          <div class="st-benefit">
+            <div class="st-benefit-title">Centralized compliance framework</div>
+            <div class="st-benefit-description">
+              Standardized workflows ensure all trips meet Clery Act, Title IX, and institutional requirements, regardless of department.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Global risk monitoring</div>
+            <div class="st-benefit-description">
+              Real-time risk intelligence for international destinations including political climate, health advisories, and security alerts.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Departmental workflows</div>
+            <div class="st-benefit-description">
+              Customizable workflows for study abroad, research trips, athletic travel, and student organization events with appropriate oversight.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Emergency response protocols</div>
+            <div class="st-benefit-description">
+              Pre-configured incident response plans with 24/7 emergency contact protocols and crisis communication templates.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Key Features</span>
+          <h2 class="st-marketing-section-title">Higher education-specific features</h2>
+        </div>
+
+        <div class="st-features-list">
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">gavel</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Clery Act Compliance</div>
+              <div class="st-feature-item-description">Built-in workflows for crime reporting and safety notification requirements</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">public</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">International Risk Intelligence</div>
+              <div class="st-feature-item-description">Global destination monitoring with real-time alerts and advisories</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">account_tree</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Multi-Department Management</div>
+              <div class="st-feature-item-description">Departmental access controls with centralized oversight and reporting</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">health_and_safety</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Title IX Considerations</div>
+              <div class="st-feature-item-description">Safety protocols addressing Title IX requirements for student travel</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">emergency</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Crisis Management Tools</div>
+              <div class="st-feature-item-description">Emergency protocols, communication templates, and incident tracking</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">assignment</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Research Trip Support</div>
+              <div class="st-feature-item-description">Specialized workflows for field research and faculty-led trips</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Use Cases</span>
+          <h2 class="st-marketing-section-title">Perfect for every university trip type</h2>
+        </div>
+
+        <div class="st-use-cases-grid">
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">flight_takeoff</span>
+            </div>
+            <div class="st-use-case-title">Study Abroad Programs</div>
+            <div class="st-use-case-description">
+              Semester abroad, short-term study tours, and international exchange programs with comprehensive safety planning and global risk monitoring.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">biotech</span>
+            </div>
+            <div class="st-use-case-title">Research & Field Work</div>
+            <div class="st-use-case-description">
+              Faculty-led research trips, field studies, and academic conferences with specialized safety protocols and institutional oversight.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">emoji_events</span>
+            </div>
+            <div class="st-use-case-title">Athletic Competitions</div>
+            <div class="st-use-case-description">
+              NCAA competitions, conference tournaments, and championship events with compliance documentation and emergency response plans.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">groups</span>
+            </div>
+            <div class="st-use-case-title">Student Organization Travel</div>
+            <div class="st-use-case-description">
+              Student group conferences, competitions, and service trips with appropriate supervision protocols and institutional approval workflows.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div class="st-marketing-testimonial">
+          <p class="st-marketing-testimonial-quote">
+            "SafeTrekr brought consistency to our international programs. We now have standardized safety reviews across all departments, better risk intelligence for global destinations, and documentation that satisfies our legal team and insurance provider. It's transformed our duty of care."
+          </p>
+          <div class="st-marketing-testimonial-author">
+            <div class="st-marketing-testimonial-avatar">RM</div>
+            <div class="st-marketing-testimonial-author-info">
+              <div class="st-marketing-testimonial-author-name">Dr. Rachel Martinez</div>
+              <div class="st-marketing-testimonial-author-title">Director of International Programs, State University</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div style="text-align: center;">
+          <h2 class="st-marketing-section-title">Ready to elevate university travel safety?</h2>
+          <p class="st-marketing-section-subtitle">
+            Join leading universities using SafeTrekr for comprehensive trip safety management across all departments.
+          </p>
+          <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
+            <a href="./request-quote.html?segment=higher-ed" class="st-marketing-cta-primary">
+              Request a Quote for Higher Ed
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="./how-it-works.html" class="st-marketing-cta-secondary">
+              See How it Works
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Churches & Mission Content -->
+  <div id="segment-churches" class="st-segment-content">
+    <!-- Pain Points Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Challenge</span>
+          <h2 class="st-marketing-section-title">Pain points for churches & mission organizations</h2>
+        </div>
+
+        <div class="st-pain-points-grid">
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Insurance compliance stress</div>
+            <div class="st-pain-point-description">
+              Church insurance policies require extensive documentation, volunteer screening, and safety protocols that overwhelm ministry staff.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Volunteer coordination chaos</div>
+            <div class="st-pain-point-description">
+              Managing volunteer leaders, background checks, training requirements, and liability waivers across multiple ministry events and trips.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Remote destination planning</div>
+            <div class="st-pain-point-description">
+              Mission trips to rural or international locations require specialized planning, but ministry staff lack safety expertise for unfamiliar destinations.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Budget constraints</div>
+            <div class="st-pain-point-description">
+              Limited ministry budgets make professional risk management services seem out of reach, forcing churches to manage complex safety planning internally.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How SafeTrekr Helps Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Solution</span>
+          <h2 class="st-marketing-section-title">How SafeTrekr helps churches & mission organizations</h2>
+        </div>
+
+        <div class="st-benefits-grid">
+          <div class="st-benefit">
+            <div class="st-benefit-title">Insurance-ready documentation</div>
+            <div class="st-benefit-description">
+              Automatic generation of all documentation required by church insurance policies, reducing claim risk and premium costs.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Volunteer screening made simple</div>
+            <div class="st-benefit-description">
+              Integrated background check management for volunteer leaders with automated tracking and ministry protection safeguards.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Mission-specific safety planning</div>
+            <div class="st-benefit-description">
+              Professional safety review for remote destinations including international locations, with culturally-aware protocols and emergency planning.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Affordable ministry pricing</div>
+            <div class="st-benefit-description">
+              Cost-effective trip-based pricing designed for ministry budgets, with volume discounts for churches with multiple annual trips.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Key Features</span>
+          <h2 class="st-marketing-section-title">Church & mission-specific features</h2>
+        </div>
+
+        <div class="st-features-list">
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">shield</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Ministry Safe Compliance</div>
+              <div class="st-feature-item-description">Integrated ministry protection and child safety protocols</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">person_search</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Volunteer Background Screening</div>
+              <div class="st-feature-item-description">Affordable background checks with automated tracking and reminders</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">volunteer_activism</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Mission Trip Planning</div>
+              <div class="st-feature-item-description">Specialized workflows for international and domestic mission work</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">policy</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Insurance Documentation</div>
+              <div class="st-feature-item-description">Automatic generation of all required insurance policy documentation</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">church</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Youth Ministry Tools</div>
+              <div class="st-feature-item-description">Parent communications, permission forms, and youth-specific safety protocols</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">savings</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Ministry Budget Friendly</div>
+              <div class="st-feature-item-description">Affordable pricing with volume discounts for churches with multiple trips</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Use Cases</span>
+          <h2 class="st-marketing-section-title">Perfect for every ministry trip type</h2>
+        </div>
+
+        <div class="st-use-cases-grid">
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">language</span>
+            </div>
+            <div class="st-use-case-title">International Mission Trips</div>
+            <div class="st-use-case-description">
+              Short-term mission trips, disaster relief, and global outreach with comprehensive safety planning, cultural protocols, and emergency response plans.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">handshake</span>
+            </div>
+            <div class="st-use-case-title">Service & Ministry Projects</div>
+            <div class="st-use-case-description">
+              Domestic service trips, community outreach, and ministry partnerships with volunteer coordination and insurance-compliant documentation.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">school</span>
+            </div>
+            <div class="st-use-case-title">Youth Retreats & Camps</div>
+            <div class="st-use-case-description">
+              Youth group retreats, summer camps, and discipleship trips with parent communications, medical tracking, and child safety protocols.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">church</span>
+            </div>
+            <div class="st-use-case-title">Church Conferences & Events</div>
+            <div class="st-use-case-description">
+              Church conferences, leadership retreats, and ministry team travel with group coordination and streamlined planning tools.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div class="st-marketing-testimonial">
+          <p class="st-marketing-testimonial-quote">
+            "As a youth pastor planning 6-8 trips per year, SafeTrekr has been a lifesaver. Our insurance company is happy, parents are informed, and I can focus on ministry instead of paperwork. The cost is minimal compared to the time it saves and the peace of mind it provides."
+          </p>
+          <div class="st-marketing-testimonial-author">
+            <div class="st-marketing-testimonial-avatar">MB</div>
+            <div class="st-marketing-testimonial-author-info">
+              <div class="st-marketing-testimonial-author-name">Michael Brown</div>
+              <div class="st-marketing-testimonial-author-title">Youth Pastor, Community Church</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div style="text-align: center;">
+          <h2 class="st-marketing-section-title">Ready to simplify ministry trip planning?</h2>
+          <p class="st-marketing-section-subtitle">
+            Join churches and mission organizations using SafeTrekr to plan safer trips with less stress and paperwork.
+          </p>
+          <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
+            <a href="./request-quote.html?segment=churches" class="st-marketing-cta-primary">
+              Request a Quote for Ministry
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="./how-it-works.html" class="st-marketing-cta-secondary">
+              See How it Works
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Corporate & Sports Content -->
+  <div id="segment-corporate" class="st-segment-content">
+    <!-- Pain Points Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Challenge</span>
+          <h2 class="st-marketing-section-title">Pain points for corporate & sports organizations</h2>
+        </div>
+
+        <div class="st-pain-points-grid">
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Duty of care compliance</div>
+            <div class="st-pain-point-description">
+              Organizations must demonstrate reasonable duty of care for employees and athletes during travel, but lack structured processes and documentation.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Travel policy enforcement</div>
+            <div class="st-pain-point-description">
+              Corporate travel policies exist but aren't consistently enforced, leading to compliance gaps, budget overruns, and liability exposure.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Real-time risk visibility</div>
+            <div class="st-pain-point-description">
+              Limited visibility into where employees/athletes are traveling, current risk conditions, and emerging threats at destination locations.
+            </div>
+          </div>
+
+          <div class="st-pain-point">
+            <div class="st-pain-point-title">Fragmented systems</div>
+            <div class="st-pain-point-description">
+              Travel booking, expense management, and safety tracking happen in separate systems with no unified view of travel risk and compliance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How SafeTrekr Helps Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">The Solution</span>
+          <h2 class="st-marketing-section-title">How SafeTrekr helps corporate & sports organizations</h2>
+        </div>
+
+        <div class="st-benefits-grid">
+          <div class="st-benefit">
+            <div class="st-benefit-title">Documented duty of care</div>
+            <div class="st-benefit-description">
+              Professional safety review and documentation for every trip, demonstrating reasonable duty of care for legal and insurance purposes.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Policy enforcement automation</div>
+            <div class="st-benefit-description">
+              Built-in travel policy checks ensure all trips comply with organizational policies before approval, reducing risk and controlling costs.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Real-time risk monitoring</div>
+            <div class="st-benefit-description">
+              Live tracking of travel locations with real-time alerts for weather, security, health, and political risks affecting your travelers.
+            </div>
+          </div>
+
+          <div class="st-benefit">
+            <div class="st-benefit-title">Integrated workflows</div>
+            <div class="st-benefit-description">
+              Connect travel booking, expense management, and safety documentation in one platform with seamless data flow between systems.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Key Features</span>
+          <h2 class="st-marketing-section-title">Corporate & sports-specific features</h2>
+        </div>
+
+        <div class="st-features-list">
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">business</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Duty of Care Documentation</div>
+              <div class="st-feature-item-description">Comprehensive documentation demonstrating reasonable duty of care compliance</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">policy</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Travel Policy Enforcement</div>
+              <div class="st-feature-item-description">Automated policy checks and approval workflows for consistent compliance</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">notifications_active</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Real-Time Risk Alerts</div>
+              <div class="st-feature-item-description">Live monitoring with instant alerts for weather, security, and health risks</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">security</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Executive Protection</div>
+              <div class="st-feature-item-description">Enhanced security protocols for executive travel and high-profile trips</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">attach_money</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Expense Integration</div>
+              <div class="st-feature-item-description">Connect to expense systems for unified travel and cost management</div>
+            </div>
+          </div>
+
+          <div class="st-feature-item">
+            <span class="material-symbols-outlined">assessment</span>
+            <div class="st-feature-item-text">
+              <div class="st-feature-item-title">Risk Analytics & Reporting</div>
+              <div class="st-feature-item-description">Executive dashboards with travel risk metrics and compliance reporting</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container">
+        <div class="st-marketing-section-header">
+          <span class="st-marketing-section-eyebrow">Use Cases</span>
+          <h2 class="st-marketing-section-title">Perfect for every business travel type</h2>
+        </div>
+
+        <div class="st-use-cases-grid">
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">flight</span>
+            </div>
+            <div class="st-use-case-title">Corporate Business Travel</div>
+            <div class="st-use-case-description">
+              Sales trips, client meetings, and business development travel with policy compliance, risk monitoring, and duty of care documentation.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">event</span>
+            </div>
+            <div class="st-use-case-title">Conferences & Trade Shows</div>
+            <div class="st-use-case-description">
+              Team attendance at industry conferences, exhibitions, and corporate events with group coordination and expense tracking.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">sports</span>
+            </div>
+            <div class="st-use-case-title">Sports Team Travel</div>
+            <div class="st-use-case-description">
+              Professional and semi-pro team travel for games, tournaments, and training camps with athlete safety protocols and compliance documentation.
+            </div>
+          </div>
+
+          <div class="st-use-case">
+            <div class="st-use-case-icon">
+              <span class="material-symbols-outlined">stars</span>
+            </div>
+            <div class="st-use-case-title">Executive & VIP Travel</div>
+            <div class="st-use-case-description">
+              Executive team retreats, board meetings, and high-profile travel with enhanced security protocols and discretionary planning.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="st-marketing-section">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div class="st-marketing-testimonial">
+          <p class="st-marketing-testimonial-quote">
+            "SafeTrekr gave us the duty of care framework we needed. Our legal team is satisfied with the documentation, our CFO appreciates the policy enforcement, and our traveling employees feel supported. It's integrated seamlessly with our expense system and travel booking platform."
+          </p>
+          <div class="st-marketing-testimonial-author">
+            <div class="st-marketing-testimonial-avatar">DS</div>
+            <div class="st-marketing-testimonial-author-info">
+              <div class="st-marketing-testimonial-author-name">David Sullivan</div>
+              <div class="st-marketing-testimonial-author-title">VP of Risk Management, TechCorp Industries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="st-marketing-section st-marketing-section-alt">
+      <div class="st-marketing-container st-marketing-container-narrow">
+        <div style="text-align: center;">
+          <h2 class="st-marketing-section-title">Ready to strengthen corporate duty of care?</h2>
+          <p class="st-marketing-section-subtitle">
+            Join leading organizations using SafeTrekr to manage business travel risk and demonstrate duty of care compliance.
+          </p>
+          <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
+            <a href="./request-quote.html?segment=corporate" class="st-marketing-cta-primary">
+              Request a Quote for Corporate
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="./how-it-works.html" class="st-marketing-cta-secondary">
+              See How it Works
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript -->
+  <script type="module">
+    import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
+
+    // Initialize header
+    const header = new MarketingHeader({ currentPage: 'solutions' });
+    header.mount('body');
+
+    // Initialize footer
+    const footer = new MarketingFooter();
+    footer.mount('body');
+
+    // Segment Management
+    const segments = ['k12', 'higher-ed', 'churches', 'corporate'];
+    let currentSegment = 'k12'; // Default segment
+
+    // Get segment from URL parameter
+    function getSegmentFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const segment = urlParams.get('segment');
+      return segments.includes(segment) ? segment : 'k12';
+    }
+
+    // Update segment display
+    function showSegment(segmentId) {
+      // Hide all segment content
+      document.querySelectorAll('.st-segment-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Remove active class from all tabs
+      document.querySelectorAll('.st-segment-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Show selected segment content
+      const segmentContent = document.getElementById(`segment-${segmentId}`);
+      if (segmentContent) {
+        segmentContent.classList.add('active');
+      }
+
+      // Activate selected tab
+      const activeTab = document.querySelector(`.st-segment-tab[data-segment="${segmentId}"]`);
+      if (activeTab) {
+        activeTab.classList.add('active');
+      }
+
+      // Update current segment
+      currentSegment = segmentId;
+
+      // Update URL without page reload
+      const newURL = new URL(window.location);
+      newURL.searchParams.set('segment', segmentId);
+      window.history.pushState({ segment: segmentId }, '', newURL);
+
+      // Track segment change
+      Analytics.trackEvent('segment_selected', {
+        segment: segmentId,
+        page: 'solutions'
+      });
+
+      // Scroll to top of segment content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize segment tabs
+    document.querySelectorAll('.st-segment-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const segment = tab.getAttribute('data-segment');
+        showSegment(segment);
+      });
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+      if (event.state && event.state.segment) {
+        currentSegment = event.state.segment;
+        showSegment(currentSegment);
+      }
+    });
+
+    // Initialize with segment from URL or default to K-12
+    const initialSegment = getSegmentFromURL();
+    showSegment(initialSegment);
+
+    // Initialize analytics
+    Analytics.init('solutions', {
+      segment: initialSegment
+    });
+
+    console.log('SafeTrekr Marketing Solutions: Initialized with segment:', initialSegment);
+  </script>
+
+</body>
+</html>

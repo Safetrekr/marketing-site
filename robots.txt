@@ -1,0 +1,16 @@
+# SafeTrekr Marketing Website - Robots.txt
+# Allow all crawlers to access all pages
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jessedo81.github.io/safetrekr-app/marketing/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1
+
+# Disallow access to component and asset directories if needed
+# (Uncomment if you want to hide these from search engines)
+# Disallow: /components/
+# Disallow: /styles/
