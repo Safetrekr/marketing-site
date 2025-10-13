@@ -107,74 +107,143 @@
         </p>
       </div>
 
-      <table class="st-pricing-table">
-        <thead>
-          <tr>
-            <th>Trip Tier</th>
-            <th>Price</th>
-            <th>Trip Type</th>
-            <th>What's Included</th>
-            <th>Typical Turnaround</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="st-pricing-tier-name">Tier 1: Domestic Day/Overnight</td>
-            <td class="st-pricing-tier-price">$450</td>
-            <td>
-              • Local field trips<br>
-              • Day trips<br>
-              • Single overnight stays<br>
-              • In-state travel
-            </td>
-            <td>
-              • Safety analyst review<br>
-              • Location verification<br>
-              • Emergency resource mapping<br>
-              • PDF trip packet<br>
-              • Basic risk assessment
-            </td>
-            <td>3-5 business days</td>
-          </tr>
-          <tr>
-            <td class="st-pricing-tier-name">Tier 2: Multi-Day Domestic</td>
-            <td class="st-pricing-tier-price">$750</td>
-            <td>
-              • Multi-day trips<br>
-              • Out-of-state travel<br>
-              • Multiple lodging sites<br>
-              • Regional tours
-            </td>
-            <td>
-              • Everything in Tier 1, plus:<br>
-              • Itinerary optimization<br>
-              • Route safety analysis<br>
-              • Multiple lodging verification<br>
-              • Drive-time isochrones
-            </td>
-            <td>5-7 business days</td>
-          </tr>
-          <tr>
-            <td class="st-pricing-tier-name">Tier 3: International/Complex</td>
-            <td class="st-pricing-tier-price">$1,250</td>
-            <td>
-              • International travel<br>
-              • Study abroad programs<br>
-              • Mission trips<br>
-              • High-risk activities
-            </td>
-            <td>
-              • Everything in Tier 2, plus:<br>
-              • International safety protocols<br>
-              • Embassy/consulate mapping<br>
-              • Medical evacuation planning<br>
-              • Cultural briefing<br>
-              • Activity-specific risk assessment
-            </td>
-            <td>7-10 business days</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="st-pricing-cards">
+        <!-- Tier 1: Domestic Day/Overnight -->
+        <div class="st-pricing-card">
+          <div class="st-pricing-card-header">
+            <h3 class="st-pricing-card-name">Tier 1: Domestic Day/Overnight</h3>
+            <div class="st-pricing-card-price">$450</div>
+            <div class="st-pricing-card-period">per trip</div>
+          </div>
+          <p class="st-pricing-card-description">
+            For local field trips, day trips, single overnight stays, and in-state travel
+          </p>
+          <ul class="st-pricing-card-features">
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Safety analyst review
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Location verification
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Emergency resource mapping
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              PDF trip packet
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Basic risk assessment
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">schedule</span>
+              Typical turnaround: 3-5 business days
+            </li>
+          </ul>
+          <div class="st-pricing-card-cta">
+            <a href="./request-quote.html?tier=1" class="st-marketing-cta-primary">
+              Book Now
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 2: Multi-Day Domestic (Featured) -->
+        <div class="st-pricing-card featured">
+          <div class="st-pricing-card-header">
+            <h3 class="st-pricing-card-name">Tier 2: Multi-Day Domestic</h3>
+            <div class="st-pricing-card-price">$750</div>
+            <div class="st-pricing-card-period">per trip</div>
+          </div>
+          <p class="st-pricing-card-description">
+            For multi-day trips, out-of-state travel, multiple lodging sites, and regional tours
+          </p>
+          <ul class="st-pricing-card-features">
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Everything in Tier 1, plus:
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Itinerary optimization
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Route safety analysis
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Multiple lodging verification
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Drive-time isochrones
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">schedule</span>
+              Typical turnaround: 5-7 business days
+            </li>
+          </ul>
+          <div class="st-pricing-card-cta">
+            <a href="./request-quote.html?tier=2" class="st-marketing-cta-primary">
+              Book Now
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 3: International/Complex -->
+        <div class="st-pricing-card">
+          <div class="st-pricing-card-header">
+            <h3 class="st-pricing-card-name">Tier 3: International/Complex</h3>
+            <div class="st-pricing-card-price">$1,250</div>
+            <div class="st-pricing-card-period">per trip</div>
+          </div>
+          <p class="st-pricing-card-description">
+            For international travel, study abroad programs, mission trips, and high-risk activities
+          </p>
+          <ul class="st-pricing-card-features">
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Everything in Tier 2, plus:
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              International safety protocols
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Embassy/consulate mapping
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Medical evacuation planning
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Cultural briefing
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">check_circle</span>
+              Activity-specific risk assessment
+            </li>
+            <li class="st-pricing-card-feature">
+              <span class="material-symbols-outlined">schedule</span>
+              Typical turnaround: 7-10 business days
+            </li>
+          </ul>
+          <div class="st-pricing-card-cta">
+            <a href="./request-quote.html?tier=3" class="st-marketing-cta-primary">
+              Book Now
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

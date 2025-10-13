@@ -46,7 +46,7 @@ export class MarketingHeader {
                 Sign In
               </a>
               <a href="./request-quote.html" class="st-marketing-cta-primary st-marketing-cta-sm">
-                Request Quote
+                Start Trip
               </a>
             </div>
           </nav>
@@ -83,7 +83,7 @@ export class MarketingHeader {
               Sign In
             </a>
             <a href="./request-quote.html" class="st-marketing-cta-primary">
-              Request Quote
+              Start Trip
             </a>
           </div>
         </nav>

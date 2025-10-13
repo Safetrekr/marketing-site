@@ -1,0 +1,112 @@
+{
+  "version": "2025-01",
+  "tiers": {
+    "T1": {
+      "label": "Tier 1 — Day-trip essentials",
+      "price": 450,
+      "description": "For local field trips, day trips, single overnight stays, and in-state travel",
+      "features": [
+        "Venue vetting",
+        "Route & egress checks",
+        "Emergency resource mapping",
+        "PDF trip packet",
+        "Basic risk assessment",
+        "Typical turnaround: 3-5 business days"
+      ],
+      "enabled": true
+    },
+    "T2": {
+      "label": "Tier 2 — Multi-day domestic",
+      "price": 750,
+      "description": "For multi-day trips, out-of-state travel, multiple lodging sites, and regional tours",
+      "features": [
+        "Everything in Tier 1, plus:",
+        "Itinerary optimization",
+        "Route safety analysis",
+        "Multiple lodging verification",
+        "Drive-time isochrones",
+        "Typical turnaround: 5-7 business days"
+      ],
+      "enabled": true
+    },
+    "T3": {
+      "label": "Tier 3 — International/Complex",
+      "price": 1250,
+      "description": "For international travel, study abroad programs, mission trips, and high-risk activities",
+      "features": [
+        "Everything in Tier 2, plus:",
+        "International safety protocols",
+        "Embassy/consulate mapping",
+        "Medical evacuation planning",
+        "Cultural briefing",
+        "Activity-specific risk assessment",
+        "Typical turnaround: 7-10 business days"
+      ],
+      "enabled": true
+    }
+  },
+  "addons": {
+    "bgDomestic": {
+      "label": "Background Check (US)",
+      "price": 35,
+      "type": "perAdult",
+      "description": "U.S. background checks for adults. Consent collected after checkout.",
+      "enabled": true,
+      "postBilled": true
+    },
+    "bgInternational": {
+      "label": "Background Check (International)",
+      "price": 65,
+      "type": "perAdult",
+      "description": "International background checks for adults with international travel history",
+      "enabled": true,
+      "postBilled": true
+    },
+    "rush": {
+      "label": "Rush Turnaround",
+      "price": 150,
+      "type": "flat",
+      "description": "24-48 hour expedited analyst review",
+      "enabled": false,
+      "postBilled": false
+    },
+    "translation": {
+      "label": "Translation Pack",
+      "price": 120,
+      "type": "flat",
+      "description": "Translate trip packet into Spanish, French, Mandarin, or 20+ languages",
+      "enabled": false,
+      "postBilled": false
+    },
+    "commsKit": {
+      "label": "Parent Communications Kit",
+      "price": 95,
+      "type": "flat",
+      "description": "Automated email and SMS updates to parents during trip",
+      "enabled": false,
+      "postBilled": false
+    },
+    "debrief": {
+      "label": "Debrief & Binder",
+      "price": 250,
+      "type": "flat",
+      "description": "Post-trip incident review with safety analyst",
+      "enabled": false,
+      "postBilled": false
+    }
+  },
+  "featureFlags": {
+    "FF_TIER_2": false,
+    "FF_TIER_3": false,
+    "FF_RUSH": false,
+    "FF_TRANSLATION": false,
+    "FF_COMMS_KIT": false,
+    "FF_DEBRIEF": false,
+    "FF_CREDIT_PACKS": false,
+    "FF_BG_CHECKS": true
+  },
+  "tax": {
+    "policy": "destination",
+    "rateDefault": 0.0
+  }
+}

@@ -50,7 +50,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ## Pages
 
-### 1. Home (`/marketing/index.html`)
+### 1. Home (`/index.html`)
 **Purpose:** Main landing page introducing SafeTrekr
 
 **Sections:**
@@ -70,7 +70,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 2. How It Works (`/marketing/how-it-works.html`)
+### 2. How It Works (`/how-it-works.html`)
 **Purpose:** Explain the SafeTrekr process in detail
 
 **Sections:**
@@ -89,7 +89,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 3. Solutions (`/marketing/solutions.html`)
+### 3. Solutions (`/solutions.html`)
 **Purpose:** Industry-specific solutions and use cases
 
 **Sections:**
@@ -108,7 +108,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 4. Pricing (`/marketing/pricing.html`)
+### 4. Pricing (`/pricing.html`)
 **Purpose:** Transparent pricing with calculators
 
 **Sections:**
@@ -126,7 +126,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 5. Request Quote (`/marketing/request-quote.html`)
+### 5. Request Quote (`/request-quote.html`)
 **Purpose:** Multi-step quote request form
 
 **Steps:**
@@ -144,7 +144,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 6. Resources (`/marketing/resources.html`)
+### 6. Resources (`/resources.html`)
 **Purpose:** Gated resources for lead capture
 
 **Sections:**
@@ -167,7 +167,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 7. Security (`/marketing/security.html`)
+### 7. Security (`/security.html`)
 **Purpose:** Security, privacy, and compliance information
 
 **Sections:**
@@ -188,7 +188,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 8. About (`/marketing/about.html`)
+### 8. About (`/about.html`)
 **Purpose:** Company information and team
 
 **Sections:**
@@ -201,7 +201,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 9. Integrations (`/marketing/integrations.html`)
+### 9. Integrations (`/integrations.html`)
 **Purpose:** Third-party integrations and partnerships
 
 **Sections:**
@@ -214,7 +214,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 
 ---
 
-### 10. Procurement (`/marketing/procurement.html`)
+### 10. Procurement (`/procurement.html`)
 **Purpose:** Procurement and legal information for enterprises
 
 **Sections:**
@@ -266,14 +266,14 @@ See [COMPONENTS.md](./COMPONENTS.md) for detailed component documentation.
 ### Prerequisites
 
 - Node.js 18+ and npm
-- SafeTrekr app repository cloned
 
 ### Installation
 
-The marketing site is part of the main SafeTrekr app repository. Install dependencies from the root:
+This is a standalone marketing site repository. Clone and install dependencies:
 
 ```bash
-cd /path/to/safetrekr-app
+git clone git@github.com:Safetrekr/marketing-site.git
+cd marketing-site
 npm install
 ```
 
@@ -285,11 +285,11 @@ Start the Vite dev server:
 npm run dev
 ```
 
-The server will start at **http://localhost:5174**
+The server will start at **http://localhost:5176** (or next available port if 5176 is in use)
 
 Access the marketing site at:
-- **Home:** http://localhost:5174/marketing/index.html
-- **Other pages:** http://localhost:5174/marketing/[page-name].html
+- **Home:** http://localhost:5176/index.html
+- **Other pages:** http://localhost:5176/[page-name].html
 
 ### Hot Module Replacement (HMR)
 
@@ -305,7 +305,7 @@ Vite provides instant hot module replacement:
 ### Project Structure
 
 ```
-marketing/
+marketing-site/
 ├── index.html                    # Home page
 ├── about.html                    # About page
 ├── how-it-works.html             # Process explanation
@@ -331,9 +331,11 @@ marketing/
 │   ├── marketing.css             # Main marketing styles
 │   └── calculators.css           # Calculator styles
 │
-└── assets/                       # Marketing assets
-    ├── images/                   # Images and photos
-    └── icons/                    # Custom icons
+├── assets/                       # Marketing assets
+│   ├── images/                   # Images and photos
+│   └── icons/                    # Custom icons
+│
+└── package.json                  # Dependencies and scripts
 ```
 
 ### Component Usage
@@ -394,18 +396,16 @@ This will:
 
 ```
 dist/
-├── marketing/
-│   ├── index.html
-│   ├── about.html
-│   ├── pricing.html
-│   └── ...
-│   ├── components/
-│   │   └── (bundled and minified JS)
-│   ├── styles/
-│   │   └── (minified CSS)
-│   └── assets/
-│       └── (optimized images)
-└── (other app directories)
+├── index.html
+├── about.html
+├── pricing.html
+├── ...
+├── components/
+│   └── (bundled and minified JS)
+├── styles/
+│   └── (minified CSS)
+└── assets/
+    └── (optimized images)
 ```
 
 ### Preview Production Build
@@ -420,16 +420,20 @@ This starts a local server to preview the production build at **http://localhost
 
 ## Deployment
 
-### GitHub Pages (Current Setup)
+### GitHub Repository
 
-The site is configured for GitHub Pages deployment:
+This standalone marketing site is hosted at:
+- **Repository:** https://github.com/Safetrekr/marketing-site
+- **SSH URL:** git@github.com:Safetrekr/marketing-site.git
 
-**Base Path:** `/safetrekr-app/`
+### GitHub Pages (Recommended Setup)
+
+The site can be deployed to GitHub Pages:
 
 **Build & Deploy:**
 
 ```bash
-# Build with correct base path
+# Build for production
 npm run build
 
 # Deploy to GitHub Pages (manual)
@@ -438,7 +442,7 @@ npm run build
 
 **Automated Deploy:**
 
-The repository includes a GitHub Actions workflow (if configured):
+Add a GitHub Actions workflow for automatic deployment:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -546,34 +550,34 @@ Create a new HTML file in `/marketing/`:
 </html>
 ```
 
-### Step 2: Add to Vite Config
+### Step 2: Add to Vite Config (if needed)
 
-Edit `/vite.config.js` and add your page to the `rollupOptions.input`:
+If you have a `vite.config.js`, add your page to the `rollupOptions.input`:
 
 ```javascript
 rollupOptions: {
   input: {
     // ... existing pages
-    'marketing-new-page': path.resolve(__dirname, 'marketing/new-page.html'),
+    'new-page': path.resolve(__dirname, 'new-page.html'),
   }
 }
 ```
 
 ### Step 3: Add to Navigation
 
-Update header component (`/marketing/components/marketing-header.js`) if needed:
+Update header component (`/components/marketing-header.js`) if needed:
 
 ```javascript
 <li><a href="./new-page.html" class="st-marketing-nav-link ${this.currentPage === 'new-page' ? 'active' : ''}">New Page</a></li>
 ```
 
-Update footer component (`/marketing/components/marketing-footer.js`) if needed.
+Update footer component (`/components/marketing-footer.js`) if needed.
 
 ### Step 4: Test
 
 ```bash
 npm run dev
-# Visit http://localhost:5174/marketing/new-page.html
+# Visit http://localhost:5176/new-page.html
 ```
 
 ---
@@ -630,7 +634,7 @@ Marketing styles use CSS custom properties defined in `/src/styles/main.css`:
 
 ### Marketing-Specific Styles
 
-Marketing styles are in `/marketing/styles/marketing.css`:
+Marketing styles are in `/styles/marketing.css`:
 
 - **Layout**: `.st-marketing-container`, `.st-marketing-section`
 - **Typography**: `.st-marketing-hero-title`, `.st-marketing-section-title`
@@ -640,7 +644,7 @@ Marketing styles are in `/marketing/styles/marketing.css`:
 
 ### Calculator Styles
 
-Calculator-specific styles are in `/marketing/styles/calculators.css`:
+Calculator-specific styles are in `/styles/calculators.css`:
 
 - `.st-calculator-card`
 - `.st-calculator-slider`
