@@ -505,4 +505,4 @@ All data comes from `/components/quote-form.js` and `/config/pricing.json`
 
 ## Questions?
 
-For questions about this specification, please contact the SafeTrekr development team.
+For questions about this specification, please contact the Safetrekr development team.

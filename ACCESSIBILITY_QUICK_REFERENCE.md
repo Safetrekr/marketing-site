@@ -1,6 +1,6 @@
 # Accessibility Quick Reference Card
 
-One-page guide for SafeTrekr marketing website accessibility fixes.
+One-page guide for Safetrekr marketing website accessibility fixes.
 
 ---
 
@@ -155,7 +155,7 @@ button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 ```html
 <table role="table" aria-label="Pricing comparison">
   <caption class="sr-only">
-    SafeTrekr pricing tiers with features and turnaround times
+    Safetrekr pricing tiers with features and turnaround times
   </caption>
   <thead>
     <tr>
@@ -267,7 +267,7 @@ Usage:
 <button type="button" onclick="handleClick()">Click me</button>
 <span aria-hidden="true">✓</span>
 <button type="button" onclick="showModal()">Open</button>
-<img src="logo.png" alt="SafeTrekr logo">
+<img src="logo.png" alt="Safetrekr logo">
 ```
 
 ---

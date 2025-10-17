@@ -180,7 +180,7 @@ export class LeadCapture {
                 required
               >
               <span>
-                I agree to receive communications from SafeTrekr about products, services, and resources.
+                I agree to receive communications from Safetrekr about products, services, and resources.
                 <span class="st-lead-capture-required">*</span>
               </span>
             </label>

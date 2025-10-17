@@ -606,7 +606,7 @@ export class QuoteForm {
               </li>
               <li>
                 <strong>Account Setup</strong><br>
-                We'll send you login credentials to access your SafeTrekr dashboard within 24 hours.
+                We'll send you login credentials to access your Safetrekr dashboard within 24 hours.
               </li>
             ` : this.formData.checkout.mode === 'invoice' ? `
               <li>

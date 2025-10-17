@@ -1,5 +1,5 @@
 /* ============================================
-   SafeTrekr Marketing Site - Styles
+   Safetrekr Marketing Site - Styles
    Extends main.css light theme for marketing pages
    ============================================ */
 
@@ -325,7 +325,9 @@
   transition: all var(--st-transition-normal);
 }
 
-.st-marketing-feature-card:hover {
+/* Only add hover states to clickable feature cards */
+.st-marketing-feature-card.clickable:hover,
+.st-marketing-feature-card.leadership-card:hover {
   border-color: var(--st-primary);
   box-shadow: var(--st-shadow-lg);
   transform: translateY(-4px);
@@ -734,13 +736,13 @@
   bottom: 0;
   background-color: var(--st-bg-primary);
   z-index: 2000;
-  transform: translateX(100%);
-  transition: transform var(--st-transition-normal);
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
   overflow-y: auto;
 }
 
 .st-marketing-mobile-menu.open {
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .st-marketing-mobile-menu-header {
@@ -1110,15 +1112,8 @@
   border: 1px solid var(--st-border-subtle);
   border-radius: var(--st-radius-lg);
   padding: var(--st-spacing-xl);
-  transition: all var(--st-transition-normal);
   display: flex;
   flex-direction: column;
-}
-
-.st-resource-card:hover {
-  border-color: var(--st-primary);
-  box-shadow: var(--st-shadow-lg);
-  transform: translateY(-4px);
 }
 
 .st-resource-card-icon {
@@ -1687,13 +1682,6 @@
   border: 2px solid var(--st-border-subtle);
   border-radius: var(--st-radius-lg);
   padding: var(--st-spacing-lg);
-  transition: all var(--st-transition-fast);
-  cursor: pointer;
-}
-
-.st-quote-addon-card:hover {
-  border-color: var(--st-primary);
-  box-shadow: var(--st-shadow-sm);
 }
 
 .st-quote-addon-card.selected {

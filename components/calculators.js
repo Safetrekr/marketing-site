@@ -100,7 +100,7 @@ export class TripVolumeCalculator {
           </div>
           <h3 class="st-calculator-title">Trip Volume Calculator</h3>
           <p class="st-calculator-description">
-            Estimate your annual SafeTrekr spend based on trip volume and complexity distribution.
+            Estimate your annual Safetrekr spend based on trip volume and complexity distribution.
           </p>
         </div>
 
@@ -306,7 +306,7 @@ export class TripVolumeCalculator {
 
 /**
  * ROI Estimator
- * Calculates time savings and cost avoidance from using SafeTrekr
+ * Calculates time savings and cost avoidance from using Safetrekr
  */
 export class ROIEstimator {
   constructor(config = {}) {
@@ -356,14 +356,14 @@ export class ROIEstimator {
     const riskReductionFactor = 0.15; // Assume 15% reduction in incidents
     const riskAvoidanceSavings = tripsPerYear * riskAvoidancePerTrip * riskReductionFactor;
 
-    // Estimated SafeTrekr cost (using average tier pricing)
+    // Estimated Safetrekr cost (using average tier pricing)
     const avgTierPrice = this.orgSizeDefaults[this.state.orgSize].avgTier;
-    const estimatedSafeTrekrCost = tripsPerYear * avgTierPrice;
+    const estimatedSafetrekrCost = tripsPerYear * avgTierPrice;
 
     // Total savings and ROI
     const totalSavings = staffTimeSavings + riskAvoidanceSavings;
-    const netSavings = totalSavings - estimatedSafeTrekrCost;
-    const roi = estimatedSafeTrekrCost > 0 ? ((netSavings / estimatedSafeTrekrCost) * 100) : 0;
+    const netSavings = totalSavings - estimatedSafetrekrCost;
+    const roi = estimatedSafetrekrCost > 0 ? ((netSavings / estimatedSafetrekrCost) * 100) : 0;
 
     return {
       hoursSavedPerTrip: Math.round(hoursSavedPerTrip),
@@ -371,7 +371,7 @@ export class ROIEstimator {
       staffTimeSavings: Math.round(staffTimeSavings),
       riskAvoidanceSavings: Math.round(riskAvoidanceSavings),
       totalSavings: Math.round(totalSavings),
-      estimatedSafeTrekrCost,
+      estimatedSafetrekrCost,
       netSavings: Math.round(netSavings),
       roi: Math.round(roi),
       weeksOfWorkSaved: Math.round(totalHoursSavedPerYear / 40)
@@ -602,8 +602,8 @@ export class ROIEstimator {
                 <span>${this.formatCurrency(result.totalSavings)}</span>
               </div>
               <div class="st-calculator-result-row">
-                <span>Estimated SafeTrekr cost</span>
-                <span>-${this.formatCurrency(result.estimatedSafeTrekrCost)}</span>
+                <span>Estimated Safetrekr cost</span>
+                <span>-${this.formatCurrency(result.estimatedSafetrekrCost)}</span>
               </div>
               <div class="st-calculator-result-row-total st-calculator-roi-result">
                 <span>Net annual benefit</span>

@@ -26,8 +26,8 @@ export class MarketingHeader {
         <div class="st-marketing-header-inner">
           <!-- Logo -->
           <a href="./index.html" class="st-marketing-logo">
-            <img src="./assets/images/safetrekr-logo-vert-dark.svg" alt="SafeTrekr" class="st-marketing-logo-desktop">
-            <img src="./assets/images/safetrekr-mark-dark.svg" alt="SafeTrekr" class="st-marketing-logo-mobile">
+            <img src="./assets/images/safetrekr-logo-vert-dark.svg" alt="Safetrekr" class="st-marketing-logo-desktop">
+            <img src="./assets/images/safetrekr-mark-dark.svg" alt="Safetrekr" class="st-marketing-logo-mobile">
           </a>
 
           <!-- Desktop Navigation -->
@@ -36,7 +36,7 @@ export class MarketingHeader {
               <li><a href="./how-it-works.html" class="st-marketing-nav-link ${this.currentPage === 'how-it-works' ? 'active' : ''}">How it Works</a></li>
               <li><a href="./solutions.html" class="st-marketing-nav-link ${this.currentPage === 'solutions' ? 'active' : ''}">Solutions</a></li>
               <li><a href="./pricing.html" class="st-marketing-nav-link ${this.currentPage === 'pricing' ? 'active' : ''}">Pricing</a></li>
-              <li><a href="./resources.html" class="st-marketing-nav-link ${this.currentPage === 'resources' ? 'active' : ''}">Resources</a></li>
+              <li><a href="./about.html" class="st-marketing-nav-link ${this.currentPage === 'about' ? 'active' : ''}">About</a></li>
               <li><a href="./security.html" class="st-marketing-nav-link ${this.currentPage === 'security' ? 'active' : ''}">Security</a></li>
             </ul>
 
@@ -62,7 +62,7 @@ export class MarketingHeader {
       <div class="st-marketing-mobile-menu" id="mobile-menu">
         <div class="st-marketing-mobile-menu-header">
           <a href="./index.html" class="st-marketing-logo">
-            <img src="./assets/images/safetrekr-mark-dark.svg" alt="SafeTrekr">
+            <img src="./assets/images/safetrekr-mark-dark.svg" alt="Safetrekr">
           </a>
           <button class="st-marketing-mobile-menu-close" id="mobile-menu-close" aria-label="Close mobile menu">
             <span class="material-symbols-outlined">close</span>
@@ -74,9 +74,8 @@ export class MarketingHeader {
             <li><a href="./how-it-works.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'how-it-works' ? 'active' : ''}">How it Works</a></li>
             <li><a href="./solutions.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'solutions' ? 'active' : ''}">Solutions</a></li>
             <li><a href="./pricing.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'pricing' ? 'active' : ''}">Pricing</a></li>
-            <li><a href="./resources.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'resources' ? 'active' : ''}">Resources</a></li>
-            <li><a href="./security.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'security' ? 'active' : ''}">Security</a></li>
             <li><a href="./about.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'about' ? 'active' : ''}">About</a></li>
+            <li><a href="./security.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'security' ? 'active' : ''}">Security</a></li>
           </ul>
           <div class="st-marketing-mobile-menu-actions">
             <a href="#" class="st-marketing-cta-secondary">

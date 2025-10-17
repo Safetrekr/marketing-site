@@ -1,4 +1,4 @@
-# SafeTrekr Marketing Website - WCAG 2.1 AA Accessibility Audit Report
+# Safetrekr Marketing Website - WCAG 2.1 AA Accessibility Audit Report
 **Date:** 2025-10-12
 **Auditor:** Claude
 **Standard:** WCAG 2.1 Level AA
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This comprehensive accessibility audit evaluated all SafeTrekr marketing pages against WCAG 2.1 Level AA standards. The audit identified several critical and moderate issues that need to be addressed to ensure the website is accessible to all users, including those using assistive technologies.
+This comprehensive accessibility audit evaluated all Safetrekr marketing pages against WCAG 2.1 Level AA standards. The audit identified several critical and moderate issues that need to be addressed to ensure the website is accessible to all users, including those using assistive technologies.
 
 **Overall Status:** ⚠️ **NEEDS IMPROVEMENT**
 
@@ -111,7 +111,7 @@ This comprehensive accessibility audit evaluated all SafeTrekr marketing pages a
 - Should have `alt=""` for decorative images
 
 **Recommendation:**
-- Logo: `alt="SafeTrekr - Trip Safety Management"`
+- Logo: `alt="Safetrekr - Trip Safety Management"`
 - Decorative: `alt=""`
 - Content images: Descriptive alt text
 
@@ -260,7 +260,7 @@ Plus adjacent visible text or `aria-label` on parent element
 **Severity:** Low
 **Impact:** Users may not identify site in browser tabs
 
-**Status:** ✅ **PASSED** - All pages have descriptive, unique titles with "SafeTrekr" suffix
+**Status:** ✅ **PASSED** - All pages have descriptive, unique titles with "Safetrekr" suffix
 
 ### 15. Tab Order Not Optimal
 **WCAG Criteria:** 2.4.3 Focus Order (Level A)
@@ -413,7 +413,7 @@ Plus adjacent visible text or `aria-label` on parent element
 
 ## Positive Findings
 
-The SafeTrekr marketing site demonstrates several accessibility best practices:
+The Safetrekr marketing site demonstrates several accessibility best practices:
 
 1. **Strong Color Contrast**: Most text/background combinations exceed WCAG AA requirements
 2. **Semantic HTML**: Proper use of HTML5 elements throughout

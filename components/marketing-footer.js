@@ -21,7 +21,7 @@ export class MarketingFooter {
             <!-- Brand Column -->
             <div class="st-marketing-footer-brand">
               <div class="st-marketing-footer-logo">
-                <img src="./assets/images/safetrekr-logo-vert-dark.svg" alt="SafeTrekr" style="height: 32px;">
+                <img src="./assets/images/safetrekr-logo-vert-dark.svg" alt="Safetrekr" style="height: 32px;">
               </div>
               <p class="st-marketing-footer-tagline">
                 Professional trip safety management for schools, churches, universities, businesses, and sports teams.
@@ -46,10 +46,10 @@ export class MarketingFooter {
               <h4 class="st-marketing-footer-section-title">Resources</h4>
               <ul class="st-marketing-footer-links">
                 <li><a href="./resources.html" class="st-marketing-footer-link">Templates & Guides</a></li>
-                <li><a href="./resources.html#blog" class="st-marketing-footer-link">Blog</a></li>
-                <li><a href="./resources.html#case-studies" class="st-marketing-footer-link">Case Studies</a></li>
-                <li><a href="./resources.html#webinars" class="st-marketing-footer-link">Webinars</a></li>
-                <li><a href="./resources.html#help" class="st-marketing-footer-link">Help Center</a></li>
+                <li><a href="./resources.html#blog" class="st-marketing-footer-link">Blog <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./resources.html#case-studies" class="st-marketing-footer-link">Case Studies <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./resources.html#webinars" class="st-marketing-footer-link">Webinars <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./resources.html#help" class="st-marketing-footer-link">Help Center <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
               </ul>
             </div>
 
@@ -70,10 +70,10 @@ export class MarketingFooter {
               <h4 class="st-marketing-footer-section-title">Legal</h4>
               <ul class="st-marketing-footer-links">
                 <li><a href="./procurement.html" class="st-marketing-footer-link">Procurement</a></li>
-                <li><a href="./legal/terms.html" class="st-marketing-footer-link">Terms of Service</a></li>
-                <li><a href="./legal/privacy.html" class="st-marketing-footer-link">Privacy Policy</a></li>
-                <li><a href="./legal/dpa.html" class="st-marketing-footer-link">Data Processing</a></li>
-                <li><a href="./legal/accessibility.html" class="st-marketing-footer-link">Accessibility</a></li>
+                <li><a href="./legal/terms.html" class="st-marketing-footer-link">Terms of Service <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./legal/privacy.html" class="st-marketing-footer-link">Privacy Policy <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./legal/dpa.html" class="st-marketing-footer-link">Data Processing <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
+                <li><a href="./legal/accessibility.html" class="st-marketing-footer-link">Accessibility <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
               </ul>
             </div>
           </div>
@@ -81,7 +81,7 @@ export class MarketingFooter {
           <!-- Footer Bottom -->
           <div class="st-marketing-footer-bottom">
             <div class="st-marketing-footer-copyright">
-              &copy; ${this.year} SafeTrekr. All rights reserved.
+              &copy; ${this.year} Safetrekr. All rights reserved.
             </div>
 
             <div class="st-marketing-footer-social">

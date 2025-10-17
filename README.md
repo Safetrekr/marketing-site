@@ -1,10 +1,10 @@
-# SafeTrekr Marketing Website
+# Safetrekr Marketing Website
 
 **Version:** 1.0.0
 **Status:** Production Ready
 **Tech Stack:** Vite + HTML5 + Vanilla JavaScript + Bootstrap 5
 
-The marketing website for SafeTrekr - a comprehensive public-facing site with lead capture, pricing calculators, request quote forms, and content resources.
+The marketing website for Safetrekr - a comprehensive public-facing site with lead capture, pricing calculators, request quote forms, and content resources.
 
 ---
 
@@ -26,7 +26,7 @@ The marketing website for SafeTrekr - a comprehensive public-facing site with le
 
 ## Overview
 
-The SafeTrekr marketing website is a 10-page marketing site built with vanilla JavaScript and designed to convert visitors into customers. It features:
+The Safetrekr marketing website is a 10-page marketing site built with vanilla JavaScript and designed to convert visitors into customers. It features:
 
 - **Professional Design**: Dark theme with modern UI components
 - **Lead Capture**: Gated resources with lead capture forms
@@ -51,7 +51,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 ## Pages
 
 ### 1. Home (`/index.html`)
-**Purpose:** Main landing page introducing SafeTrekr
+**Purpose:** Main landing page introducing Safetrekr
 
 **Sections:**
 - Hero with primary CTA
@@ -71,7 +71,7 @@ The SafeTrekr marketing website is a 10-page marketing site built with vanilla J
 ---
 
 ### 2. How It Works (`/how-it-works.html`)
-**Purpose:** Explain the SafeTrekr process in detail
+**Purpose:** Explain the Safetrekr process in detail
 
 **Sections:**
 - Hero with value prop
@@ -516,7 +516,7 @@ Create a new HTML file in `/marketing/`:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Title - SafeTrekr</title>
+  <title>Page Title - Safetrekr</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Page description">
@@ -742,12 +742,12 @@ All pages include SEO meta tags:
 
 ```html
 <!-- Basic Meta Tags -->
-<title>Page Title - SafeTrekr</title>
+<title>Page Title - Safetrekr</title>
 <meta name="description" content="Page description (155 characters)">
 <meta name="keywords" content="trip safety, travel management, field trips">
 
 <!-- Open Graph (Facebook) -->
-<meta property="og:title" content="Page Title - SafeTrekr">
+<meta property="og:title" content="Page Title - Safetrekr">
 <meta property="og:description" content="Page description">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://safetrekr.com/page">
@@ -755,7 +755,7 @@ All pages include SEO meta tags:
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page Title - SafeTrekr">
+<meta name="twitter:title" content="Page Title - Safetrekr">
 <meta name="twitter:description" content="Page description">
 <meta name="twitter:image" content="https://safetrekr.com/twitter-image.png">
 ```
@@ -768,7 +768,7 @@ Home page includes Organization structured data:
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "SafeTrekr",
+  "name": "Safetrekr",
   "description": "Professional trip safety management platform",
   "url": "https://safetrekr.com",
   "logo": "https://safetrekr.com/logo.png"
@@ -916,8 +916,8 @@ npm run dev -- --port 3000
 
 ## License
 
-Proprietary - SafeTrekr, Inc.
+Proprietary - Safetrekr, Inc.
 
 ---
 
-**Built with care by the SafeTrekr Team**
+**Built with care by the Safetrekr Team**

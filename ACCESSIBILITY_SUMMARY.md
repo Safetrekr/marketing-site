@@ -1,4 +1,4 @@
-# SafeTrekr Marketing Website - Accessibility Audit Summary
+# Safetrekr Marketing Website - Accessibility Audit Summary
 
 **Date:** 2025-10-12
 **Status:** ⚠️ Needs Improvement
@@ -9,7 +9,7 @@
 
 ## Quick Overview
 
-The SafeTrekr marketing website has a **solid foundation** for accessibility but requires several critical fixes to achieve full WCAG 2.1 AA compliance. The good news: most issues can be fixed quickly with minimal code changes.
+The Safetrekr marketing website has a **solid foundation** for accessibility but requires several critical fixes to achieve full WCAG 2.1 AA compliance. The good news: most issues can be fixed quickly with minimal code changes.
 
 ### What's Working Well ✅
 - Strong color contrast for most text
@@ -268,7 +268,7 @@ Refer to the detailed audit report for:
 
 ## Conclusion
 
-The SafeTrekr marketing website has a **strong accessibility foundation** and can achieve full WCAG 2.1 AA compliance with **7-8 hours of focused work**. The majority of issues are quick wins that don't require design changes—just adding proper ARIA attributes and semantic markup.
+The Safetrekr marketing website has a **strong accessibility foundation** and can achieve full WCAG 2.1 AA compliance with **7-8 hours of focused work**. The majority of issues are quick wins that don't require design changes—just adding proper ARIA attributes and semantic markup.
 
 **Recommended Action:** Start with the 2-hour critical fixes to immediately improve experience for users with disabilities, then schedule the remaining work over the next 2-3 weeks.
 

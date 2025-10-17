@@ -1,6 +1,6 @@
 # Marketing Components Documentation
 
-Comprehensive documentation for all reusable components in the SafeTrekr marketing website.
+Comprehensive documentation for all reusable components in the Safetrekr marketing website.
 
 ---
 
@@ -842,7 +842,7 @@ roiEstimator.updateState({
   staffTimeSavings: number,         // Dollar value of time saved
   riskAvoidanceSavings: number,     // Estimated risk avoidance value
   totalSavings: number,             // Total annual savings
-  estimatedSafeTrekrCost: number,   // Estimated annual SafeTrekr cost
+  estimatedSafetrekrCost: number,   // Estimated annual Safetrekr cost
   netSavings: number,               // Net benefit (savings - cost)
   roi: number,                      // ROI percentage
   weeksOfWorkSaved: number          // Equivalent weeks of work
@@ -1015,4 +1015,4 @@ For questions or issues with components:
 
 ---
 
-**Documentation maintained by SafeTrekr Team**
+**Documentation maintained by Safetrekr Team**

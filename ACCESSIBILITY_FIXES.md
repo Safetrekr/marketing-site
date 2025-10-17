@@ -1,4 +1,4 @@
-# SafeTrekr Marketing - Accessibility Implementation Guide
+# Safetrekr Marketing - Accessibility Implementation Guide
 
 This document provides the specific code changes needed to implement WCAG 2.1 AA accessibility fixes across all marketing pages.
 
@@ -97,8 +97,8 @@ This document provides the specific code changes needed to implement WCAG 2.1 AA
 const headerHTML = `
   <header class="st-marketing-header" role="banner">
     <div class="st-marketing-header-inner">
-      <a href="./index.html" class="st-marketing-logo" aria-label="SafeTrekr - Trip Safety Management">
-        SafeTrekr
+      <a href="./index.html" class="st-marketing-logo" aria-label="Safetrekr - Trip Safety Management">
+        Safetrekr
       </a>
       <nav class="st-marketing-nav" role="navigation" aria-label="Main navigation">
         <!-- Navigation links -->
@@ -209,12 +209,12 @@ question.addEventListener('click', () => {
 ```html
 <div class="st-faq-item">
   <button class="st-faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-    <span>Is SafeTrekr FERPA compliant for K-12 schools?</span>
+    <span>Is Safetrekr FERPA compliant for K-12 schools?</span>
     <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
   </button>
   <div class="st-faq-answer" id="faq-answer-1">
     <div class="st-faq-answer-content">
-      <p>Yes. SafeTrekr is fully FERPA compliant...</p>
+      <p>Yes. Safetrekr is fully FERPA compliant...</p>
     </div>
   </div>
 </div>
@@ -363,7 +363,7 @@ function validateEmail(input) {
 **Updated:**
 ```html
 <table class="st-pricing-table" role="table" aria-label="Pricing tiers comparison">
-  <caption class="sr-only">SafeTrekr pricing tiers with features and turnaround times</caption>
+  <caption class="sr-only">Safetrekr pricing tiers with features and turnaround times</caption>
   <thead>
     <tr>
       <th scope="col">Trip Tier</th>
@@ -505,7 +505,7 @@ function goToStep(stepNumber) {
 
 **Updated:**
 ```html
-<a href="https://twitter.com/safetrekr" class="st-marketing-footer-social-link" aria-label="Follow SafeTrekr on Twitter" target="_blank" rel="noopener noreferrer">
+<a href="https://twitter.com/safetrekr" class="st-marketing-footer-social-link" aria-label="Follow Safetrekr on Twitter" target="_blank" rel="noopener noreferrer">
   <span class="material-symbols-outlined" aria-hidden="true">twitter</span>
   <span class="sr-only">Opens in new window</span>
 </a>

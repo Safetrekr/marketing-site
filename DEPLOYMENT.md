@@ -1,6 +1,6 @@
 # Marketing Site Deployment Guide
 
-Complete guide to deploying the SafeTrekr marketing website to production.
+Complete guide to deploying the Safetrekr marketing website to production.
 
 ---
 
@@ -25,7 +25,7 @@ Complete guide to deploying the SafeTrekr marketing website to production.
 
 ## Overview
 
-The SafeTrekr marketing site is a **static website** built with Vite. It requires no server-side processing and can be deployed to any static hosting provider.
+The Safetrekr marketing site is a **static website** built with Vite. It requires no server-side processing and can be deployed to any static hosting provider.
 
 ### Deployment Requirements
 
@@ -953,7 +953,7 @@ After deploying:
 - [AWS S3](https://docs.aws.amazon.com/s3/)
 - [AWS CloudFront](https://docs.aws.amazon.com/cloudfront/)
 
-### SafeTrekr Resources
+### Safetrekr Resources
 
 - [Marketing README](./README.md)
 - [Component Documentation](./COMPONENTS.md)
@@ -968,4 +968,4 @@ After deploying:
 
 ---
 
-**Deployment guide maintained by SafeTrekr DevOps Team**
+**Deployment guide maintained by Safetrekr DevOps Team**

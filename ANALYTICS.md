@@ -1,6 +1,6 @@
 # Marketing Analytics Documentation
 
-Complete guide to analytics tracking and Google Analytics 4 integration for the SafeTrekr marketing website.
+Complete guide to analytics tracking and Google Analytics 4 integration for the Safetrekr marketing website.
 
 ---
 
@@ -19,7 +19,7 @@ Complete guide to analytics tracking and Google Analytics 4 integration for the 
 
 ## Overview
 
-The SafeTrekr marketing site uses **Google Analytics 4 (GA4)** for comprehensive event tracking and conversion measurement. All tracking is centralized in the `Analytics` component for consistency and maintainability.
+The Safetrekr marketing site uses **Google Analytics 4 (GA4)** for comprehensive event tracking and conversion measurement. All tracking is centralized in the `Analytics` component for consistency and maintainability.
 
 ### Key Features
 
@@ -156,7 +156,7 @@ Tracks a page view.
 
 **Example:**
 ```javascript
-Analytics.trackPageView('/marketing/pricing.html', 'Pricing - SafeTrekr');
+Analytics.trackPageView('/marketing/pricing.html', 'Pricing - Safetrekr');
 ```
 
 ---
@@ -312,7 +312,7 @@ Tracks video play events.
 **Example:**
 ```javascript
 videoElement.addEventListener('play', () => {
-  Analytics.trackVideoPlay('How SafeTrekr Works', 'home');
+  Analytics.trackVideoPlay('How Safetrekr Works', 'home');
 });
 ```
 
@@ -816,7 +816,7 @@ Configure in GA4 Admin → Data settings → Data retention:
 - [GA4 Events Reference](https://support.google.com/analytics/answer/9267735)
 - [GA4 Best Practices](https://support.google.com/analytics/answer/9267744)
 
-### SafeTrekr Resources
+### Safetrekr Resources
 
 - [Component Documentation](./COMPONENTS.md)
 - [Deployment Guide](./DEPLOYMENT.md)
@@ -830,4 +830,4 @@ Configure in GA4 Admin → Data settings → Data retention:
 
 ---
 
-**Analytics documentation maintained by SafeTrekr Marketing Team**
+**Analytics documentation maintained by Safetrekr Marketing Team**
