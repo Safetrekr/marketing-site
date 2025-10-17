@@ -226,15 +226,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--st-marketing-hero-gradient);
-  opacity: 0.05;
+  background-image: url('../assets/images/site-images/Safetrekr-Hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: 0;
+}
+
+.st-marketing-hero-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 100%);
+  z-index: 1;
 }
 
 .st-marketing-hero-content {
   position: relative;
   z-index: 1;
-  text-align: center;
+  text-align: left;
 }
 
 .st-marketing-hero-title {
@@ -251,15 +264,13 @@
   color: var(--st-text-secondary);
   margin-bottom: var(--st-spacing-xl);
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1.5;
 }
 
 .st-marketing-hero-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--st-spacing-md);
   flex-wrap: wrap;
   margin-bottom: var(--st-spacing-2xl);
@@ -664,6 +675,14 @@
     padding: 4rem 0 3rem;
   }
 
+  .st-marketing-hero-background {
+    background-image: url('../assets/images/site-images/Safetrekr-Hero-Mobile.jpg');
+  }
+
+  .st-marketing-hero-content {
+    text-align: center;
+  }
+
   .st-marketing-hero-title {
     font-size: var(--st-marketing-hero-size-mobile);
   }
@@ -674,6 +693,7 @@
 
   .st-marketing-hero-actions {
     flex-direction: column;
+    justify-content: center;
   }
 
   /* Sections */
