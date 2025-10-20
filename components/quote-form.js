@@ -13,24 +13,14 @@ export class QuoteForm {
     // EXACT data structure as specified
     this.formData = {
       plan: {
-        tier: null,
-        international: false,
-        overnight: false,
-        internationalAcknowledged: false
+        tier: null
       },
       trip: {
         name: '',
         dateStart: '',
         dateEnd: '',
         destCity: '',
-        destCountry: 'US',
-        adults: 0,
-        minors: 0,
-        originCity: '',
-        transport: '',
-        lodgingStatus: '',
-        notes: '',
-        showMoreDetails: false
+        destCountry: 'US'
       },
       addons: {
         bgAdultsDomestic: 0,
@@ -87,7 +77,7 @@ export class QuoteForm {
    * Calculate total price
    */
   calculateTotal() {
-    if (!this.pricingConfig) return { total: 0, todayTotal: 0, postBilled: 0 };
+    if (!this.pricingConfig) return { total: 0, todayTotal: 0, postBilled: 0, bgDomestic: 0, bgInternational: 0 };
 
     let total = 0;
     let postBilled = 0;
@@ -97,9 +87,12 @@ export class QuoteForm {
       total += this.pricingConfig.tiers[this.formData.plan.tier].price;
     }
 
-    // Add background check costs (post-billed)
-    const bgDomestic = this.formData.addons.bgAdultsDomestic * 35;
-    const bgInternational = this.formData.addons.bgAdultsInternational * 65;
+    // Add background check costs (post-billed) - ensure we have valid numbers
+    const bgAdultsDomestic = parseInt(this.formData.addons.bgAdultsDomestic) || 0;
+    const bgAdultsInternational = parseInt(this.formData.addons.bgAdultsInternational) || 0;
+
+    const bgDomestic = bgAdultsDomestic * 35;
+    const bgInternational = bgAdultsInternational * 65;
     postBilled = bgDomestic + bgInternational;
 
     const todayTotal = total;
@@ -119,13 +112,6 @@ export class QuoteForm {
         if (!this.formData.plan.tier) {
           errors.push('Please select a trip tier');
         }
-
-        // If international AND not Tier 3, must acknowledge
-        if (this.formData.plan.international &&
-            this.formData.plan.tier !== 'T3' &&
-            !this.formData.plan.internationalAcknowledged) {
-          errors.push('Please acknowledge the international trip limitation or select Tier 3');
-        }
         break;
 
       case 2: // Trip
@@ -140,12 +126,6 @@ export class QuoteForm {
         }
         if (!this.formData.trip.destCity || !this.formData.trip.destCity.trim()) {
           errors.push('Destination city is required');
-        }
-        if (!this.formData.trip.adults || this.formData.trip.adults < 1) {
-          errors.push('At least one adult is required');
-        }
-        if (this.formData.trip.minors === null || this.formData.trip.minors === undefined || this.formData.trip.minors < 0) {
-          errors.push('Number of minors is required (can be 0)');
         }
 
         // Validate dates
@@ -175,6 +155,11 @@ export class QuoteForm {
           errors.push('Email is required');
         } else if (!this.isValidEmail(this.formData.org.email)) {
           errors.push('Please enter a valid email address');
+        }
+        if (!this.formData.org.phone || !this.formData.org.phone.trim()) {
+          errors.push('Phone number is required');
+        } else if (!this.isValidPhone(this.formData.org.phone)) {
+          errors.push('Please enter a valid phone number');
         }
         break;
 
@@ -263,8 +248,21 @@ export class QuoteForm {
     }
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Import quote service dynamically
+      const { submitQuote } = await import('../services/quoteService.js');
+
+      // Submit quote to backend
+      const result = await submitQuote(this.formData);
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to submit quote');
+      }
+
+      console.log('[QuoteForm] Quote submitted successfully:', result.quote_id);
+
+      // Store quote_id and magic_token in sessionStorage for potential use
+      sessionStorage.setItem('pending_quote_id', result.quote_id);
+      sessionStorage.setItem('magic_token', result.magic_token);
 
       // Track quote request
       const tierInfo = this.pricingConfig.tiers[this.formData.plan.tier];
@@ -276,9 +274,14 @@ export class QuoteForm {
       // Show confirmation
       this.showConfirmation();
 
+      // TODO: Send magic link email via email service
+      // For now, we'll just log the magic link
+      console.log('[QuoteForm] Magic link (for testing):',
+        `http://localhost:5174/onboarding/welcome.html?token=${result.magic_token}`);
+
     } catch (error) {
       console.error('Form submission error:', error);
-      this.showErrors(['An error occurred. Please try again.']);
+      this.showErrors([error.message || 'An error occurred. Please try again.']);
 
       // Reset button
       if (submitBtn) {
@@ -348,7 +351,6 @@ export class QuoteForm {
         if (!this.formData.trip.dateStart) this.markFieldInvalid('trip.dateStart');
         if (!this.formData.trip.dateEnd) this.markFieldInvalid('trip.dateEnd');
         if (!this.formData.trip.destCity) this.markFieldInvalid('trip.destCity');
-        if (!this.formData.trip.adults) this.markFieldInvalid('trip.adults');
         break;
 
       case 4:
@@ -357,6 +359,9 @@ export class QuoteForm {
         if (!this.formData.org.role) this.markFieldInvalid('org.role');
         if (!this.formData.org.email || !this.isValidEmail(this.formData.org.email)) {
           this.markFieldInvalid('org.email');
+        }
+        if (!this.formData.org.phone || !this.isValidPhone(this.formData.org.phone)) {
+          this.markFieldInvalid('org.phone');
         }
         break;
 
@@ -401,7 +406,6 @@ export class QuoteForm {
         if (this.formData.trip.dateStart) this.markFieldValid('trip.dateStart');
         if (this.formData.trip.dateEnd) this.markFieldValid('trip.dateEnd');
         if (this.formData.trip.destCity) this.markFieldValid('trip.destCity');
-        if (this.formData.trip.adults) this.markFieldValid('trip.adults');
         break;
 
       case 4:
@@ -410,6 +414,9 @@ export class QuoteForm {
         if (this.formData.org.role) this.markFieldValid('org.role');
         if (this.formData.org.email && this.isValidEmail(this.formData.org.email)) {
           this.markFieldValid('org.email');
+        }
+        if (this.formData.org.phone && this.isValidPhone(this.formData.org.phone)) {
+          this.markFieldValid('org.phone');
         }
         break;
 
@@ -482,21 +489,12 @@ export class QuoteForm {
         isValid = value && value.toString().trim() !== '';
         break;
 
-      case 'trip.adults':
-        isValid = value && parseInt(value) >= 1;
-        break;
-
       case 'org.email':
         isValid = value && this.isValidEmail(value);
         break;
 
       case 'org.phone':
-        if (value && value.trim() !== '') {
-          isValid = this.isValidPhone(value);
-        } else {
-          fieldElement.classList.remove('is-invalid', 'is-valid');
-          return;
-        }
+        isValid = value && value.trim() !== '' && this.isValidPhone(value);
         break;
 
       default:
@@ -585,9 +583,6 @@ export class QuoteForm {
             <dt class="col-sm-4">Dates</dt>
             <dd class="col-sm-8">${this.formatDate(this.formData.trip.dateStart)} - ${this.formatDate(this.formData.trip.dateEnd)}</dd>
 
-            <dt class="col-sm-4">Participants</dt>
-            <dd class="col-sm-8">${this.formData.trip.adults} adults, ${this.formData.trip.minors} minors</dd>
-
             <dt class="col-sm-4">Organization</dt>
             <dd class="col-sm-8">${this.formData.org.orgName}</dd>
 
@@ -599,37 +594,29 @@ export class QuoteForm {
         <div class="st-quote-confirmation-next-steps">
           <h3 class="mb-3">What's Next?</h3>
           <ol class="st-quote-next-steps-list">
+            <li>
+              <strong>Check Your Email</strong><br>
+              We've sent a secure link to ${this.formData.org.email}. Click the link to set up your account and complete your trip details.
+            </li>
             ${this.formData.checkout.mode === 'order' ? `
               <li>
                 <strong>Payment Confirmation</strong><br>
-                You'll receive a payment receipt at ${this.formData.org.email} within minutes.
-              </li>
-              <li>
-                <strong>Account Setup</strong><br>
-                We'll send you login credentials to access your Safetrekr dashboard within 24 hours.
+                You'll receive a payment receipt within minutes.
               </li>
             ` : this.formData.checkout.mode === 'invoice' ? `
               <li>
                 <strong>Invoice Delivery</strong><br>
                 We'll send an invoice to ${this.formData.org.email} within 1 business day.
               </li>
-              <li>
-                <strong>Account Setup</strong><br>
-                Once payment is received, we'll create your account and send login credentials.
-              </li>
             ` : `
               <li>
                 <strong>Quote Delivery</strong><br>
                 You'll receive a detailed PDF quote at ${this.formData.org.email} within 2 hours.
               </li>
-              <li>
-                <strong>Follow-up Call</strong><br>
-                Our team will reach out within 1 business day to discuss your trip and answer questions.
-              </li>
             `}
             <li>
-              <strong>Trip Input</strong><br>
-              Log into your dashboard to enter your complete trip details and itinerary.
+              <strong>Complete Trip Setup</strong><br>
+              After setting up your account, you'll finalize your trip details. We've pre-filled everything from your quote to save you time!
             </li>
             <li>
               <strong>Analyst Review</strong><br>
@@ -755,15 +742,12 @@ export class QuoteForm {
   }
 
   /**
-   * Render Step 1: Plan (Tier selection with toggles)
+   * Render Step 1: Plan (Tier selection)
    */
   renderStep1() {
     if (!this.pricingConfig) {
       return '<div class="st-quote-step">Loading pricing...</div>';
     }
-
-    // Show risk banner if international is selected but tier is not T3
-    const showRiskBanner = this.formData.plan.international && this.formData.plan.tier !== 'T3';
 
     return `
       <div class="st-quote-step">
@@ -796,51 +780,6 @@ export class QuoteForm {
             `;
           }).join('')}
         </div>
-
-        <!-- International/Overnight Toggles (Below tier cards) -->
-        <div class="st-quote-form-section mt-4">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="toggleInternational" data-field="plan.international" ${this.formData.plan.international ? 'checked' : ''}>
-                <label class="form-check-label" for="toggleInternational">
-                  <strong>International Travel</strong>
-                </label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="toggleOvernight" data-field="plan.overnight" ${this.formData.plan.overnight ? 'checked' : ''}>
-                <label class="form-check-label" for="toggleOvernight">
-                  <strong>Overnight Stay</strong>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        ${showRiskBanner ? `
-          <div class="st-alert st-alert-danger mt-4" role="alert">
-            <div class="st-alert-icon">
-              <span class="material-symbols-outlined">warning</span>
-            </div>
-            <div class="st-alert-content">
-              <strong class="st-alert-title">International Travel Requires Tier 3</strong>
-              <p>Your selected tier does not include international travel coverage. Please either:</p>
-              <ul class="st-alert-list">
-                <li>Select Tier 3 - International/Complex for full international coverage</li>
-                <li>Uncheck "International Travel" if this is a domestic trip</li>
-                <li>Acknowledge you understand the limitation and proceed at your own risk</li>
-              </ul>
-              <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" id="ackInternational" data-field="plan.internationalAcknowledged" ${this.formData.plan.internationalAcknowledged ? 'checked' : ''}>
-                <label class="form-check-label" for="ackInternational">
-                  I acknowledge this tier does not fully cover international travel
-                </label>
-              </div>
-            </div>
-          </div>
-        ` : ''}
       </div>
     `;
   }
@@ -849,36 +788,67 @@ export class QuoteForm {
    * Render Step 2: Trip Details
    */
   renderStep2() {
+    // Calculate trip duration and check for tier mismatch
+    let showTierWarning = false;
+    let tripDays = 0;
+
+    if (this.formData.trip.dateStart && this.formData.trip.dateEnd) {
+      const start = new Date(this.formData.trip.dateStart);
+      const end = new Date(this.formData.trip.dateEnd);
+      const diffTime = Math.abs(end - start);
+      tripDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 to include both start and end day
+
+      // Show warning if Tier 1 selected but trip is 3+ days (multi-day)
+      if (this.formData.plan.tier === 'T1' && tripDays >= 3) {
+        showTierWarning = true;
+      }
+    }
+
     return `
       <div class="st-quote-step">
         <h2 class="st-quote-step-title">Trip details</h2>
         <p class="st-quote-step-subtitle">Tell us about your trip</p>
 
+        ${showTierWarning ? `
+          <div class="st-alert st-alert-warning mb-4" role="alert">
+            <div class="st-alert-icon">
+              <span class="material-symbols-outlined">warning</span>
+            </div>
+            <div class="st-alert-content">
+              <strong class="st-alert-title">Multi-Day Trip Detected</strong>
+              <p>You've selected <strong>Tier 1 (Domestic Day/Overnight)</strong> which is designed for 1-2 day trips, but your dates indicate a ${tripDays}-day trip. Multi-day trips require <strong>Tier 2 (Multi-Day Domestic)</strong>.</p>
+              <p><strong>Please choose one of the following options:</strong></p>
+              <ul class="st-alert-list">
+                <li><strong>Option 1:</strong> Adjust your dates to 1-2 days and continue with Tier 1</li>
+                <li><strong>Option 2:</strong> <button type="button" class="btn btn-primary btn-sm" data-action="change-to-tier2">Click here to upgrade to Tier 2</button> for your ${tripDays}-day trip</li>
+              </ul>
+            </div>
+          </div>
+        ` : ''}
+
         <div class="st-quote-form-section">
-          <!-- Required Fields -->
-          <h3 class="mb-4">Required Information</h3>
-          <div class="row g-4">
-            <div class="col-12">
+          <div class="row">
+            <div class="col-12" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Trip Name *</label>
               <input type="text" class="st-quote-form-input" data-field="trip.name" value="${this.formData.trip.name}" placeholder="e.g., Spring 2025 Science Field Trip" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Start Date *</label>
               <input type="date" class="st-quote-form-input" data-field="trip.dateStart" value="${this.formData.trip.dateStart}" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">End Date *</label>
               <input type="date" class="st-quote-form-input" data-field="trip.dateEnd" value="${this.formData.trip.dateEnd}" required>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-8" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Destination City *</label>
               <input type="text" class="st-quote-form-input" data-field="trip.destCity" value="${this.formData.trip.destCity}" placeholder="e.g., San Francisco" required>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Country *</label>
               <select class="st-quote-form-select" data-field="trip.destCountry" required>
                 <option value="US" ${this.formData.trip.destCountry === 'US' ? 'selected' : ''}>United States</option>
@@ -887,63 +857,7 @@ export class QuoteForm {
                 <option value="OTHER" ${this.formData.trip.destCountry === 'OTHER' ? 'selected' : ''}>Other</option>
               </select>
             </div>
-
-            <div class="col-md-6">
-              <label class="st-quote-form-label">Number of Adults *</label>
-              <input type="number" class="st-quote-form-input" data-field="trip.adults" value="${this.formData.trip.adults || ''}" placeholder="0" min="1" required>
-            </div>
-
-            <div class="col-md-6">
-              <label class="st-quote-form-label">Number of Minors *</label>
-              <input type="number" class="st-quote-form-input" data-field="trip.minors" value="${this.formData.trip.minors || ''}" placeholder="0" min="0" required>
-            </div>
           </div>
-
-          <!-- Optional Fields (Collapsible) -->
-          <div style="margin-top: 3rem;">
-            <button type="button" class="st-marketing-cta-secondary" data-action="toggle-more-details">
-              <span class="material-symbols-outlined">${this.formData.trip.showMoreDetails ? 'expand_less' : 'expand_more'}</span>
-              ${this.formData.trip.showMoreDetails ? 'Hide' : 'Show'} Optional Details
-            </button>
-          </div>
-
-          ${this.formData.trip.showMoreDetails ? `
-            <div class="mt-4">
-              <h3 class="mb-4">Optional Information</h3>
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <label class="st-quote-form-label">Origin City (Optional)</label>
-                  <input type="text" class="st-quote-form-input" data-field="trip.originCity" value="${this.formData.trip.originCity}" placeholder="e.g., Boston">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="st-quote-form-label">Primary Transport (Optional)</label>
-                  <select class="st-quote-form-select" data-field="trip.transport">
-                    <option value="">Select...</option>
-                    <option value="bus" ${this.formData.trip.transport === 'bus' ? 'selected' : ''}>Bus/Charter</option>
-                    <option value="flight" ${this.formData.trip.transport === 'flight' ? 'selected' : ''}>Flight</option>
-                    <option value="van" ${this.formData.trip.transport === 'van' ? 'selected' : ''}>Van/Personal Vehicle</option>
-                    <option value="other" ${this.formData.trip.transport === 'other' ? 'selected' : ''}>Other</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="st-quote-form-label">Lodging Status (Optional)</label>
-                  <select class="st-quote-form-select" data-field="trip.lodgingStatus">
-                    <option value="">Select...</option>
-                    <option value="booked" ${this.formData.trip.lodgingStatus === 'booked' ? 'selected' : ''}>Booked</option>
-                    <option value="pending" ${this.formData.trip.lodgingStatus === 'pending' ? 'selected' : ''}>Pending</option>
-                    <option value="none" ${this.formData.trip.lodgingStatus === 'none' ? 'selected' : ''}>No lodging needed</option>
-                  </select>
-                </div>
-
-                <div class="col-12">
-                  <label class="st-quote-form-label">Additional Notes (Optional)</label>
-                  <textarea class="st-quote-form-input" data-field="trip.notes" rows="3" placeholder="Any special considerations, activities, or details we should know...">${this.formData.trip.notes}</textarea>
-                </div>
-              </div>
-            </div>
-          ` : ''}
         </div>
       </div>
     `;
@@ -964,14 +878,12 @@ export class QuoteForm {
         <div class="st-quote-addons-grid">
           <!-- Background Checks - Domestic -->
           <div class="st-quote-addon-card">
-            <div class="st-quote-addon-header">
-              <div class="st-quote-addon-name">Background Checks - U.S. Adults</div>
-              <div class="st-quote-addon-price">$${bgDomesticPrice} per adult</div>
-            </div>
+            <div class="st-quote-addon-name">Background Checks - U.S. Adults</div>
+            <div class="st-quote-addon-price">$${bgDomesticPrice} per adult</div>
             <div class="st-quote-addon-description">
               U.S. background checks for adult chaperones. Consent collected after checkout.
             </div>
-            <div class="mt-3">
+            <div style="margin-top: 1.5rem;">
               <label class="st-quote-form-label">Number of U.S. adults to screen:</label>
               <input type="number" class="st-quote-form-input" data-field="addons.bgAdultsDomestic" value="${this.formData.addons.bgAdultsDomestic || 0}" min="0" max="100">
               ${this.formData.addons.bgAdultsDomestic > 0 ? `
@@ -984,14 +896,12 @@ export class QuoteForm {
 
           <!-- Background Checks - International -->
           <div class="st-quote-addon-card">
-            <div class="st-quote-addon-header">
-              <div class="st-quote-addon-name">Background Checks - International Adults</div>
-              <div class="st-quote-addon-price">$${bgInternationalPrice} per adult</div>
-            </div>
+            <div class="st-quote-addon-name">Background Checks - International Adults</div>
+            <div class="st-quote-addon-price">$${bgInternationalPrice} per adult</div>
             <div class="st-quote-addon-description">
               International background checks for adults with international travel history.
             </div>
-            <div class="mt-3">
+            <div style="margin-top: 1.5rem;">
               <label class="st-quote-form-label">Number of international adults to screen:</label>
               <input type="number" class="st-quote-form-input" data-field="addons.bgAdultsInternational" value="${this.formData.addons.bgAdultsInternational || 0}" min="0" max="100">
               ${this.formData.addons.bgAdultsInternational > 0 ? `
@@ -1003,12 +913,9 @@ export class QuoteForm {
           </div>
         </div>
 
-        <div class="alert alert-info mt-4">
-          <span class="material-symbols-outlined">info</span>
-          <div>
-            <strong>Note about background checks:</strong>
-            Background check fees are billed separately after adult consent forms are completed. They are not included in today's total.
-          </div>
+        <div class="alert alert-info" style="margin-top: 2rem;">
+          <strong>Note about background checks:</strong>
+          Background check fees are billed separately after adult consent forms are completed. They are not included in today's total.
         </div>
       </div>
     `;
@@ -1024,8 +931,8 @@ export class QuoteForm {
         <p class="st-quote-step-subtitle">We'll use this to set up your account</p>
 
         <div class="st-quote-form-section">
-          <div class="row g-4">
-            <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Organization Type *</label>
               <select class="st-quote-form-select" data-field="org.orgType" required>
                 <option value="">Select type...</option>
@@ -1039,28 +946,28 @@ export class QuoteForm {
               </select>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Organization Name *</label>
               <input type="text" class="st-quote-form-input" data-field="org.orgName" value="${this.formData.org.orgName}" placeholder="Your school/organization name" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Your Role/Title *</label>
               <input type="text" class="st-quote-form-input" data-field="org.role" value="${this.formData.org.role}" placeholder="e.g., Trip Coordinator, Principal" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Your Email *</label>
               <input type="email" class="st-quote-form-input" data-field="org.email" value="${this.formData.org.email}" placeholder="your@email.com" required>
             </div>
 
-            <div class="col-md-6">
-              <label class="st-quote-form-label">Phone Number (Optional)</label>
-              <input type="tel" class="st-quote-form-input" data-field="org.phone" value="${this.formData.org.phone}" placeholder="(555) 123-4567">
+            <div class="col-md-6" style="margin-bottom: 2rem;">
+              <label class="st-quote-form-label">Phone Number *</label>
+              <input type="tel" class="st-quote-form-input" data-field="org.phone" value="${this.formData.org.phone}" placeholder="(555) 123-4567" required>
             </div>
 
-            <div class="col-md-6">
-              <div class="form-check mt-4">
+            <div class="col-md-6" style="padding-top: 2rem;">
+              <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="taxExempt" data-field="org.taxExempt" ${this.formData.org.taxExempt ? 'checked' : ''}>
                 <label class="form-check-label" for="taxExempt">
                   We are tax-exempt
@@ -1151,14 +1058,14 @@ export class QuoteForm {
 
         <!-- Agreement Checkboxes -->
         <div class="st-quote-agreements mt-5">
-          <div class="form-check mb-3">
+          <div class="form-check mb-3" style="margin-top: 1.5rem;">
             <input class="form-check-input" type="checkbox" id="agreeAuthorized" data-field="checkout.agreedToAuthorization" ${this.formData.checkout.agreedToAuthorization ? 'checked' : ''} required>
             <label class="form-check-label" for="agreeAuthorized">
               I am authorized to make this purchase or request a quote on behalf of my organization. *
             </label>
           </div>
 
-          <div class="form-check mb-3">
+          <div class="form-check mb-3" style="margin-top: 1.5rem;">
             <input class="form-check-input" type="checkbox" id="agreeTerms" data-field="checkout.agreedToTerms" ${this.formData.checkout.agreedToTerms ? 'checked' : ''} required>
             <label class="form-check-label" for="agreeTerms">
               I agree to the <a href="./terms.html" target="_blank">Terms of Service</a> and <a href="./privacy.html" target="_blank">Privacy Policy</a>. *
@@ -1167,12 +1074,9 @@ export class QuoteForm {
         </div>
 
         <!-- Security Note -->
-        <div class="alert alert-secondary mt-4">
-          <span class="material-symbols-outlined">lock</span>
-          <div>
-            <strong>Secure & Confidential</strong><br>
-            Your information is encrypted and never shared. All payments are processed securely through Stripe.
-          </div>
+        <div class="alert alert-secondary" style="margin-top: 2rem;">
+          <strong>Secure & Confidential</strong><br>
+          Your information is encrypted and never shared. All payments are processed securely through Stripe.
         </div>
       </div>
     `;
@@ -1238,10 +1142,18 @@ export class QuoteForm {
             </div>
 
             ${pricing.postBilled > 0 ? `
-              <div class="st-quote-summary-note mt-3">
-                <small class="text-muted">
-                  + $${pricing.postBilled.toFixed(2)} background checks billed after consent
-                </small>
+              <div class="st-quote-summary-item mt-2">
+                <div class="st-quote-summary-label">
+                  <small class="text-muted">+ Background Checks (billed later)</small>
+                </div>
+                <div class="st-quote-summary-price">
+                  <small class="text-muted">$${pricing.postBilled.toFixed(2)}</small>
+                </div>
+              </div>
+
+              <div class="st-quote-summary-total mt-3" style="border-top: 2px solid var(--st-border); padding-top: var(--st-spacing-md);">
+                <div class="st-quote-summary-label"><strong>Expected Final Total</strong></div>
+                <div class="st-quote-summary-price"><strong>$${pricing.total.toFixed(2)}</strong></div>
               </div>
             ` : ''}
           ` : ''}
@@ -1299,12 +1211,22 @@ export class QuoteForm {
       });
     });
 
-    // Toggle more details button
-    const toggleMoreBtn = this.element.querySelector('[data-action="toggle-more-details"]');
-    if (toggleMoreBtn) {
-      toggleMoreBtn.addEventListener('click', () => {
-        this.formData.trip.showMoreDetails = !this.formData.trip.showMoreDetails;
+    // Change to Tier 2 button (from warning in Step 2)
+    const changeTierBtn = this.element.querySelector('[data-action="change-to-tier2"]');
+    if (changeTierBtn) {
+      changeTierBtn.addEventListener('click', () => {
+        this.formData.plan.tier = 'T2';
+
+        // Track analytics
+        if (this.pricingConfig && this.pricingConfig.tiers.T2) {
+          const tierInfo = this.pricingConfig.tiers.T2;
+          Analytics.trackPricingTierSelect(tierInfo.label, tierInfo.price);
+        }
+
+        // Go back to step 1 to show the updated tier selection
+        this.currentStep = 1;
         this.render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
@@ -1374,8 +1296,8 @@ export class QuoteForm {
       }
 
       // Re-render on certain changes
-      if (fieldName === 'plan.international' || fieldName === 'plan.overnight' ||
-          fieldName === 'plan.internationalAcknowledged' || fieldName === 'checkout.mode') {
+      if (fieldName === 'checkout.mode' ||
+          (this.currentStep === 2 && (fieldName === 'trip.dateStart' || fieldName === 'trip.dateEnd'))) {
         this.render();
       }
     }

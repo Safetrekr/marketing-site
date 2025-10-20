@@ -1717,22 +1717,23 @@
 }
 
 .st-quote-addon-name {
-  flex: 1;
   font-size: var(--st-font-size-base);
   font-weight: 600;
   color: var(--st-text-heading);
+  margin-bottom: var(--st-spacing-sm);
 }
 
 .st-quote-addon-price {
-  font-size: var(--st-font-size-lg);
-  font-weight: 700;
-  color: var(--st-primary);
+  font-size: var(--st-font-size-sm);
+  font-weight: 600;
+  color: var(--st-text-secondary);
+  margin-bottom: var(--st-spacing-md);
 }
 
 .st-quote-addon-description {
   font-size: var(--st-font-size-sm);
   color: var(--st-text-secondary);
-  margin-left: calc(var(--st-spacing-sm) + 1rem);
+  line-height: 1.5;
 }
 
 /* Payment Options */
