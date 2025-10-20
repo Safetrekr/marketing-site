@@ -3,7 +3,7 @@
  * Handles quote submissions from marketing site and quote retrieval for onboarding
  */
 
-import supabase from './supabaseClient.js';
+import supabase from '/services/supabaseClient.js';
 
 /**
  * Submit a quote from the marketing site

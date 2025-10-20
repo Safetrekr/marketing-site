@@ -4,6 +4,9 @@
  */
 
 import { Analytics } from './analytics.js';
+import { submitQuote } from '/services/quoteService.js';
+import { LocationAutocomplete } from '/components/LocationAutocomplete.js';
+import { determineTripType } from '/services/geocodingService.js';
 
 export class QuoteForm {
   constructor(options = {}) {
@@ -19,6 +22,8 @@ export class QuoteForm {
         name: '',
         dateStart: '',
         dateEnd: '',
+        depCity: '',
+        depCountry: 'US',
         destCity: '',
         destCountry: 'US'
       },
@@ -46,6 +51,12 @@ export class QuoteForm {
 
     this.pricingConfig = null;
     this.element = null;
+
+    // Location autocomplete instances
+    this.depCityAutocomplete = null;
+    this.destCityAutocomplete = null;
+    this.selectedDepLocation = null;
+    this.selectedDestLocation = null;
   }
 
   /**
@@ -248,9 +259,6 @@ export class QuoteForm {
     }
 
     try {
-      // Import quote service dynamically
-      const { submitQuote } = await import('../services/quoteService.js');
-
       // Submit quote to backend
       const result = await submitQuote(this.formData);
 
@@ -843,19 +851,16 @@ export class QuoteForm {
               <input type="date" class="st-quote-form-input" data-field="trip.dateEnd" value="${this.formData.trip.dateEnd}" required>
             </div>
 
-            <div class="col-md-8" style="margin-bottom: 2rem;">
-              <label class="st-quote-form-label">Destination City *</label>
-              <input type="text" class="st-quote-form-input" data-field="trip.destCity" value="${this.formData.trip.destCity}" placeholder="e.g., San Francisco" required>
+            <div class="col-12" style="margin-bottom: 2rem;">
+              <label class="st-quote-form-label">Departure City *</label>
+              <input type="text" id="quote-depCity-autocomplete" class="st-quote-form-input" placeholder="Where is your group departing from?" required>
+              <small class="text-muted">Start typing to search for cities worldwide</small>
             </div>
 
-            <div class="col-md-4" style="margin-bottom: 2rem;">
-              <label class="st-quote-form-label">Country *</label>
-              <select class="st-quote-form-select" data-field="trip.destCountry" required>
-                <option value="US" ${this.formData.trip.destCountry === 'US' ? 'selected' : ''}>United States</option>
-                <option value="CA" ${this.formData.trip.destCountry === 'CA' ? 'selected' : ''}>Canada</option>
-                <option value="MX" ${this.formData.trip.destCountry === 'MX' ? 'selected' : ''}>Mexico</option>
-                <option value="OTHER" ${this.formData.trip.destCountry === 'OTHER' ? 'selected' : ''}>Other</option>
-              </select>
+            <div class="col-12" style="margin-bottom: 2rem;">
+              <label class="st-quote-form-label">Destination City *</label>
+              <input type="text" id="quote-destCity-autocomplete" class="st-quote-form-input" placeholder="Where is your group traveling to?" required>
+              <small class="text-muted">Start typing to search for cities worldwide</small>
             </div>
           </div>
         </div>
@@ -1274,6 +1279,9 @@ export class QuoteForm {
         }
       });
     });
+
+    // Initialize location autocomplete for Step 2
+    this.initializeLocationAutocomplete();
   }
 
   /**
@@ -1332,6 +1340,172 @@ export class QuoteForm {
         }
       }
     }
+  }
+
+  /**
+   * Initialize location autocomplete components for Step 2
+   */
+  initializeLocationAutocomplete() {
+    // Only initialize if we're on Step 2
+    if (this.currentStep !== 2) {
+      return;
+    }
+
+    // Destroy existing instances if they exist
+    if (this.depCityAutocomplete) {
+      this.depCityAutocomplete.destroy();
+      this.depCityAutocomplete = null;
+    }
+    if (this.destCityAutocomplete) {
+      this.destCityAutocomplete.destroy();
+      this.destCityAutocomplete = null;
+    }
+
+    // Initialize departure city autocomplete
+    const depCityInput = document.getElementById('quote-depCity-autocomplete');
+    if (depCityInput) {
+      this.depCityAutocomplete = new LocationAutocomplete({
+        inputId: 'quote-depCity-autocomplete',
+        placeholder: 'Where is your group departing from?',
+        onSelect: (location) => {
+          console.log('[QuoteForm] Departure city selected:', location);
+          this.selectedDepLocation = location;
+          this.formData.trip.depCity = location.displayName;
+          this.formData.trip.depCountry = location.countryCode;
+
+          // Auto-detect trip type if both locations are selected
+          this.autoDetectTripType();
+        },
+        initialValue: this.selectedDepLocation,
+        required: true
+      });
+      this.depCityAutocomplete.init();
+
+      // Restore previous selection if exists
+      if (this.selectedDepLocation) {
+        this.depCityAutocomplete.setLocation(this.selectedDepLocation);
+      }
+    }
+
+    // Initialize destination city autocomplete
+    const destCityInput = document.getElementById('quote-destCity-autocomplete');
+    if (destCityInput) {
+      this.destCityAutocomplete = new LocationAutocomplete({
+        inputId: 'quote-destCity-autocomplete',
+        placeholder: 'Where is your group traveling to?',
+        onSelect: (location) => {
+          console.log('[QuoteForm] Destination city selected:', location);
+          this.selectedDestLocation = location;
+          this.formData.trip.destCity = location.displayName;
+          this.formData.trip.destCountry = location.countryCode;
+
+          // Auto-detect trip type if both locations are selected
+          this.autoDetectTripType();
+        },
+        initialValue: this.selectedDestLocation,
+        required: true
+      });
+      this.destCityAutocomplete.init();
+
+      // Restore previous selection if exists
+      if (this.selectedDestLocation) {
+        this.destCityAutocomplete.setLocation(this.selectedDestLocation);
+      }
+    }
+  }
+
+  /**
+   * Auto-detect trip type based on departure and destination
+   */
+  autoDetectTripType() {
+    if (!this.selectedDepLocation || !this.selectedDestLocation) {
+      return;
+    }
+
+    // Detect if either location is international
+    const tripType = determineTripType(this.selectedDepLocation, this.selectedDestLocation);
+
+    if (tripType === 'T3') {
+
+      // If user selected T1 or T2, auto-upgrade to T3 and show notification
+      if (this.formData.plan.tier !== 'T3' && this.formData.plan.tier) {
+        console.warn('[QuoteForm] International destination requires Tier 3, auto-upgrading');
+
+        // Auto-upgrade to T3
+        this.formData.plan.tier = 'T3';
+
+        // Track analytics
+        if (this.pricingConfig && this.pricingConfig.tiers.T3) {
+          const tierInfo = this.pricingConfig.tiers.T3;
+          Analytics.trackPricingTierSelect(tierInfo.label, tierInfo.price);
+        }
+
+        // Update the tier selection in DOM without re-rendering (which would destroy autocomplete)
+        const t3Radio = document.querySelector('input[name="plan.tier"][value="T3"]');
+        if (t3Radio) {
+          t3Radio.checked = true;
+        }
+
+        // Update pricing summary without full re-render
+        const summaryContainer = this.element.querySelector('.st-quote-summary-sidebar');
+        if (summaryContainer) {
+          summaryContainer.outerHTML = this.renderOrderSummary();
+        }
+
+        // Show themed modal
+        setTimeout(() => {
+          this.showTierUpgradeModal(this.selectedDestLocation.displayName);
+        }, 100);
+      }
+    }
+  }
+
+  /**
+   * Show themed modal for tier upgrade notification
+   */
+  showTierUpgradeModal(destinationName) {
+    // Create modal HTML
+    const modalHTML = `
+      <div class="st-modal-overlay" id="tier-upgrade-modal">
+        <div class="st-modal-content">
+          <div class="st-modal-header">
+            <div class="st-modal-icon st-modal-icon-info">
+              <span class="material-symbols-outlined">flight_takeoff</span>
+            </div>
+            <h3 class="st-modal-title">International Destination Detected</h3>
+          </div>
+          <div class="st-modal-body">
+            <p>Your trip includes an international destination (<strong>${destinationName}</strong>), which requires comprehensive international coverage.</p>
+            <p><strong>We've automatically upgraded your selection to Tier 3 (International)</strong> to ensure you have the protection you need for international travel.</p>
+          </div>
+          <div class="st-modal-footer">
+            <button type="button" class="st-modal-btn st-modal-btn-primary" onclick="document.getElementById('tier-upgrade-modal').remove()">
+              Got it, thanks!
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Insert modal into DOM
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Close on overlay click
+    const overlay = document.getElementById('tier-upgrade-modal');
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.remove();
+      }
+    });
+
+    // Close on Escape key
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        overlay.remove();
+        document.removeEventListener('keydown', escapeHandler);
+      }
+    };
+    document.addEventListener('keydown', escapeHandler);
   }
 
   /**
