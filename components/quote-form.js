@@ -6,7 +6,7 @@
 import { Analytics } from './analytics.js';
 import { submitQuote } from '/services/quoteService.js';
 import { LocationAutocomplete } from '/components/LocationAutocomplete.js';
-import { determineTripType } from '/services/geocodingService.js';
+import { determineTripType, geocodeAddress } from '/services/geocodingService.js';
 
 export class QuoteForm {
   constructor(options = {}) {
@@ -253,14 +253,30 @@ export class QuoteForm {
 
     // Show loading state
     const submitBtn = this.element.querySelector('[data-submit]');
+    const originalButtonText = this.formData.checkout.mode === 'order' ? 'Checkout Now' : 'Submit Request';
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
     }
 
     try {
+      // Calculate pricing before submitting
+      const pricing = this.calculateTotal();
+
+      // Add pricing to formData
+      this.formData.pricing = {
+        tierPrice: pricing.todayTotal * 100, // Convert to cents
+        todayTotal: pricing.todayTotal,
+        total: pricing.total,
+        postBilled: pricing.postBilled
+      };
+
+      console.log('[QuoteForm] Submitting quote with data:', this.formData);
+
       // Submit quote to backend
       const result = await submitQuote(this.formData);
+
+      console.log('[QuoteForm] Submit result:', result);
 
       if (!result.success) {
         throw new Error(result.error || 'Failed to submit quote');
@@ -279,22 +295,29 @@ export class QuoteForm {
         []
       );
 
-      // Show confirmation
+      // Handle Stripe payment flow
+      if (result.stripe?.action === 'redirect' && result.stripe?.checkoutUrl) {
+        // Order Now mode - redirect to Stripe Checkout
+        console.log('[QuoteForm] Redirecting to Stripe Checkout:', result.stripe.checkoutUrl);
+        window.location.href = result.stripe.checkoutUrl;
+        return; // Don't show confirmation, user is being redirected
+      }
+
+      // Show confirmation for Invoice/Quote modes
       this.showConfirmation();
 
-      // TODO: Send magic link email via email service
-      // For now, we'll just log the magic link
+      // Log magic link for testing
       console.log('[QuoteForm] Magic link (for testing):',
-        `http://localhost:5174/onboarding/welcome.html?token=${result.magic_token}`);
+        `${window.location.origin}/onboarding/welcome.html?token=${result.magic_token}`);
 
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('[QuoteForm] Form submission error:', error);
       this.showErrors([error.message || 'An error occurred. Please try again.']);
 
       // Reset button
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
+        submitBtn.innerHTML = `${originalButtonText} <span class="material-symbols-outlined">${this.formData.checkout.mode === 'order' ? 'shopping_cart_checkout' : 'send'}</span>`;
       }
     }
   }
@@ -604,7 +627,7 @@ export class QuoteForm {
           <ol class="st-quote-next-steps-list">
             <li>
               <strong>Check Your Email</strong><br>
-              We've sent a secure link to ${this.formData.org.email}. Click the link to set up your account and complete your trip details.
+              We've sent a secure one-click setup link to ${this.formData.org.email}. No password needed—just click the link to get started!
             </li>
             ${this.formData.checkout.mode === 'order' ? `
               <li>
@@ -623,8 +646,8 @@ export class QuoteForm {
               </li>
             `}
             <li>
-              <strong>Complete Trip Setup</strong><br>
-              After setting up your account, you'll finalize your trip details. We've pre-filled everything from your quote to save you time!
+              <strong>Quick Setup (2 minutes)</strong><br>
+              Click the email link to confirm your profile—no password or complex forms. We've pre-filled everything from your quote!
             </li>
             <li>
               <strong>Analyst Review</strong><br>
@@ -694,8 +717,8 @@ export class QuoteForm {
             </button>
           ` : `
             <button type="button" class="st-marketing-cta-primary" data-submit>
-              Submit Request
-              <span class="material-symbols-outlined">send</span>
+              ${this.formData.checkout.mode === 'order' ? 'Checkout Now' : 'Submit Request'}
+              <span class="material-symbols-outlined">${this.formData.checkout.mode === 'order' ? 'shopping_cart_checkout' : 'send'}</span>
             </button>
           `}
         </div>
@@ -1008,11 +1031,11 @@ export class QuoteForm {
 
             ${this.formData.checkout.mode === 'order' ? `
               <div class="st-quote-payment-details mt-4">
-                <div class="alert alert-info">
-                  <span class="material-symbols-outlined">credit_card</span>
+                <div class="alert alert-success">
+                  <span class="material-symbols-outlined">lock</span>
                   <div>
-                    <strong>Stripe integration will be added here</strong>
-                    <br>Secure payment processing with Stripe
+                    <strong>Ready to Pay Securely</strong>
+                    <br>When you click "Submit Request" below, you'll be redirected to Stripe's secure checkout page to complete your payment with credit card.
                   </div>
                 </div>
               </div>
@@ -1033,7 +1056,11 @@ export class QuoteForm {
               <div class="st-quote-payment-details mt-4">
                 <div class="mb-3">
                   <label class="st-quote-form-label">Billing Address *</label>
-                  <textarea class="st-quote-form-input" data-field="checkout.billingAddress" rows="3" placeholder="Enter your billing address" required>${this.formData.checkout.billingAddress}</textarea>
+                  <div class="geocoding-search-wrapper">
+                    <input type="text" class="st-quote-form-input" id="billing-address-input" data-field="checkout.billingAddress" value="${this.formData.checkout.billingAddress}" placeholder="Search for your billing address..." autocomplete="off" required>
+                    <div class="geocoding-results" style="display: none;"></div>
+                  </div>
+                  <small class="text-muted">Start typing to search for your address</small>
                 </div>
 
                 <div class="mb-3">
@@ -1250,6 +1277,72 @@ export class QuoteForm {
       }
     });
 
+    // Billing address geocoding autocomplete
+    const billingAddressInput = this.element.querySelector('#billing-address-input');
+    if (billingAddressInput) {
+      const resultsContainer = billingAddressInput.parentElement.querySelector('.geocoding-results');
+      let geocodingTimeout = null;
+
+      billingAddressInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+
+        // Clear previous timeout
+        clearTimeout(geocodingTimeout);
+
+        if (query.length < 3) {
+          if (resultsContainer) resultsContainer.style.display = 'none';
+          return;
+        }
+
+        // Debounce geocoding requests
+        geocodingTimeout = setTimeout(async () => {
+          try {
+            if (resultsContainer) {
+              resultsContainer.innerHTML = '<div class="geocoding-result-item" style="padding: 12px; color: var(--st-text-secondary);">Searching...</div>';
+              resultsContainer.style.display = 'block';
+            }
+
+            const results = await geocodeAddress(query);
+
+            if (results.length === 0) {
+              if (resultsContainer) resultsContainer.innerHTML = '<div class="geocoding-result-item" style="padding: 12px; color: var(--st-text-secondary);">No results found</div>';
+              return;
+            }
+
+            // Display results
+            if (resultsContainer) {
+              resultsContainer.innerHTML = results.map(result => `
+                <div class="geocoding-result-item" data-result='${JSON.stringify(result)}'>
+                  <div class="result-name">${result.name}</div>
+                  <div class="result-address" style="font-size: var(--st-font-size-sm); color: var(--st-text-secondary); margin-top: 4px;">${result.address}</div>
+                </div>
+              `).join('');
+
+              // Attach click handlers
+              resultsContainer.querySelectorAll('.geocoding-result-item').forEach(item => {
+                item.addEventListener('click', () => {
+                  const result = JSON.parse(item.dataset.result);
+                  billingAddressInput.value = result.address;
+                  this.formData.checkout.billingAddress = result.address;
+                  resultsContainer.style.display = 'none';
+                });
+              });
+            }
+          } catch (error) {
+            console.error('[QuoteForm] Billing address geocoding error:', error);
+            if (resultsContainer) resultsContainer.innerHTML = '<div class="geocoding-result-item" style="padding: 12px; color: var(--st-danger);">Search failed. Please try again.</div>';
+          }
+        }, 300);
+      });
+
+      // Hide results when clicking outside
+      document.addEventListener('click', (e) => {
+        if (resultsContainer && !billingAddressInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+          resultsContainer.style.display = 'none';
+        }
+      });
+    }
+
     // Navigation buttons
     const prevBtn = this.element.querySelector('[data-action="prev"]');
     if (prevBtn) {
@@ -1425,6 +1518,9 @@ export class QuoteForm {
     // Detect if either location is international
     const tripType = determineTripType(this.selectedDepLocation, this.selectedDestLocation);
 
+    console.log('[QuoteForm] Trip type detected:', tripType);
+    console.log('[QuoteForm] Current tier:', this.formData.plan.tier);
+
     if (tripType === 'T3') {
 
       // If user selected T1 or T2, auto-upgrade to T3 and show notification
@@ -1453,9 +1549,12 @@ export class QuoteForm {
         }
 
         // Show themed modal
+        console.log('[QuoteForm] About to show tier upgrade modal for:', this.selectedDestLocation.displayName);
         setTimeout(() => {
           this.showTierUpgradeModal(this.selectedDestLocation.displayName);
         }, 100);
+      } else {
+        console.log('[QuoteForm] Modal NOT shown. Conditions: tier !== T3:', this.formData.plan.tier !== 'T3', ', tier exists:', !!this.formData.plan.tier);
       }
     }
   }
@@ -1464,6 +1563,8 @@ export class QuoteForm {
    * Show themed modal for tier upgrade notification
    */
   showTierUpgradeModal(destinationName) {
+    console.log('[QuoteForm] showTierUpgradeModal called with destination:', destinationName);
+
     // Create modal HTML
     const modalHTML = `
       <div class="st-modal-overlay" id="tier-upgrade-modal">
@@ -1489,9 +1590,11 @@ export class QuoteForm {
 
     // Insert modal into DOM
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+    console.log('[QuoteForm] Modal HTML inserted into DOM');
 
     // Close on overlay click
     const overlay = document.getElementById('tier-upgrade-modal');
+    console.log('[QuoteForm] Modal overlay element:', overlay);
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.remove();
