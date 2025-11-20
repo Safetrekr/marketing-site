@@ -42,9 +42,50 @@ export class MarketingHeader {
 
             <!-- CTA Actions -->
             <div class="st-marketing-nav-actions">
-              <a href="#" class="st-marketing-cta-tertiary st-marketing-cta-sm">
-                Sign In
-              </a>
+              <div class="st-marketing-dropdown">
+                <button class="st-marketing-cta-tertiary st-marketing-cta-sm st-marketing-dropdown-toggle" id="sign-in-dropdown">
+                  Sign In
+                  <span class="material-symbols-outlined" style="font-size: 18px; margin-left: 4px;">expand_more</span>
+                </button>
+                <div class="st-marketing-dropdown-menu" id="sign-in-menu">
+                  <a href="http://localhost:5174/org-login.html" class="st-marketing-dropdown-item">
+                    <span class="material-symbols-outlined">business</span>
+                    <div>
+                      <div class="st-marketing-dropdown-item-title">Organization Admin</div>
+                      <div class="st-marketing-dropdown-item-subtitle">Schools, Churches, Teams</div>
+                    </div>
+                  </a>
+                  <a href="http://localhost:5174/traveler/welcome.html?role=traveler" class="st-marketing-dropdown-item">
+                    <span class="material-symbols-outlined">luggage</span>
+                    <div>
+                      <div class="st-marketing-dropdown-item-title">Traveler</div>
+                      <div class="st-marketing-dropdown-item-subtitle">Trip Participant</div>
+                    </div>
+                  </a>
+                  <a href="http://localhost:5174/traveler/welcome.html?role=chaperone" class="st-marketing-dropdown-item">
+                    <span class="material-symbols-outlined">supervisor_account</span>
+                    <div>
+                      <div class="st-marketing-dropdown-item-title">Chaperone</div>
+                      <div class="st-marketing-dropdown-item-subtitle">Trip Supervisor</div>
+                    </div>
+                  </a>
+                  <a href="http://localhost:5174/traveler/welcome.html?role=guardian" class="st-marketing-dropdown-item">
+                    <span class="material-symbols-outlined">family_restroom</span>
+                    <div>
+                      <div class="st-marketing-dropdown-item-title">Guardian</div>
+                      <div class="st-marketing-dropdown-item-subtitle">Parent/Guardian</div>
+                    </div>
+                  </a>
+                  <div class="st-marketing-dropdown-divider"></div>
+                  <a href="http://localhost:5174/staff-login.html" class="st-marketing-dropdown-item">
+                    <span class="material-symbols-outlined">badge</span>
+                    <div>
+                      <div class="st-marketing-dropdown-item-title">SafeTrekr Staff</div>
+                      <div class="st-marketing-dropdown-item-subtitle">Admin & Analyst</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
               <a href="./request-quote.html" class="st-marketing-cta-primary st-marketing-cta-sm">
                 Start Trip
               </a>
@@ -78,9 +119,50 @@ export class MarketingHeader {
             <li><a href="./security.html" class="st-marketing-mobile-menu-link ${this.currentPage === 'security' ? 'active' : ''}">Security</a></li>
           </ul>
           <div class="st-marketing-mobile-menu-actions">
-            <a href="#" class="st-marketing-cta-secondary">
-              Sign In
-            </a>
+            <div class="st-marketing-mobile-dropdown">
+              <button class="st-marketing-cta-secondary st-marketing-mobile-dropdown-toggle" id="mobile-sign-in-dropdown">
+                Sign In
+                <span class="material-symbols-outlined" style="font-size: 18px; margin-left: 4px;">expand_more</span>
+              </button>
+              <div class="st-marketing-mobile-dropdown-menu" id="mobile-sign-in-menu" style="display: none;">
+                <a href="http://localhost:5174/org-login.html" class="st-marketing-mobile-dropdown-item">
+                  <span class="material-symbols-outlined">business</span>
+                  <div>
+                    <div class="st-marketing-dropdown-item-title">Organization Admin</div>
+                    <div class="st-marketing-dropdown-item-subtitle">Schools, Churches, Teams</div>
+                  </div>
+                </a>
+                <a href="http://localhost:5174/traveler/welcome.html?role=traveler" class="st-marketing-mobile-dropdown-item">
+                  <span class="material-symbols-outlined">luggage</span>
+                  <div>
+                    <div class="st-marketing-dropdown-item-title">Traveler</div>
+                    <div class="st-marketing-dropdown-item-subtitle">Trip Participant</div>
+                  </div>
+                </a>
+                <a href="http://localhost:5174/traveler/welcome.html?role=chaperone" class="st-marketing-mobile-dropdown-item">
+                  <span class="material-symbols-outlined">supervisor_account</span>
+                  <div>
+                    <div class="st-marketing-dropdown-item-title">Chaperone</div>
+                    <div class="st-marketing-dropdown-item-subtitle">Trip Supervisor</div>
+                  </div>
+                </a>
+                <a href="http://localhost:5174/traveler/welcome.html?role=guardian" class="st-marketing-mobile-dropdown-item">
+                  <span class="material-symbols-outlined">family_restroom</span>
+                  <div>
+                    <div class="st-marketing-dropdown-item-title">Guardian</div>
+                    <div class="st-marketing-dropdown-item-subtitle">Parent/Guardian</div>
+                  </div>
+                </a>
+                <div class="st-marketing-dropdown-divider"></div>
+                <a href="http://localhost:5174/staff-login.html" class="st-marketing-mobile-dropdown-item">
+                  <span class="material-symbols-outlined">badge</span>
+                  <div>
+                    <div class="st-marketing-dropdown-item-title">SafeTrekr Staff</div>
+                    <div class="st-marketing-dropdown-item-subtitle">Admin & Analyst</div>
+                  </div>
+                </a>
+              </div>
+            </div>
             <a href="./request-quote.html" class="st-marketing-cta-primary">
               Start Trip
             </a>
@@ -146,6 +228,55 @@ export class MarketingHeader {
         this.closeMobileMenu();
       }
     });
+
+    // Desktop Sign In dropdown
+    const signInDropdownBtn = document.getElementById('sign-in-dropdown');
+    const signInMenu = document.getElementById('sign-in-menu');
+
+    if (signInDropdownBtn && signInMenu) {
+      signInDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = signInMenu.classList.contains('open');
+
+        // Close any other open dropdowns
+        document.querySelectorAll('.st-marketing-dropdown-menu.open').forEach(menu => {
+          menu.classList.remove('open');
+        });
+
+        if (!isOpen) {
+          signInMenu.classList.add('open');
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', () => {
+        signInMenu.classList.remove('open');
+      });
+
+      // Prevent menu clicks from closing the dropdown
+      signInMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Mobile Sign In dropdown
+    const mobileSignInDropdownBtn = document.getElementById('mobile-sign-in-dropdown');
+    const mobileSignInMenu = document.getElementById('mobile-sign-in-menu');
+
+    if (mobileSignInDropdownBtn && mobileSignInMenu) {
+      mobileSignInDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobileSignInMenu.style.display === 'block';
+
+        if (isOpen) {
+          mobileSignInMenu.style.display = 'none';
+          mobileSignInDropdownBtn.querySelector('.material-symbols-outlined').textContent = 'expand_more';
+        } else {
+          mobileSignInMenu.style.display = 'block';
+          mobileSignInDropdownBtn.querySelector('.material-symbols-outlined').textContent = 'expand_less';
+        }
+      });
+    }
   }
 
   /**

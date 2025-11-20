@@ -4,6 +4,7 @@
  */
 
 import supabase from '/services/supabaseClient.js';
+import { processStripePayment } from '/services/stripeQuoteService.js';
 
 /**
  * Submit a quote from the marketing site
@@ -43,12 +44,24 @@ export async function submitQuote(quoteData) {
 
     console.log('[QuoteService] Quote submitted successfully:', data.id);
 
+    // Process Stripe payment based on mode
+    let stripeResult = null;
+    if (quoteData.checkout?.mode) {
+      stripeResult = await processStripePayment(data.id, quoteData);
+
+      if (!stripeResult.success) {
+        console.error('[QuoteService] Stripe processing failed:', stripeResult.error);
+        // Don't fail the entire quote - user can still complete payment later
+      }
+    }
+
     return {
       success: true,
       quote_id: data.id,
       magic_token: data.magic_token,
       email: data.email,
-      expires_at: data.expires_at
+      expires_at: data.expires_at,
+      stripe: stripeResult
     };
   } catch (error) {
     console.error('[QuoteService] submitQuote failed:', error);
@@ -178,11 +191,29 @@ export async function activateQuote(quoteId, userId, orgId) {
 /**
  * Create organization from quote data
  * @param {Object} quoteData - Quote data containing org info
+ * @param {string} quoteId - Quote ID to retrieve Stripe customer ID
  * @returns {Promise<Object>} - Created organization
  */
-export async function createOrgFromQuote(quoteData) {
+export async function createOrgFromQuote(quoteData, quoteId) {
   try {
     console.log('[QuoteService] Creating org from quote data');
+
+    // Get Stripe customer ID from quote
+    let stripeCustomerId = null;
+    let paymentStatus = 'pending';
+
+    if (quoteId) {
+      const { data: quote } = await supabase
+        .from('quotes')
+        .select('stripe_customer_id, payment_status')
+        .eq('id', quoteId)
+        .single();
+
+      if (quote) {
+        stripeCustomerId = quote.stripe_customer_id;
+        paymentStatus = quote.payment_status || 'pending';
+      }
+    }
 
     const orgSettings = {
       branding: {
@@ -203,7 +234,10 @@ export async function createOrgFromQuote(quoteData) {
       .insert({
         name: quoteData.org.orgName,
         type: quoteData.org.orgType,
-        settings: orgSettings
+        settings: orgSettings,
+        stripe_customer_id: stripeCustomerId,
+        payment_status: paymentStatus,
+        quote_id: quoteId
       })
       .select()
       .single();
@@ -213,7 +247,7 @@ export async function createOrgFromQuote(quoteData) {
       throw error;
     }
 
-    console.log('[QuoteService] Organization created:', data.id);
+    console.log('[QuoteService] Organization created:', data.id, 'with Stripe customer:', stripeCustomerId);
 
     return {
       success: true,
@@ -372,7 +406,7 @@ export async function completeQuoteOnboarding(quoteId, accountData, quoteData) {
     console.log('[QuoteService] Starting complete onboarding flow');
 
     // 1. Create organization
-    const orgResult = await createOrgFromQuote(quoteData);
+    const orgResult = await createOrgFromQuote(quoteData, quoteId);
     if (!orgResult.success) {
       throw new Error(`Failed to create org: ${orgResult.error}`);
     }

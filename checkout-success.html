@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful - SafeTrekr</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/components.css">
+
+  <style>
+    .st-success-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #003D82 0%, #0052A8 100%);
+    }
+
+    .st-success-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 3rem;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .st-success-icon {
+      width: 80px;
+      height: 80px;
+      background: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      animation: scaleIn 0.5s ease-out;
+    }
+
+    .st-success-icon span {
+      font-size: 48px;
+      color: white;
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .st-success-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    .st-success-message {
+      font-size: 1.125rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .st-success-details {
+      background: #f7f9fc;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .st-success-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .st-success-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .st-success-detail-label {
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .st-success-detail-value {
+      color: #1a1a1a;
+    }
+
+    .st-success-btn {
+      background: #003D82;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .st-success-btn:hover {
+      background: #002d5f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 61, 130, 0.3);
+    }
+
+    .st-loading {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .st-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #e5e7eb;
+      border-top-color: #003D82;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="st-success-container">
+    <div class="st-success-card">
+      <div id="loading" class="st-loading">
+        <div class="st-spinner"></div>
+        <p>Verifying your payment...</p>
+      </div>
+
+      <div id="success" style="display: none;">
+        <div class="st-success-icon">
+          <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <h1 class="st-success-title">Payment Successful!</h1>
+        <p class="st-success-message">
+          Thank you for your purchase. Your trip planning is ready to begin!
+        </p>
+
+        <div class="st-success-details" id="details">
+          <!-- Details will be populated here -->
+        </div>
+
+        <a href="#" id="onboardingLink" class="st-success-btn">
+          Continue to Setup
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-left: 0.5rem;">arrow_forward</span>
+        </a>
+
+        <p style="margin-top: 1.5rem; color: #666; font-size: 0.875rem;">
+          We've sent a confirmation email with your login link.
+        </p>
+      </div>
+
+      <div id="error" style="display: none;">
+        <div class="st-success-icon" style="background: #ef4444;">
+          <span class="material-symbols-outlined">error</span>
+        </div>
+        <h1 class="st-success-title">Payment Verification Failed</h1>
+        <p class="st-success-message" id="errorMessage">
+          We couldn't verify your payment. Please contact support if you were charged.
+        </p>
+        <a href="/request-quote.html" class="st-success-btn" style="background: #6b7280;">
+          Back to Quote Form
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import supabase from '/services/supabaseClient.js';
+
+    async function verifyCheckout() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+
+      if (!sessionId) {
+        showError('No session ID found in URL');
+        return;
+      }
+
+      try {
+        // Call verify checkout Edge Function
+        const { data, error } = await supabase.functions.invoke('verify-checkout-session', {
+          body: { sessionId }
+        });
+
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        if (!data?.session) {
+          throw new Error('Invalid session data returned');
+        }
+
+        // Get magic token from sessionStorage (stored before redirect)
+        const magicToken = sessionStorage.getItem('magic_token');
+
+        // Show success
+        showSuccess(data.session, magicToken);
+
+      } catch (error) {
+        console.error('[CheckoutSuccess] Verification error:', error);
+        showError(error.message);
+      }
+    }
+
+    function showSuccess(session, magicToken) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+
+      // Populate details
+      const detailsHtml = `
+        <div class="st-success-detail-row">
+          <span class="st-success-detail-label">Order Number</span>
+          <span class="st-success-detail-value">${session.id.substring(0, 16)}...</span>
+        </div>
+        <div class="st-success-detail-row">
+          <span class="st-success-detail-label">Amount Paid</span>
+          <span class="st-success-detail-value">$${(session.amount_total / 100).toFixed(2)}</span>
+        </div>
+        <div class="st-success-detail-row">
+          <span class="st-success-detail-label">Email</span>
+          <span class="st-success-detail-value">${session.customer_email || session.customer_details?.email || 'N/A'}</span>
+        </div>
+      `;
+      document.getElementById('details').innerHTML = detailsHtml;
+
+      // Set onboarding link
+      if (magicToken) {
+        document.getElementById('onboardingLink').href = `/onboarding/welcome.html?token=${magicToken}`;
+      } else {
+        document.getElementById('onboardingLink').href = '/';
+      }
+    }
+
+    function showError(message) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+      document.getElementById('errorMessage').textContent = message;
+    }
+
+    // Run verification on page load
+    verifyCheckout();
+  </script>
+</body>
+</html>
