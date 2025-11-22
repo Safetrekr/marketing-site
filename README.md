@@ -285,11 +285,11 @@ Start the Vite dev server:
 npm run dev
 ```
 
-The server will start at **http://localhost:5176** (or next available port if 5176 is in use)
+The server will start at **http://localhost:5175**
 
 Access the marketing site at:
-- **Home:** http://localhost:5176/index.html
-- **Other pages:** http://localhost:5176/[page-name].html
+- **Home:** http://localhost:5175/index.html
+- **Other pages:** http://localhost:5175/[page-name].html
 
 ### Hot Module Replacement (HMR)
 
@@ -415,6 +415,75 @@ npm run preview
 ```
 
 This starts a local server to preview the production build at **http://localhost:4173**
+
+---
+
+## SafeTrekr Ecosystem
+
+The SafeTrekr Marketing Site is part of a larger ecosystem of integrated applications:
+
+### Related Services
+
+| Service | Port | Description |
+|---------|------|-------------|
+| **Marketing Site** (this) | 5175 | Public-facing marketing and lead capture |
+| **SafeTrekr App** | 5178 | Main application (Admin, Analyst, Traveler portals) |
+| **Traveler App** | 5173 | Dedicated mobile-first traveler portal |
+| **TarvaRI Console** | 5174 | Intelligence system console |
+| **TarvaRI Backend** | 8000 | Intelligence API (FastAPI) |
+| **SafeTrekr Core API** | 8001 | Core backend API (FastAPI) |
+
+### Supporting Services
+
+- **Redis (TarvaRI)**: Port 6379 - Caching and job queues
+- **Redis (Core)**: Port 6380 - Core API caching
+- **Supabase**: Cloud - Shared PostgreSQL database
+
+### How They Work Together
+
+```
+Marketing Site (5175) → Lead Capture
+         ↓
+SafeTrekr App (5178) → Trip Management
+         ↓
+TarvaRI Backend (8000) → Intelligence Alerts
+         ↓
+Supabase Database → Shared Data Layer
+```
+
+**Data Flow:**
+1. **Marketing → App**: Leads from marketing site become organization admins
+2. **App → Database**: Trips, users, documents stored in Supabase
+3. **TarvaRI → App**: Intelligence alerts matched to active trips
+4. **All Services → Supabase**: Shared authentication and data storage
+
+### Running the Full Stack
+
+```bash
+# Terminal 1: Marketing Site
+cd /Users/jessetms/Sites/Safetrekr/marketing-site
+npm run dev  # http://localhost:5175
+
+# Terminal 2: SafeTrekr App
+cd /Users/jessetms/Sites/Safetrekr/safetrekr-app
+npm run dev  # http://localhost:5178
+
+# Terminal 3: Traveler App
+cd /Users/jessetms/Sites/Safetrekr/safetrekr-traveler
+npm run dev  # http://localhost:5173
+
+# Terminal 4: TarvaRI Console
+cd /Users/jessetms/Sites/Safetrekr/TarvaRI/console
+npm run dev  # http://localhost:5174
+
+# Terminal 5: TarvaRI Backend
+cd /Users/jessetms/Sites/Safetrekr/TarvaRI
+docker compose up -d  # http://localhost:8000
+
+# Terminal 6: SafeTrekr Core API
+cd /Users/jessetms/Sites/Safetrekr/safetrekr-core
+docker compose up -d  # http://localhost:8001
+```
 
 ---
 
