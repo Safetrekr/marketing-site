@@ -6,7 +6,7 @@
 import { Analytics } from './analytics.js';
 import { submitQuote } from '/services/quoteService.js';
 import { LocationAutocomplete } from '/components/LocationAutocomplete.js';
-import { determineTripType, geocodeAddress } from '/services/geocodingService.js';
+import { determineTripType, searchLocations } from '/services/geocodingService.js';
 
 export class QuoteForm {
   constructor(options = {}) {
@@ -1302,7 +1302,7 @@ export class QuoteForm {
               resultsContainer.style.display = 'block';
             }
 
-            const results = await geocodeAddress(query);
+            const results = await searchLocations(query, { citiesOnly: false });
 
             if (results.length === 0) {
               if (resultsContainer) resultsContainer.innerHTML = '<div class="geocoding-result-item" style="padding: 12px; color: var(--st-text-secondary);">No results found</div>';
