@@ -57,7 +57,9 @@
   </script>
 </head>
 <body class="st-marketing-page">
+  <a href="#main-content" class="st-skip-nav">Skip to main content</a>
 
+  <main id="main-content">
   <!-- Hero Section -->
   <section class="st-marketing-hero">
     <div class="st-marketing-hero-background"></div>
@@ -175,6 +177,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- JavaScript -->
   <script type="module">
@@ -316,7 +320,7 @@
             resourceType,
             resourceUrl,
             onSuccess: (data) => {
-              console.log('Lead captured for:', resourceName);
+              if (import.meta.env.DEV) console.log('Lead captured for:', resourceName);
               // In production, would send to backend/CRM
             }
           });
@@ -360,7 +364,7 @@
     document.getElementById('segment-filter').addEventListener('change', filterResources);
     document.getElementById('topic-filter').addEventListener('change', filterResources);
 
-    console.log('Safetrekr Marketing Resources: Initialized');
+    if (import.meta.env.DEV) console.log('Safetrekr Marketing Resources: Initialized');
   </script>
 
 </body>

@@ -13,7 +13,7 @@ import { processStripePayment } from '/services/stripeQuoteService.js';
  */
 export async function submitQuote(quoteData) {
   try {
-    console.log('[QuoteService] Submitting quote:', quoteData);
+    if (import.meta.env.DEV) console.log('[QuoteService] Submitting quote:', quoteData);
 
     // Validate required fields
     if (!quoteData.org?.email) {
@@ -42,7 +42,7 @@ export async function submitQuote(quoteData) {
       throw error;
     }
 
-    console.log('[QuoteService] Quote submitted successfully:', data.id);
+    if (import.meta.env.DEV) console.log('[QuoteService] Quote submitted successfully:', data.id);
 
     // Process Stripe payment based on mode
     let stripeResult = null;
@@ -50,7 +50,7 @@ export async function submitQuote(quoteData) {
       stripeResult = await processStripePayment(data.id, quoteData);
 
       if (!stripeResult.success) {
-        console.error('[QuoteService] Stripe processing failed:', stripeResult.error);
+        if (import.meta.env.DEV) console.error('[QuoteService] Stripe processing failed:', stripeResult.error);
         // Don't fail the entire quote - user can still complete payment later
       }
     }
@@ -79,7 +79,7 @@ export async function submitQuote(quoteData) {
  */
 export async function getQuoteByToken(magicToken) {
   try {
-    console.log('[QuoteService] Fetching quote by token:', magicToken);
+    if (import.meta.env.DEV) console.log('[QuoteService] Fetching quote by token:', magicToken);
 
     const { data, error } = await supabase
       .from('quotes')
@@ -97,7 +97,7 @@ export async function getQuoteByToken(magicToken) {
     const now = new Date();
 
     if (now > expiresAt) {
-      console.warn('[QuoteService] Quote has expired:', magicToken);
+      if (import.meta.env.DEV) console.warn('[QuoteService] Quote has expired:', magicToken);
 
       // Mark as expired
       await supabase
@@ -114,7 +114,7 @@ export async function getQuoteByToken(magicToken) {
 
     // Check if already activated
     if (data.status === 'activated') {
-      console.warn('[QuoteService] Quote already activated:', magicToken);
+      if (import.meta.env.DEV) console.warn('[QuoteService] Quote already activated:', magicToken);
       return {
         success: false,
         error: 'This quote has already been activated',
@@ -123,7 +123,7 @@ export async function getQuoteByToken(magicToken) {
       };
     }
 
-    console.log('[QuoteService] Quote retrieved successfully:', data.id);
+    if (import.meta.env.DEV) console.log('[QuoteService] Quote retrieved successfully:', data.id);
 
     return {
       success: true,
@@ -154,7 +154,7 @@ export async function getQuoteByToken(magicToken) {
  */
 export async function activateQuote(quoteId, userId, orgId) {
   try {
-    console.log('[QuoteService] Activating quote:', quoteId);
+    if (import.meta.env.DEV) console.log('[QuoteService] Activating quote:', quoteId);
 
     const { data, error } = await supabase
       .from('quotes')
@@ -173,7 +173,7 @@ export async function activateQuote(quoteId, userId, orgId) {
       throw error;
     }
 
-    console.log('[QuoteService] Quote activated successfully');
+    if (import.meta.env.DEV) console.log('[QuoteService] Quote activated successfully');
 
     return {
       success: true,
@@ -196,7 +196,7 @@ export async function activateQuote(quoteId, userId, orgId) {
  */
 export async function createOrgFromQuote(quoteData, quoteId) {
   try {
-    console.log('[QuoteService] Creating org from quote data');
+    if (import.meta.env.DEV) console.log('[QuoteService] Creating org from quote data');
 
     // Get Stripe customer ID from quote
     let stripeCustomerId = null;
@@ -247,7 +247,7 @@ export async function createOrgFromQuote(quoteData, quoteId) {
       throw error;
     }
 
-    console.log('[QuoteService] Organization created:', data.id, 'with Stripe customer:', stripeCustomerId);
+    if (import.meta.env.DEV) console.log('[QuoteService] Organization created:', data.id, 'with Stripe customer:', stripeCustomerId);
 
     return {
       success: true,
@@ -272,7 +272,7 @@ export async function createOrgFromQuote(quoteData, quoteId) {
  */
 export async function createUserFromQuote(quoteId, orgId, accountData, email) {
   try {
-    console.log('[QuoteService] Creating user from quote');
+    if (import.meta.env.DEV) console.log('[QuoteService] Creating user from quote');
 
     const { data, error } = await supabase
       .from('users')
@@ -292,7 +292,7 @@ export async function createUserFromQuote(quoteId, orgId, accountData, email) {
       throw error;
     }
 
-    console.log('[QuoteService] User created:', data.id);
+    if (import.meta.env.DEV) console.log('[QuoteService] User created:', data.id);
 
     return {
       success: true,
@@ -317,7 +317,7 @@ export async function createUserFromQuote(quoteId, orgId, accountData, email) {
  */
 export async function createTripDraftFromQuote(quoteId, orgId, userId, tripData) {
   try {
-    console.log('[QuoteService] Creating trip draft from quote');
+    if (import.meta.env.DEV) console.log('[QuoteService] Creating trip draft from quote');
 
     const { data, error } = await supabase
       .from('trip_drafts')
@@ -336,7 +336,7 @@ export async function createTripDraftFromQuote(quoteId, orgId, userId, tripData)
       throw error;
     }
 
-    console.log('[QuoteService] Trip draft created:', data.id);
+    if (import.meta.env.DEV) console.log('[QuoteService] Trip draft created:', data.id);
 
     return {
       success: true,
@@ -358,7 +358,7 @@ export async function createTripDraftFromQuote(quoteId, orgId, userId, tripData)
  */
 export async function getTripDraftForUser(userId) {
   try {
-    console.log('[QuoteService] Fetching trip draft for user:', userId);
+    if (import.meta.env.DEV) console.log('[QuoteService] Fetching trip draft for user:', userId);
 
     const { data, error } = await supabase
       .from('trip_drafts')
@@ -403,7 +403,7 @@ export async function getTripDraftForUser(userId) {
  */
 export async function completeQuoteOnboarding(quoteId, accountData, quoteData) {
   try {
-    console.log('[QuoteService] Starting complete onboarding flow');
+    if (import.meta.env.DEV) console.log('[QuoteService] Starting complete onboarding flow');
 
     // 1. Create organization
     const orgResult = await createOrgFromQuote(quoteData, quoteId);
@@ -443,7 +443,7 @@ export async function completeQuoteOnboarding(quoteId, accountData, quoteData) {
       throw new Error(`Failed to activate quote: ${activateResult.error}`);
     }
 
-    console.log('[QuoteService] Complete onboarding flow finished successfully');
+    if (import.meta.env.DEV) console.log('[QuoteService] Complete onboarding flow finished successfully');
 
     return {
       success: true,

@@ -14,9 +14,9 @@ import supabase from '/services/supabaseClient.js';
 export async function processStripePayment(quoteId, quoteData) {
   const { checkout, plan, trip, org, pricing } = quoteData;
 
-  console.log('[StripeQuoteService] Processing payment for quote:', quoteId, 'mode:', checkout.mode);
-  console.log('[StripeQuoteService] Quote data received:', quoteData);
-  console.log('[StripeQuoteService] Plan tier:', plan.tier, 'Type:', typeof plan.tier);
+  if (import.meta.env.DEV) console.log('[StripeQuoteService] Processing payment for quote:', quoteId, 'mode:', checkout.mode);
+  if (import.meta.env.DEV) console.log('[StripeQuoteService] Quote data received:', quoteData);
+  if (import.meta.env.DEV) console.log('[StripeQuoteService] Plan tier:', plan.tier, 'Type:', typeof plan.tier);
 
   const tierInfo = {
     quoteId,
@@ -28,7 +28,7 @@ export async function processStripePayment(quoteId, quoteData) {
     tierPrice: pricing?.tierPrice || getTierPrice(plan.tier)
   };
 
-  console.log('[StripeQuoteService] Tier info to be sent:', tierInfo);
+  if (import.meta.env.DEV) console.log('[StripeQuoteService] Tier info to be sent:', tierInfo);
 
   switch (checkout.mode) {
     case 'order':
@@ -62,8 +62,8 @@ export async function processStripePayment(quoteId, quoteData) {
  */
 async function createCheckoutSession(tierInfo) {
   try {
-    console.log('[StripeQuoteService] Creating checkout session for quote:', tierInfo.quoteId);
-    console.log('[StripeQuoteService] Tier info:', tierInfo);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Creating checkout session for quote:', tierInfo.quoteId);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Tier info:', tierInfo);
 
     const origin = window.location.origin;
 
@@ -79,48 +79,27 @@ async function createCheckoutSession(tierInfo) {
       cancelUrl: `${origin}/request-quote.html?quote_id=${tierInfo.quoteId}&cancelled=true`
     };
 
-    console.log('[StripeQuoteService] Request body:', requestBody);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Request body:', requestBody);
 
-    // Make a direct fetch call to get better error details
-    const supabaseUrl = 'https://olgjdqguafidgrutubih.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sZ2pkcWd1YWZpZGdydXR1YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MTY4NDgsImV4cCI6MjA3NjE5Mjg0OH0.wgxdXUekbqiORvs9ruHf29looIRWZEaGY2aObCuep5A';
-
-    const fetchResponse = await fetch(`${supabaseUrl}/functions/v1/create-checkout-session`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${supabaseAnonKey}`,
-        'apikey': supabaseAnonKey
-      },
-      body: JSON.stringify(requestBody)
+    // Call Supabase Edge Function
+    const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+      body: requestBody
     });
 
-    console.log('[StripeQuoteService] Fetch response status:', fetchResponse.status);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Edge function response:', data);
 
-    const responseText = await fetchResponse.text();
-    console.log('[StripeQuoteService] Response body text:', responseText);
-
-    let data;
-    try {
-      data = JSON.parse(responseText);
-      console.log('[StripeQuoteService] Parsed response:', data);
-    } catch (e) {
-      console.error('[StripeQuoteService] Could not parse response as JSON:', e);
-      throw new Error('Invalid response from server');
-    }
-
-    if (!fetchResponse.ok) {
-      const errorMessage = data?.error || data?.message || 'Failed to create checkout session';
-      console.error('[StripeQuoteService] Server error:', errorMessage);
+    if (error) {
+      const errorMessage = error.message || 'Failed to create checkout session';
+      if (import.meta.env.DEV) console.error('[StripeQuoteService] Server error:', errorMessage);
       throw new Error(errorMessage);
     }
 
     if (!data?.checkoutUrl) {
-      console.error('[StripeQuoteService] No checkout URL in response');
+      if (import.meta.env.DEV) console.error('[StripeQuoteService] No checkout URL in response');
       throw new Error('No checkout URL returned from server');
     }
 
-    console.log('[StripeQuoteService] Checkout session created, redirecting to:', data.checkoutUrl);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Checkout session created, redirecting to:', data.checkoutUrl);
 
     return {
       success: true,
@@ -144,7 +123,7 @@ async function createCheckoutSession(tierInfo) {
  */
 async function createStripeInvoice(tierInfo, options) {
   try {
-    console.log('[StripeQuoteService] Creating invoice for quote:', tierInfo.quoteId, 'mode:', options.paymentMode);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Creating invoice for quote:', tierInfo.quoteId, 'mode:', options.paymentMode);
 
     // Call Supabase Edge Function
     const { data, error } = await supabase.functions.invoke('create-invoice', {
@@ -173,7 +152,7 @@ async function createStripeInvoice(tierInfo, options) {
       throw new Error('No invoice ID returned from server');
     }
 
-    console.log('[StripeQuoteService] Invoice created:', data.invoiceId);
+    if (import.meta.env.DEV) console.log('[StripeQuoteService] Invoice created:', data.invoiceId);
 
     return {
       success: true,

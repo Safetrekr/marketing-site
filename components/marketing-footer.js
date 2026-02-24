@@ -24,8 +24,7 @@ export class MarketingFooter {
                 <img src="./assets/images/safetrekr-logo-vert-dark.svg" alt="Safetrekr" style="height: 32px;">
               </div>
               <p class="st-marketing-footer-tagline">
-                Professional trip safety management for schools, churches, universities, businesses, and sports teams.
-                Plan safer, travel confident.
+                Professionally reviewed before departure. Actively monitored during travel. Fully documented for the record.
               </p>
             </div>
 
@@ -37,7 +36,7 @@ export class MarketingFooter {
                 <li><a href="./solutions.html" class="st-marketing-footer-link">Solutions</a></li>
                 <li><a href="./pricing.html" class="st-marketing-footer-link">Pricing</a></li>
                 <li><a href="./integrations.html" class="st-marketing-footer-link">Integrations</a></li>
-                <li><a href="./request-quote.html" class="st-marketing-footer-link">Request Quote</a></li>
+                <li><a href="./request-quote.html" class="st-marketing-footer-link">Contact Us</a></li>
               </ul>
             </div>
 
@@ -112,7 +111,7 @@ export class MarketingFooter {
   mount(selector = 'body') {
     const target = document.querySelector(selector);
     if (!target) {
-      console.error(`MarketingFooter: Target element "${selector}" not found`);
+      if (import.meta.env.DEV) console.error(`MarketingFooter: Target element "${selector}" not found`);
       return;
     }
 
@@ -125,7 +124,7 @@ export class MarketingFooter {
     // Attach event listeners
     this.attachEventListeners();
 
-    console.log('MarketingFooter: Mounted successfully');
+    if (import.meta.env.DEV) console.log('MarketingFooter: Mounted successfully');
   }
 
   /**

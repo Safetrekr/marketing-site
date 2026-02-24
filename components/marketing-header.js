@@ -80,14 +80,14 @@ export class MarketingHeader {
                   <a href="http://localhost:5174/staff-login.html" class="st-marketing-dropdown-item">
                     <span class="material-symbols-outlined">badge</span>
                     <div>
-                      <div class="st-marketing-dropdown-item-title">SafeTrekr Staff</div>
+                      <div class="st-marketing-dropdown-item-title">Safetrekr Staff</div>
                       <div class="st-marketing-dropdown-item-subtitle">Admin & Analyst</div>
                     </div>
                   </a>
                 </div>
               </div>
               <a href="./request-quote.html" class="st-marketing-cta-primary st-marketing-cta-sm">
-                Start Trip
+                Request Info
               </a>
             </div>
           </nav>
@@ -157,14 +157,14 @@ export class MarketingHeader {
                 <a href="http://localhost:5174/staff-login.html" class="st-marketing-mobile-dropdown-item">
                   <span class="material-symbols-outlined">badge</span>
                   <div>
-                    <div class="st-marketing-dropdown-item-title">SafeTrekr Staff</div>
+                    <div class="st-marketing-dropdown-item-title">Safetrekr Staff</div>
                     <div class="st-marketing-dropdown-item-subtitle">Admin & Analyst</div>
                   </div>
                 </a>
               </div>
             </div>
             <a href="./request-quote.html" class="st-marketing-cta-primary">
-              Start Trip
+              Request Info
             </a>
           </div>
         </nav>
@@ -180,7 +180,7 @@ export class MarketingHeader {
   mount(selector = 'body') {
     const target = document.querySelector(selector);
     if (!target) {
-      console.error(`MarketingHeader: Target element "${selector}" not found`);
+      if (import.meta.env.DEV) console.error(`MarketingHeader: Target element "${selector}" not found`);
       return;
     }
 
@@ -194,7 +194,7 @@ export class MarketingHeader {
     // Attach event listeners
     this.attachEventListeners();
 
-    console.log('MarketingHeader: Mounted successfully');
+    if (import.meta.env.DEV) console.log('MarketingHeader: Mounted successfully');
   }
 
   /**

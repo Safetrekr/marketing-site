@@ -36,6 +36,8 @@ export class TripVolumeCalculator {
   calculateSpend() {
     const { tripsPerYear, tier1Percentage, tier2Percentage, tier3Percentage } = this.state;
 
+    const tierPercentageSum = tier1Percentage + tier2Percentage + tier3Percentage;
+
     const tier1Count = Math.round((tripsPerYear * tier1Percentage) / 100);
     const tier2Count = Math.round((tripsPerYear * tier2Percentage) / 100);
     const tier3Count = Math.round((tripsPerYear * tier3Percentage) / 100);
@@ -45,7 +47,9 @@ export class TripVolumeCalculator {
     const tier3Cost = tier3Count * this.pricing.tier3;
 
     const totalCost = tier1Cost + tier2Cost + tier3Cost;
-    const avgCostPerTrip = tripsPerYear > 0 ? totalCost / tripsPerYear : 0;
+    // Divide by the actual sum of rounded trip counts (which may differ from tripsPerYear due to rounding)
+    const actualTripCount = tier1Count + tier2Count + tier3Count;
+    const avgCostPerTrip = actualTripCount > 0 ? totalCost / actualTripCount : 0;
 
     return {
       tier1Count,
@@ -55,7 +59,8 @@ export class TripVolumeCalculator {
       tier2Cost,
       tier3Cost,
       totalCost,
-      avgCostPerTrip
+      avgCostPerTrip,
+      tierPercentageSum
     };
   }
 
@@ -118,6 +123,10 @@ export class TripVolumeCalculator {
                 max="100"
                 value="${this.state.tripsPerYear}"
                 class="st-calculator-slider"
+                aria-label="Number of trips per year"
+                aria-valuemin="1"
+                aria-valuemax="100"
+                aria-valuenow="${this.state.tripsPerYear}"
               >
               <div class="st-calculator-slider-value">
                 <input
@@ -155,6 +164,10 @@ export class TripVolumeCalculator {
                   max="100"
                   value="${this.state.tier1Percentage}"
                   class="st-calculator-slider st-calculator-slider-tier1"
+                  aria-label="Tier 1 percentage"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="${this.state.tier1Percentage}"
                 >
                 <span class="st-calculator-slider-value">${this.state.tier1Percentage}%</span>
               </div>
@@ -174,6 +187,10 @@ export class TripVolumeCalculator {
                   max="100"
                   value="${this.state.tier2Percentage}"
                   class="st-calculator-slider st-calculator-slider-tier2"
+                  aria-label="Tier 2 percentage"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="${this.state.tier2Percentage}"
                 >
                 <span class="st-calculator-slider-value">${this.state.tier2Percentage}%</span>
               </div>
@@ -193,6 +210,10 @@ export class TripVolumeCalculator {
                   max="100"
                   value="${this.state.tier3Percentage}"
                   class="st-calculator-slider st-calculator-slider-tier3"
+                  aria-label="Tier 3 percentage"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="${this.state.tier3Percentage}"
                 >
                 <span class="st-calculator-slider-value">${this.state.tier3Percentage}%</span>
               </div>
@@ -204,6 +225,13 @@ export class TripVolumeCalculator {
             <div class="st-calculator-results-header">
               <h4>Estimated Annual Investment</h4>
             </div>
+
+            ${result.tierPercentageSum !== 100 ? `
+            <div class="st-calculator-tier-warning" role="alert">
+              <span class="material-symbols-outlined">warning</span>
+              Tier percentages total ${result.tierPercentageSum}% — adjust to equal 100% for accurate results
+            </div>
+            ` : ''}
 
             <div class="st-calculator-results-breakdown">
               <div class="st-calculator-result-row">
@@ -242,7 +270,7 @@ export class TripVolumeCalculator {
   render() {
     const container = document.querySelector(this.config.mountSelector);
     if (!container) {
-      console.error(`TripVolumeCalculator: Mount point "${this.config.mountSelector}" not found`);
+      if (import.meta.env.DEV) console.error(`TripVolumeCalculator: Mount point "${this.config.mountSelector}" not found`);
       return;
     }
 
@@ -251,15 +279,36 @@ export class TripVolumeCalculator {
   }
 
   /**
+   * Update a slider's track background to reflect its current value
+   */
+  updateSliderTrack(slider) {
+    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = `linear-gradient(to right, var(--st-primary) ${pct}%, var(--st-bg-tertiary) ${pct}%)`;
+  }
+
+  /**
+   * Initialize track fills for all range inputs in this calculator
+   */
+  initSliderTracks() {
+    const container = document.querySelector(this.config.mountSelector);
+    if (!container) return;
+    container.querySelectorAll('input[type="range"]').forEach(slider => this.updateSliderTrack(slider));
+  }
+
+  /**
    * Attach event listeners
    */
   attachEventListeners() {
+    // Initialize slider track fills
+    this.initSliderTracks();
+
     // Trips per year slider
     const tripsSlider = document.getElementById('trips-per-year-slider');
     const tripsInput = document.getElementById('trips-per-year-input');
 
     if (tripsSlider) {
       tripsSlider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ tripsPerYear: parseInt(e.target.value) });
       });
     }
@@ -278,18 +327,21 @@ export class TripVolumeCalculator {
 
     if (tier1Slider) {
       tier1Slider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ tier1Percentage: parseInt(e.target.value) });
       });
     }
 
     if (tier2Slider) {
       tier2Slider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ tier2Percentage: parseInt(e.target.value) });
       });
     }
 
     if (tier3Slider) {
       tier3Slider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ tier3Percentage: parseInt(e.target.value) });
       });
     }
@@ -322,13 +374,10 @@ export class ROIEstimator {
       staffHourlyRate: 50
     };
 
-    // Time savings assumptions
-    this.timeSavings = {
-      researchAndPlanning: 0.60,      // 60% reduction in research time
-      documentationAndPackets: 0.70,  // 70% reduction in documentation time
-      complianceAndLegal: 0.50,       // 50% reduction in compliance work
-      stakeholderComms: 0.40          // 40% reduction in communication overhead
-    };
+    // Tracks whether the user has manually adjusted the hourly-rate or hours-per-trip sliders.
+    // When true, org-size button clicks will NOT overwrite those values.
+    this._userTouchedRate = false;
+    this._userTouchedHours = false;
 
     this.orgSizeDefaults = {
       small: { hourlyRate: 40, hoursPerTrip: 15, avgTier: 600 },
@@ -339,11 +388,16 @@ export class ROIEstimator {
 
   /**
    * Calculate ROI metrics
+   *
+   * Key assumptions (surfaced to users in the "How we calculate this" section):
+   * - 50% average time reduction across research, documentation, compliance, and comms
+   * - $5,000 average cost of a preventable trip incident (legal, insurance, admin)
+   * - 15% reduction in incidents with professional safety review
    */
   calculateROI() {
     const { tripsPerYear, currentHoursPerTrip, staffHourlyRate } = this.state;
 
-    // Time savings (assuming 50% average time reduction)
+    // 50% blended average across planning categories
     const avgTimeSavingsPercentage = 0.50;
     const hoursSavedPerTrip = currentHoursPerTrip * avgTimeSavingsPercentage;
     const totalHoursSavedPerYear = hoursSavedPerTrip * tripsPerYear;
@@ -382,13 +436,25 @@ export class ROIEstimator {
    * Update calculator state
    */
   updateState(updates) {
+    // Track when the user manually touches the rate or hours sliders
+    if ('staffHourlyRate' in updates && !('orgSize' in updates)) {
+      this._userTouchedRate = true;
+    }
+    if ('currentHoursPerTrip' in updates && !('orgSize' in updates)) {
+      this._userTouchedHours = true;
+    }
+
     this.state = { ...this.state, ...updates };
 
-    // Update related fields when org size changes
+    // Apply org-size defaults only for sliders the user hasn't manually adjusted
     if (updates.orgSize) {
       const defaults = this.orgSizeDefaults[updates.orgSize];
-      this.state.staffHourlyRate = defaults.hourlyRate;
-      this.state.currentHoursPerTrip = defaults.hoursPerTrip;
+      if (!this._userTouchedRate) {
+        this.state.staffHourlyRate = defaults.hourlyRate;
+      }
+      if (!this._userTouchedHours) {
+        this.state.currentHoursPerTrip = defaults.hoursPerTrip;
+      }
     }
 
     this.render();
@@ -483,6 +549,10 @@ export class ROIEstimator {
                 max="100"
                 value="${this.state.tripsPerYear}"
                 class="st-calculator-slider"
+                aria-label="Number of trips per year"
+                aria-valuemin="1"
+                aria-valuemax="100"
+                aria-valuenow="${this.state.tripsPerYear}"
               >
               <div class="st-calculator-slider-value">
                 <input
@@ -511,6 +581,10 @@ export class ROIEstimator {
                 step="5"
                 value="${this.state.currentHoursPerTrip}"
                 class="st-calculator-slider"
+                aria-label="Current hours spent per trip"
+                aria-valuemin="5"
+                aria-valuemax="80"
+                aria-valuenow="${this.state.currentHoursPerTrip}"
               >
               <div class="st-calculator-slider-value">
                 <input
@@ -539,6 +613,10 @@ export class ROIEstimator {
                 step="5"
                 value="${this.state.staffHourlyRate}"
                 class="st-calculator-slider"
+                aria-label="Staff hourly rate"
+                aria-valuemin="25"
+                aria-valuemax="150"
+                aria-valuenow="${this.state.staffHourlyRate}"
               >
               <div class="st-calculator-slider-value">
                 $<input
@@ -623,6 +701,20 @@ export class ROIEstimator {
               staff composition, and risk profile. Values include both direct staff time savings and estimated
               risk avoidance from professional safety review.
             </p>
+
+            <details class="st-calculator-assumptions">
+              <summary>
+                <span class="material-symbols-outlined">chevron_right</span>
+                How we calculate this
+              </summary>
+              <div class="st-calculator-assumptions-content">
+                <ul>
+                  <li><strong>Time savings estimate:</strong> 50% reduction in manual safety planning hours, averaged across research, documentation, compliance, and stakeholder communication tasks.</li>
+                  <li><strong>Average cost of a preventable trip incident:</strong> $5,000 — includes legal fees, insurance claims, and administrative costs associated with unplanned safety events.</li>
+                  <li><strong>Estimated incident reduction with professional safety review:</strong> 15% — based on the value of structured venue vetting, route analysis, and emergency resource mapping.</li>
+                </ul>
+              </div>
+            </details>
           </div>
         </div>
       </div>
@@ -635,7 +727,7 @@ export class ROIEstimator {
   render() {
     const container = document.querySelector(this.config.mountSelector);
     if (!container) {
-      console.error(`ROIEstimator: Mount point "${this.config.mountSelector}" not found`);
+      if (import.meta.env.DEV) console.error(`ROIEstimator: Mount point "${this.config.mountSelector}" not found`);
       return;
     }
 
@@ -644,9 +736,29 @@ export class ROIEstimator {
   }
 
   /**
+   * Update a slider's track background to reflect its current value
+   */
+  updateSliderTrack(slider) {
+    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = `linear-gradient(to right, var(--st-primary) ${pct}%, var(--st-bg-tertiary) ${pct}%)`;
+  }
+
+  /**
+   * Initialize track fills for all range inputs in this calculator
+   */
+  initSliderTracks() {
+    const container = document.querySelector(this.config.mountSelector);
+    if (!container) return;
+    container.querySelectorAll('input[type="range"]').forEach(slider => this.updateSliderTrack(slider));
+  }
+
+  /**
    * Attach event listeners
    */
   attachEventListeners() {
+    // Initialize slider track fills
+    this.initSliderTracks();
+
     // Organization size buttons
     const orgSizeButtons = document.querySelectorAll('[data-org-size]');
     orgSizeButtons.forEach(button => {
@@ -662,6 +774,7 @@ export class ROIEstimator {
 
     if (tripsSlider) {
       tripsSlider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ tripsPerYear: parseInt(e.target.value) });
       });
     }
@@ -679,6 +792,7 @@ export class ROIEstimator {
 
     if (hoursSlider) {
       hoursSlider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ currentHoursPerTrip: parseInt(e.target.value) });
       });
     }
@@ -696,6 +810,7 @@ export class ROIEstimator {
 
     if (rateSlider) {
       rateSlider.addEventListener('input', (e) => {
+        this.updateSliderTrack(e.target);
         this.updateState({ staffHourlyRate: parseInt(e.target.value) });
       });
     }

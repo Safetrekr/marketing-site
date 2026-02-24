@@ -37,7 +37,7 @@ export async function searchLocations(query, options = {}) {
   const cacheKey = `${CACHE_KEY_PREFIX}${query.toLowerCase()}`;
   const cachedResult = getCachedResult(cacheKey);
   if (cachedResult) {
-    console.log('[GeocodingService] Using cached result for:', query);
+    if (import.meta.env.DEV) console.log('[GeocodingService] Using cached result for:', query);
     return cachedResult.slice(0, limit);
   }
 
@@ -64,7 +64,7 @@ export async function searchLocations(query, options = {}) {
 
     const url = `${NOMINATIM_BASE_URL}${SEARCH_ENDPOINT}?${params.toString()}`;
     
-    console.log('[GeocodingService] Searching for:', query);
+    if (import.meta.env.DEV) console.log('[GeocodingService] Searching for:', query);
     
     const response = await fetch(url, {
       headers: {
@@ -86,7 +86,7 @@ export async function searchLocations(query, options = {}) {
     // Cache the results
     cacheResult(cacheKey, formattedResults);
 
-    console.log('[GeocodingService] Found', formattedResults.length, 'results');
+    if (import.meta.env.DEV) console.log('[GeocodingService] Found', formattedResults.length, 'results');
     
     return formattedResults;
 
@@ -247,7 +247,7 @@ export function clearCache() {
     
     geocodingKeys.forEach(key => localStorage.removeItem(key));
     
-    console.log('[GeocodingService] Cleared', geocodingKeys.length, 'cached results');
+    if (import.meta.env.DEV) console.log('[GeocodingService] Cleared', geocodingKeys.length, 'cached results');
   } catch (error) {
     console.error('[GeocodingService] Cache clear error:', error);
   }

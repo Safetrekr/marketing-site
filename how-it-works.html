@@ -166,7 +166,9 @@
   </script>
 </head>
 <body class="st-marketing-page">
+  <a href="#main-content" class="st-skip-nav">Skip to main content</a>
 
+  <main id="main-content">
   <!-- Hero Section -->
   <section class="st-marketing-hero">
     <div class="st-marketing-hero-background"></div>
@@ -671,6 +673,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- JavaScript -->
   <script type="module">
     import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
@@ -698,7 +702,7 @@
       });
     });
 
-    console.log('Safetrekr Marketing How It Works: Initialized');
+    if (import.meta.env.DEV) console.log('Safetrekr Marketing How It Works: Initialized');
   </script>
 
 </body>

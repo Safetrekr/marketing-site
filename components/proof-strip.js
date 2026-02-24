@@ -3,6 +3,8 @@
  * Displays customer logos or testimonials for social proof
  */
 
+import { escapeHtml } from '../utils/escapeHtml.js';
+
 export class ProofStrip {
   constructor(options = {}) {
     this.label = options.label || 'Trusted by leading organizations';
@@ -34,7 +36,7 @@ export class ProofStrip {
                   padding: var(--st-spacing-md) var(--st-spacing-lg);
                   font-weight: 600; color: var(--st-text-muted);
                   font-size: var(--st-font-size-sm);">
-        ${logo.name}
+        ${escapeHtml(logo.name)}
       </div>
     `).join('');
 
@@ -55,17 +57,20 @@ export class ProofStrip {
   /**
    * Mount the proof strip to the page
    */
-  mount(selector) {
-    const target = document.querySelector(selector);
+  mount(selectorOrElement) {
+    const target = typeof selectorOrElement === 'string'
+      ? document.querySelector(selectorOrElement)
+      : selectorOrElement;
+
     if (!target) {
-      console.error(`ProofStrip: Target element "${selector}" not found`);
+      if (import.meta.env.DEV) console.error(`ProofStrip: Target element "${selectorOrElement}" not found`);
       return;
     }
 
     target.insertAdjacentHTML('beforeend', this.render());
     this.container = document.getElementById('proof-strip');
 
-    console.log('ProofStrip: Mounted successfully');
+    if (import.meta.env.DEV) console.log('ProofStrip: Mounted successfully');
   }
 
   /**

@@ -4,6 +4,7 @@
  */
 
 import { Analytics } from './analytics.js';
+import { escapeHtml } from '../utils/escapeHtml.js';
 
 export class LeadCapture {
   constructor(options = {}) {
@@ -62,7 +63,7 @@ export class LeadCapture {
           <div class="st-lead-capture-icon">
             <span class="material-symbols-outlined">download</span>
           </div>
-          <h2 class="st-lead-capture-title">Download ${this.resourceName}</h2>
+          <h2 class="st-lead-capture-title">Download ${escapeHtml(this.resourceName)}</h2>
           <p class="st-lead-capture-subtitle">
             Enter your information to receive this free resource.
           </p>
@@ -189,7 +190,7 @@ export class LeadCapture {
 
           <div class="st-lead-capture-actions">
             <button type="submit" class="st-marketing-cta-primary st-lead-capture-submit">
-              Download ${this.resourceType}
+              Download ${escapeHtml(this.resourceType)}
               <span class="material-symbols-outlined">download</span>
             </button>
             <button type="button" class="st-marketing-cta-secondary st-lead-capture-cancel">
@@ -211,8 +212,8 @@ export class LeadCapture {
           <p class="st-lead-capture-success-message">
             Thank you for your interest. Your download will begin shortly.
           </p>
-          <a href="${this.resourceUrl}" class="st-marketing-cta-primary st-lead-capture-download-link" download>
-            Download ${this.resourceType}
+          <a href="${escapeHtml(this.resourceUrl)}" class="st-marketing-cta-primary st-lead-capture-download-link" download>
+            Download ${escapeHtml(this.resourceType)}
             <span class="material-symbols-outlined">download</span>
           </a>
           <button type="button" class="st-marketing-cta-secondary st-lead-capture-close-success">
@@ -356,7 +357,7 @@ export class LeadCapture {
       timestamp: new Date().toISOString()
     };
 
-    console.log('Lead captured:', data);
+    if (import.meta.env.DEV) console.log('Lead captured:', data);
 
     // Track analytics
     Analytics.trackLeadCapture(this.resourceName, data.email);
@@ -400,8 +401,8 @@ export class LeadCapture {
 
     // In production, this would download the actual file
     // For now, just log it
-    console.log(`Downloading: ${this.resourceName} (${this.resourceType})`);
-    console.log(`Resource URL: ${this.resourceUrl}`);
+    if (import.meta.env.DEV) console.log(`Downloading: ${this.resourceName} (${this.resourceType})`);
+    if (import.meta.env.DEV) console.log(`Resource URL: ${this.resourceUrl}`);
 
     // Simulate download by opening resource URL
     if (this.resourceUrl && this.resourceUrl !== '#') {

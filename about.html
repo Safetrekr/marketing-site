@@ -42,7 +42,9 @@
   <link rel="stylesheet" href="./styles/marketing.css">
 </head>
 <body class="st-marketing-page">
+  <a href="#main-content" class="st-skip-nav">Skip to main content</a>
 
+  <main id="main-content">
   <!-- Hero Section -->
   <section class="st-marketing-hero">
     <div class="st-marketing-hero-background"></div>
@@ -147,7 +149,7 @@
       </div>
 
       <!-- Badge Grid -->
-      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--st-spacing-lg); margin-top: var(--st-spacing-2xl);">
+      <div class="st-badge-grid" style="margin-top: var(--st-spacing-2xl);">
         <!-- US Secret Service -->
         <div style="text-align: center;">
           <div style="display: flex; align-items: center; justify-content: center; height: 100px; margin-bottom: var(--st-spacing-md);">
@@ -504,6 +506,8 @@
     </div>
   </div>
 
+  </main>
+
   <!-- JavaScript -->
   <script type="module">
     import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
@@ -667,7 +671,7 @@
       modalClose.style.opacity = '1';
     });
 
-    console.log('Safetrekr Marketing Team: Initialized');
+    if (import.meta.env.DEV) console.log('Safetrekr Marketing Team: Initialized');
   </script>
 
 </body>

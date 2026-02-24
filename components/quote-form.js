@@ -7,6 +7,7 @@ import { Analytics } from './analytics.js';
 import { submitQuote } from '/services/quoteService.js';
 import { LocationAutocomplete } from '/components/LocationAutocomplete.js';
 import { determineTripType, searchLocations } from '/services/geocodingService.js';
+import { escapeHtml } from '../utils/escapeHtml.js';
 
 export class QuoteForm {
   constructor(options = {}) {
@@ -271,18 +272,18 @@ export class QuoteForm {
         postBilled: pricing.postBilled
       };
 
-      console.log('[QuoteForm] Submitting quote with data:', this.formData);
+      if (import.meta.env.DEV) console.log('[QuoteForm] Submitting quote with data:', this.formData);
 
       // Submit quote to backend
       const result = await submitQuote(this.formData);
 
-      console.log('[QuoteForm] Submit result:', result);
+      if (import.meta.env.DEV) console.log('[QuoteForm] Submit result:', result);
 
       if (!result.success) {
         throw new Error(result.error || 'Failed to submit quote');
       }
 
-      console.log('[QuoteForm] Quote submitted successfully:', result.quote_id);
+      if (import.meta.env.DEV) console.log('[QuoteForm] Quote submitted successfully:', result.quote_id);
 
       // Store quote_id and magic_token in sessionStorage for potential use
       sessionStorage.setItem('pending_quote_id', result.quote_id);
@@ -298,7 +299,7 @@ export class QuoteForm {
       // Handle Stripe payment flow
       if (result.stripe?.action === 'redirect' && result.stripe?.checkoutUrl) {
         // Order Now mode - redirect to Stripe Checkout
-        console.log('[QuoteForm] Redirecting to Stripe Checkout:', result.stripe.checkoutUrl);
+        if (import.meta.env.DEV) console.log('[QuoteForm] Redirecting to Stripe Checkout:', result.stripe.checkoutUrl);
         window.location.href = result.stripe.checkoutUrl;
         return; // Don't show confirmation, user is being redirected
       }
@@ -307,7 +308,7 @@ export class QuoteForm {
       this.showConfirmation();
 
       // Log magic link for testing
-      console.log('[QuoteForm] Magic link (for testing):',
+      if (import.meta.env.DEV) console.log('[QuoteForm] Magic link (for testing):',
         `${window.location.origin}/onboarding/welcome.html?token=${result.magic_token}`);
 
     } catch (error) {
@@ -606,19 +607,19 @@ export class QuoteForm {
           <h3 class="mb-3">Trip Details</h3>
           <dl class="row">
             <dt class="col-sm-4">Trip Name</dt>
-            <dd class="col-sm-8">${this.formData.trip.name}</dd>
+            <dd class="col-sm-8">${escapeHtml(this.formData.trip.name)}</dd>
 
             <dt class="col-sm-4">Destination</dt>
-            <dd class="col-sm-8">${this.formData.trip.destCity}, ${this.formData.trip.destCountry}</dd>
+            <dd class="col-sm-8">${escapeHtml(this.formData.trip.destCity)}, ${escapeHtml(this.formData.trip.destCountry)}</dd>
 
             <dt class="col-sm-4">Dates</dt>
             <dd class="col-sm-8">${this.formatDate(this.formData.trip.dateStart)} - ${this.formatDate(this.formData.trip.dateEnd)}</dd>
 
             <dt class="col-sm-4">Organization</dt>
-            <dd class="col-sm-8">${this.formData.org.orgName}</dd>
+            <dd class="col-sm-8">${escapeHtml(this.formData.org.orgName)}</dd>
 
             <dt class="col-sm-4">Contact</dt>
-            <dd class="col-sm-8">${this.formData.org.role}<br>${this.formData.org.email}</dd>
+            <dd class="col-sm-8">${escapeHtml(this.formData.org.role)}<br>${escapeHtml(this.formData.org.email)}</dd>
           </dl>
         </div>
 
@@ -627,7 +628,7 @@ export class QuoteForm {
           <ol class="st-quote-next-steps-list">
             <li>
               <strong>Check Your Email</strong><br>
-              We've sent a secure one-click setup link to ${this.formData.org.email}. No password needed—just click the link to get started!
+              We've sent a secure one-click setup link to ${escapeHtml(this.formData.org.email)}. No password needed—just click the link to get started!
             </li>
             ${this.formData.checkout.mode === 'order' ? `
               <li>
@@ -637,12 +638,12 @@ export class QuoteForm {
             ` : this.formData.checkout.mode === 'invoice' ? `
               <li>
                 <strong>Invoice Delivery</strong><br>
-                We'll send an invoice to ${this.formData.org.email} within 1 business day.
+                We'll send an invoice to ${escapeHtml(this.formData.org.email)} within 1 business day.
               </li>
             ` : `
               <li>
                 <strong>Quote Delivery</strong><br>
-                You'll receive a detailed PDF quote at ${this.formData.org.email} within 2 hours.
+                You'll receive a detailed PDF quote at ${escapeHtml(this.formData.org.email)} within 2 hours.
               </li>
             `}
             <li>
@@ -676,9 +677,12 @@ export class QuoteForm {
   /**
    * Format date for display
    */
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  formatDate(dateStr) {
+    if (!dateStr) return '';
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
   }
 
   /**
@@ -861,7 +865,7 @@ export class QuoteForm {
           <div class="row">
             <div class="col-12" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Trip Name *</label>
-              <input type="text" class="st-quote-form-input" data-field="trip.name" value="${this.formData.trip.name}" placeholder="e.g., Spring 2025 Science Field Trip" required>
+              <input type="text" class="st-quote-form-input" data-field="trip.name" value="${escapeHtml(this.formData.trip.name)}" placeholder="e.g., Spring 2025 Science Field Trip" required>
             </div>
 
             <div class="col-md-6" style="margin-bottom: 2rem;">
@@ -976,22 +980,22 @@ export class QuoteForm {
 
             <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Organization Name *</label>
-              <input type="text" class="st-quote-form-input" data-field="org.orgName" value="${this.formData.org.orgName}" placeholder="Your school/organization name" required>
+              <input type="text" class="st-quote-form-input" data-field="org.orgName" value="${escapeHtml(this.formData.org.orgName)}" placeholder="Your school/organization name" required>
             </div>
 
             <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Your Role/Title *</label>
-              <input type="text" class="st-quote-form-input" data-field="org.role" value="${this.formData.org.role}" placeholder="e.g., Trip Coordinator, Principal" required>
+              <input type="text" class="st-quote-form-input" data-field="org.role" value="${escapeHtml(this.formData.org.role)}" placeholder="e.g., Trip Coordinator, Principal" required>
             </div>
 
             <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Your Email *</label>
-              <input type="email" class="st-quote-form-input" data-field="org.email" value="${this.formData.org.email}" placeholder="your@email.com" required>
+              <input type="email" class="st-quote-form-input" data-field="org.email" value="${escapeHtml(this.formData.org.email)}" placeholder="your@email.com" required>
             </div>
 
             <div class="col-md-6" style="margin-bottom: 2rem;">
               <label class="st-quote-form-label">Phone Number *</label>
-              <input type="tel" class="st-quote-form-input" data-field="org.phone" value="${this.formData.org.phone}" placeholder="(555) 123-4567" required>
+              <input type="tel" class="st-quote-form-input" data-field="org.phone" value="${escapeHtml(this.formData.org.phone)}" placeholder="(555) 123-4567" required>
             </div>
 
             <div class="col-md-6" style="padding-top: 2rem;">
@@ -1057,7 +1061,7 @@ export class QuoteForm {
                 <div class="mb-3">
                   <label class="st-quote-form-label">Billing Address *</label>
                   <div class="geocoding-search-wrapper">
-                    <input type="text" class="st-quote-form-input" id="billing-address-input" data-field="checkout.billingAddress" value="${this.formData.checkout.billingAddress}" placeholder="Search for your billing address..." autocomplete="off" required>
+                    <input type="text" class="st-quote-form-input" id="billing-address-input" data-field="checkout.billingAddress" value="${escapeHtml(this.formData.checkout.billingAddress)}" placeholder="Search for your billing address..." autocomplete="off" required>
                     <div class="geocoding-results" style="display: none;"></div>
                   </div>
                   <small class="text-muted">Start typing to search for your address</small>
@@ -1065,12 +1069,12 @@ export class QuoteForm {
 
                 <div class="mb-3">
                   <label class="st-quote-form-label">AP Email *</label>
-                  <input type="email" class="st-quote-form-input" data-field="checkout.apEmail" value="${this.formData.checkout.apEmail}" placeholder="accounts.payable@organization.com" required>
+                  <input type="email" class="st-quote-form-input" data-field="checkout.apEmail" value="${escapeHtml(this.formData.checkout.apEmail)}" placeholder="accounts.payable@organization.com" required>
                 </div>
 
                 <div class="mb-3">
                   <label class="st-quote-form-label">PO Number (Optional)</label>
-                  <input type="text" class="st-quote-form-input" data-field="checkout.poNumber" value="${this.formData.checkout.poNumber}" placeholder="PO-2025-001">
+                  <input type="text" class="st-quote-form-input" data-field="checkout.poNumber" value="${escapeHtml(this.formData.checkout.poNumber)}" placeholder="PO-2025-001">
                 </div>
               </div>
             ` : ''}
@@ -1312,9 +1316,9 @@ export class QuoteForm {
             // Display results
             if (resultsContainer) {
               resultsContainer.innerHTML = results.map(result => `
-                <div class="geocoding-result-item" data-result='${JSON.stringify(result)}'>
-                  <div class="result-name">${result.name}</div>
-                  <div class="result-address" style="font-size: var(--st-font-size-sm); color: var(--st-text-secondary); margin-top: 4px;">${result.address}</div>
+                <div class="geocoding-result-item" data-result='${escapeHtml(JSON.stringify(result))}'>
+                  <div class="result-name">${escapeHtml(result.name)}</div>
+                  <div class="result-address" style="font-size: var(--st-font-size-sm); color: var(--st-text-secondary); margin-top: 4px;">${escapeHtml(result.address)}</div>
                 </div>
               `).join('');
 
@@ -1461,7 +1465,7 @@ export class QuoteForm {
         inputId: 'quote-depCity-autocomplete',
         placeholder: 'Where is your group departing from?',
         onSelect: (location) => {
-          console.log('[QuoteForm] Departure city selected:', location);
+          if (import.meta.env.DEV) console.log('[QuoteForm] Departure city selected:', location);
           this.selectedDepLocation = location;
           this.formData.trip.depCity = location.displayName;
           this.formData.trip.depCountry = location.countryCode;
@@ -1487,7 +1491,7 @@ export class QuoteForm {
         inputId: 'quote-destCity-autocomplete',
         placeholder: 'Where is your group traveling to?',
         onSelect: (location) => {
-          console.log('[QuoteForm] Destination city selected:', location);
+          if (import.meta.env.DEV) console.log('[QuoteForm] Destination city selected:', location);
           this.selectedDestLocation = location;
           this.formData.trip.destCity = location.displayName;
           this.formData.trip.destCountry = location.countryCode;
@@ -1518,14 +1522,14 @@ export class QuoteForm {
     // Detect if either location is international
     const tripType = determineTripType(this.selectedDepLocation, this.selectedDestLocation);
 
-    console.log('[QuoteForm] Trip type detected:', tripType);
-    console.log('[QuoteForm] Current tier:', this.formData.plan.tier);
+    if (import.meta.env.DEV) console.log('[QuoteForm] Trip type detected:', tripType);
+    if (import.meta.env.DEV) console.log('[QuoteForm] Current tier:', this.formData.plan.tier);
 
     if (tripType === 'T3') {
 
       // If user selected T1 or T2, auto-upgrade to T3 and show notification
       if (this.formData.plan.tier !== 'T3' && this.formData.plan.tier) {
-        console.warn('[QuoteForm] International destination requires Tier 3, auto-upgrading');
+        if (import.meta.env.DEV) console.warn('[QuoteForm] International destination requires Tier 3, auto-upgrading');
 
         // Auto-upgrade to T3
         this.formData.plan.tier = 'T3';
@@ -1549,12 +1553,12 @@ export class QuoteForm {
         }
 
         // Show themed modal
-        console.log('[QuoteForm] About to show tier upgrade modal for:', this.selectedDestLocation.displayName);
+        if (import.meta.env.DEV) console.log('[QuoteForm] About to show tier upgrade modal for:', this.selectedDestLocation.displayName);
         setTimeout(() => {
           this.showTierUpgradeModal(this.selectedDestLocation.displayName);
         }, 100);
       } else {
-        console.log('[QuoteForm] Modal NOT shown. Conditions: tier !== T3:', this.formData.plan.tier !== 'T3', ', tier exists:', !!this.formData.plan.tier);
+        if (import.meta.env.DEV) console.log('[QuoteForm] Modal NOT shown. Conditions: tier !== T3:', this.formData.plan.tier !== 'T3', ', tier exists:', !!this.formData.plan.tier);
       }
     }
   }
@@ -1563,7 +1567,7 @@ export class QuoteForm {
    * Show themed modal for tier upgrade notification
    */
   showTierUpgradeModal(destinationName) {
-    console.log('[QuoteForm] showTierUpgradeModal called with destination:', destinationName);
+    if (import.meta.env.DEV) console.log('[QuoteForm] showTierUpgradeModal called with destination:', destinationName);
 
     // Create modal HTML
     const modalHTML = `
@@ -1576,7 +1580,7 @@ export class QuoteForm {
             <h3 class="st-modal-title">International Destination Detected</h3>
           </div>
           <div class="st-modal-body">
-            <p>Your trip includes an international destination (<strong>${destinationName}</strong>), which requires comprehensive international coverage.</p>
+            <p>Your trip includes an international destination (<strong>${escapeHtml(destinationName)}</strong>), which requires comprehensive international coverage.</p>
             <p><strong>We've automatically upgraded your selection to Tier 3 (International)</strong> to ensure you have the protection you need for international travel.</p>
           </div>
           <div class="st-modal-footer">
@@ -1590,11 +1594,11 @@ export class QuoteForm {
 
     // Insert modal into DOM
     document.body.insertAdjacentHTML('beforeend', modalHTML);
-    console.log('[QuoteForm] Modal HTML inserted into DOM');
+    if (import.meta.env.DEV) console.log('[QuoteForm] Modal HTML inserted into DOM');
 
     // Close on overlay click
     const overlay = document.getElementById('tier-upgrade-modal');
-    console.log('[QuoteForm] Modal overlay element:', overlay);
+    if (import.meta.env.DEV) console.log('[QuoteForm] Modal overlay element:', overlay);
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.remove();
@@ -1620,7 +1624,7 @@ export class QuoteForm {
       : selector;
 
     if (!container) {
-      console.error('QuoteForm: Mount target not found');
+      if (import.meta.env.DEV) console.error('QuoteForm: Mount target not found');
       return;
     }
 

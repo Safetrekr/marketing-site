@@ -17,7 +17,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: CTA Click', { ctaText, ctaLocation, ctaDestination });
+    if (import.meta.env.DEV) console.log('Analytics: CTA Click', { ctaText, ctaLocation, ctaDestination });
   }
 
   /**
@@ -31,7 +31,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Page View', { pagePath, pageTitle });
+    if (import.meta.env.DEV) console.log('Analytics: Page View', { pagePath, pageTitle });
   }
 
   /**
@@ -46,7 +46,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Form Submit', { formName, formLocation });
+    if (import.meta.env.DEV) console.log('Analytics: Form Submit', { formName, formLocation });
   }
 
   /**
@@ -61,7 +61,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Resource Download', { resourceName, resourceType });
+    if (import.meta.env.DEV) console.log('Analytics: Resource Download', { resourceName, resourceType });
   }
 
   /**
@@ -76,7 +76,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Pricing Tier Select', { tierName, tierPrice });
+    if (import.meta.env.DEV) console.log('Analytics: Pricing Tier Select', { tierName, tierPrice });
   }
 
   /**
@@ -91,7 +91,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Calculator Use', { calculatorType, calculatorResult });
+    if (import.meta.env.DEV) console.log('Analytics: Calculator Use', { calculatorType, calculatorResult });
   }
 
   /**
@@ -106,7 +106,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Video Play', { videoTitle, videoLocation });
+    if (import.meta.env.DEV) console.log('Analytics: Video Play', { videoTitle, videoLocation });
   }
 
   /**
@@ -120,7 +120,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Segment Select', { segmentName });
+    if (import.meta.env.DEV) console.log('Analytics: Segment Select', { segmentName });
   }
 
   /**
@@ -135,7 +135,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Add-on Select', { addonName, addonPrice });
+    if (import.meta.env.DEV) console.log('Analytics: Add-on Select', { addonName, addonPrice });
   }
 
   /**
@@ -150,7 +150,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Quote Request', { tripTier, addons });
+    if (import.meta.env.DEV) console.log('Analytics: Quote Request', { tripTier, addons });
   }
 
   /**
@@ -166,7 +166,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: Lead Capture', { resourceName });
+    if (import.meta.env.DEV) console.log('Analytics: Lead Capture', { resourceName });
   }
 
   /**
@@ -181,7 +181,7 @@ export class Analytics {
       });
     }
 
-    console.log('Analytics: External Link Click', { linkUrl, linkText });
+    if (import.meta.env.DEV) console.log('Analytics: External Link Click', { linkUrl, linkText });
   }
 
   /**
@@ -202,7 +202,7 @@ export class Analytics {
       }
     });
 
-    console.log(`Analytics: Initialized for page "${pageName}"`);
+    if (import.meta.env.DEV) console.log(`Analytics: Initialized for page "${pageName}"`);
   }
 }
 

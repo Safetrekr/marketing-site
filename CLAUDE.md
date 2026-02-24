@@ -10,42 +10,64 @@ npm run build    # Build to /dist
 npm run preview  # Preview production build at http://localhost:4173
 ```
 
+No linter, formatter, or test runner is configured. There are no tests.
+
 ## Architecture
 
-This is a static marketing site for Safetrekr built with **Vite + Vanilla JS + Bootstrap 5**. No framework—just ES6 modules.
+Static marketing site for Safetrekr built with **Vite + Vanilla JS + Bootstrap 5**. No framework — just ES6 modules. Uses Inter font and Material Symbols Outlined icons.
 
-### Project Structure
+### Entry Points
 
-- **Root HTML files**: 10 marketing pages (index, pricing, solutions, etc.) configured as separate Vite entry points in `vite.config.js`
-- **components/**: ES6 class-based components exported via `components/index.js`
-- **services/**: Backend integrations (Supabase, Stripe, geocoding)
-- **config/pricing.json**: Pricing tier and add-on configuration
-- **styles/**: CSS with custom properties (marketing.css, calculators.css, main.css)
+10 root HTML files, each a separate Vite entry point configured in `vite.config.js` `rollupOptions.input`. Each page has an inline `<script type="module">` that imports components from `components/index.js` and initializes them.
 
 ### Component Pattern
 
-Components are ES6 classes with a `mount()` method. Each page imports and initializes them:
+Components are ES6 classes with a `mount(selector)` method that renders HTML and attaches event listeners. All components are barrel-exported from `components/index.js`:
 
 ```javascript
 import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
-
 const header = new MarketingHeader({ currentPage: 'pricing' });
 header.mount('body');
 ```
 
-### Key Components
+### Services Layer
 
-- **QuoteForm** (`components/quote-form.js`): 5-step form with tier selection, add-ons, org info, payment. Uses `LocationAutocomplete` for geocoding.
-- **LeadCapture**: Modal for gating resource downloads
-- **TripVolumeCalculator / ROIEstimator**: Interactive pricing tools on `/pricing.html`
-- **Analytics**: GA4 event tracking wrapper
+Services use absolute import paths from root (e.g., `import supabase from '/services/supabaseClient.js'`).
 
-### Services
+- **supabaseClient.js**: Singleton Supabase client. Credentials are hardcoded (public anon key).
+- **quoteService.js**: Quote CRUD operations against Supabase `quotes` table, plus onboarding flow (create org, user, trip draft, activate quote).
+- **stripeQuoteService.js**: Three payment modes — `order` (Stripe Checkout redirect), `invoice` (Net 30 Stripe Invoice), `quote` (PDF quote with payment link). Calls Supabase Edge Functions `create-checkout-session` and `create-invoice`.
+- **geocodingService.js**: Nominatim/OpenStreetMap location search with 1req/sec rate limiting and localStorage caching. Used by `LocationAutocomplete` component.
 
-- **supabaseClient.js**: Supabase connection for lead/quote data
-- **quoteService.js**: Quote submission logic
-- **stripeQuoteService.js**: Stripe checkout integration
-- **geocodingService.js**: Location search and trip type detection (domestic vs international)
+### Quote Form Flow
+
+`QuoteForm` is the most complex component (~1500 lines). Its 5-step wizard:
+1. Tier selection (T1/T2/T3) — auto-suggested by departure/destination locations and trip dates
+2. Trip details — uses `LocationAutocomplete` for city search
+3. Add-ons — background checks priced per-adult
+4. Organization info
+5. Checkout — three modes: pay now, request invoice, request quote PDF
+
+### Pricing Configuration
+
+`config/pricing.json` defines tiers (T1=$450, T2=$750, T3=$1250), add-ons, and feature flags. Feature flags gate unreleased tiers/add-ons (currently only T1 and background checks are fully enabled via `FF_TIER_2: false`, `FF_TIER_3: false`, `FF_BG_CHECKS: true`).
+
+### Styles
+
+- **styles/main.css**: Design tokens (CSS custom properties) — brand colors start with `--st-`, light theme default with dark theme variant
+- **styles/marketing.css**: Page layout, header/footer, cards, CTAs — all classes prefixed `st-marketing-`
+- **styles/calculators.css**: Calculator-specific styles prefixed `st-calculator-`
+
+### Path Aliases
+
+Defined in `vite.config.js`: `@` maps to project root, `@components` to `./components`, `@styles` to `./styles`.
+
+## Adding a New Page
+
+1. Create `new-page.html` in project root
+2. Add entry to `vite.config.js` `rollupOptions.input`
+3. Add nav link in `components/marketing-header.js`
+4. Add footer link in `components/marketing-footer.js`
 
 ## Ecosystem Context
 
@@ -55,4 +77,4 @@ This marketing site (port 5175) is part of a larger SafeTrekr ecosystem:
 - TarvaRI Console (5174) + Backend (8000): Intelligence system
 - SafeTrekr Core API (8001): Core backend
 
-All share Supabase as the database layer.
+All share Supabase as the database layer. The quote submission flow on this site creates records that the SafeTrekr App consumes for onboarding.

@@ -24,6 +24,25 @@
   --st-marketing-subhero-size-mobile: 1.125rem;
 }
 
+/* Skip navigation */
+.st-skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--st-primary);
+  color: #fff;
+  border-radius: var(--st-radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.st-skip-nav:focus {
+  top: 16px;
+}
+
 /* ===== Marketing Page Layout ===== */
 .st-marketing-page {
   min-height: 100vh;
@@ -2587,6 +2606,30 @@
 }
 
 /* ===== Print Styles ===== */
+/* Scroll offset for sticky header */
+#calculators {
+  scroll-margin-top: 80px;
+}
+
+/* Badge grid (about page) */
+.st-badge-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--st-spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .st-badge-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .st-badge-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media print {
   .st-marketing-header,
   .st-marketing-footer,

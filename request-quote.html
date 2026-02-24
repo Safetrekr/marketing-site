@@ -11,22 +11,22 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
 
   <!-- SEO Meta Tags -->
-  <title>Request a Quote - Safetrekr Trip Safety Management</title>
-  <meta name="description" content="Get started with Safetrekr's professional trip safety management. Choose your tier, select add-ons, and request a quote for your upcoming trip.">
-  <meta name="keywords" content="trip safety quote, travel safety pricing, trip planning request, school trip quote, mission trip pricing">
+  <title>Contact Us - Safetrekr Trip Safety Management</title>
+  <meta name="description" content="Get in touch with Safetrekr. Request a sample trip package, schedule a walkthrough, or ask a question about professional trip safety management.">
+  <meta name="keywords" content="trip safety contact, travel safety demo, school trip safety, trip safety sample, safetrekr contact">
   <link rel="canonical" href="https://jessedo81.github.io/safetrekr-app/marketing/request-quote.html">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Request a Quote - Safetrekr">
-  <meta property="og:description" content="Get started with professional trip safety management. Choose your tier and request a quote.">
+  <meta property="og:title" content="Contact Us - Safetrekr">
+  <meta property="og:description" content="Request a sample trip package, schedule a walkthrough, or get in touch with our team.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jessedo81.github.io/safetrekr-app/marketing/request-quote.html">
   <meta property="og:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Request a Quote - Safetrekr">
-  <meta name="twitter:description" content="Get started with professional trip safety management. Choose your tier and request a quote.">
+  <meta name="twitter:title" content="Contact Us - Safetrekr">
+  <meta name="twitter:description" content="Request a sample trip package, schedule a walkthrough, or get in touch with our team.">
   <meta name="twitter:image" content="https://jessedo81.github.io/safetrekr-app/marketing/assets/og-image.png">
 
   <!-- Fonts -->
@@ -45,245 +45,504 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Request a Quote - Safetrekr",
-    "description": "Request a quote for professional trip safety management services",
+    "@type": "ContactPage",
+    "name": "Contact Safetrekr",
+    "description": "Get in touch with Safetrekr for professional trip safety management",
     "url": "https://jessedo81.github.io/safetrekr-app/marketing/request-quote.html",
     "mainEntity": {
-      "@type": "Service",
-      "name": "Safetrekr Trip Safety Management",
-      "provider": {
-        "@type": "Organization",
-        "name": "Safetrekr"
-      },
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Domestic Day/Overnight",
-          "price": "450",
-          "priceCurrency": "USD"
-        },
-        {
-          "@type": "Offer",
-          "name": "Multi-Day Domestic",
-          "price": "750",
-          "priceCurrency": "USD"
-        },
-        {
-          "@type": "Offer",
-          "name": "International/Complex",
-          "price": "1250",
-          "priceCurrency": "USD"
-        }
-      ]
+      "@type": "Organization",
+      "name": "Safetrekr",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "email": "sales@safetrekr.com"
+      }
     }
   }
   </script>
+
+  <style>
+    .st-contact-form {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--st-spacing-xl);
+      background: var(--st-bg-card);
+      border: 1px solid var(--st-border-subtle);
+      border-radius: var(--st-radius-lg);
+    }
+
+    .st-contact-form .st-form-group {
+      margin-bottom: var(--st-spacing-lg);
+    }
+
+    .st-contact-form label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: var(--st-spacing-xs);
+      color: var(--st-text-primary);
+      font-size: 0.9375rem;
+    }
+
+    .st-contact-form input,
+    .st-contact-form select,
+    .st-contact-form textarea {
+      width: 100%;
+      padding: var(--st-spacing-sm) var(--st-spacing-md);
+      border: 1px solid var(--st-border-subtle);
+      border-radius: var(--st-radius-md);
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--st-text-primary);
+      background: var(--st-bg-primary);
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .st-contact-form input:focus,
+    .st-contact-form select:focus,
+    .st-contact-form textarea:focus {
+      outline: none;
+      border-color: var(--st-primary);
+      box-shadow: 0 0 0 3px rgba(75, 164, 103, 0.15);
+    }
+
+    .st-contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .st-contact-form .st-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--st-spacing-md);
+    }
+
+    @media (max-width: 640px) {
+      .st-contact-form .st-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .st-contact-form .st-form-submit {
+      margin-top: var(--st-spacing-xl);
+      text-align: center;
+    }
+
+    .st-contact-form .st-form-submit button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--st-spacing-xs);
+      padding: var(--st-spacing-sm) var(--st-spacing-xl);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .st-contact-success {
+      text-align: center;
+      padding: var(--st-spacing-2xl);
+    }
+
+    .st-contact-success .material-symbols-outlined {
+      font-size: 48px;
+      color: var(--st-color-success, #22c55e);
+      margin-bottom: var(--st-spacing-md);
+    }
+
+    .st-contact-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--st-spacing-lg);
+      margin-bottom: var(--st-spacing-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .st-contact-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .st-contact-option {
+      text-align: center;
+      padding: var(--st-spacing-xl);
+      border: 1px solid var(--st-border-subtle);
+      border-radius: var(--st-radius-lg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .st-contact-option:hover {
+      border-color: var(--st-primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .st-contact-option .material-symbols-outlined {
+      font-size: 36px;
+      color: var(--st-primary);
+      margin-bottom: var(--st-spacing-sm);
+    }
+
+    .st-contact-option h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--st-spacing-xs);
+    }
+
+    .st-contact-option p {
+      font-size: 0.9375rem;
+      opacity: 0.8;
+      margin: 0;
+    }
+
+    /* Inline validation styles */
+    .st-field-error {
+      display: none;
+      color: #dc2626;
+      font-size: 0.8125rem;
+      margin-top: var(--st-spacing-xs);
+    }
+
+    .st-field-invalid {
+      border-color: #dc2626 !important;
+    }
+
+    .st-field-invalid:focus {
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+    }
+  </style>
 </head>
 <body class="st-marketing-page">
+  <a href="#main-content" class="st-skip-nav">Skip to main content</a>
 
+  <main id="main-content">
   <!-- Page Header -->
   <section class="st-marketing-section st-marketing-section-sm">
     <div class="st-marketing-container">
       <div class="st-marketing-section-header">
-        <span class="st-marketing-section-eyebrow">Get Started</span>
-        <h1 class="st-marketing-section-title">Start Your Trip</h1>
+        <span class="st-marketing-section-eyebrow">Get in Touch</span>
+        <h1 class="st-marketing-section-title">How can we help?</h1>
         <p class="st-marketing-section-subtitle">
-          Choose your trip tier, select add-ons, and get started with professional trip safety management.
-          Complete the form below or download a quote to share with your team.
+          See what a professionally reviewed trip safety package looks like, schedule a walkthrough
+          with our team, or ask us anything about Safetrekr.
         </p>
       </div>
 
-      <!-- Quote Form Container (will be populated by JavaScript) -->
-      <div id="quote-form-root"></div>
+      <!-- Quick Options -->
+      <div class="st-contact-options">
+        <div class="st-contact-option">
+          <span class="material-symbols-outlined">description</span>
+          <h3>See a Sample</h3>
+          <p>Request a sample trip package with analyst review, emergency plan, and board-ready documentation.</p>
+        </div>
+        <div class="st-contact-option">
+          <span class="material-symbols-outlined">videocam</span>
+          <h3>Schedule a Walkthrough</h3>
+          <p>See Safetrekr in action -- the Client Portal, Analyst Portal, and Traveler App experience.</p>
+        </div>
+        <div class="st-contact-option">
+          <span class="material-symbols-outlined">help</span>
+          <h3>Ask a Question</h3>
+          <p>Pricing, compliance, integration, or anything else -- our team will respond within one business day.</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form class="st-contact-form" id="contact-form" novalidate>
+        <div class="st-form-row">
+          <div class="st-form-group">
+            <label for="contact-name">Your Name *</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Jane Smith">
+            <span class="st-field-error" id="contact-name-error">Please enter your name</span>
+          </div>
+          <div class="st-form-group">
+            <label for="contact-email">Email *</label>
+            <input type="email" id="contact-email" name="email" required placeholder="jane@school.edu">
+            <span class="st-field-error" id="contact-email-error">Please enter a valid email address</span>
+          </div>
+        </div>
+
+        <div class="st-form-row">
+          <div class="st-form-group">
+            <label for="contact-org">Organization</label>
+            <input type="text" id="contact-org" name="organization" placeholder="Lincoln Elementary School">
+          </div>
+          <div class="st-form-group">
+            <label for="contact-org-type">Organization Type</label>
+            <select id="contact-org-type" name="org_type">
+              <option value="">Select...</option>
+              <option value="k12_public">K-12 Public School</option>
+              <option value="k12_private">K-12 Private School</option>
+              <option value="k12_charter">K-12 Charter School</option>
+              <option value="higher_ed">Higher Education</option>
+              <option value="church">Church / Mission Organization</option>
+              <option value="youth_sports">Youth Sports Organization</option>
+              <option value="corporate">Corporate / Business</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="st-form-group">
+          <label for="contact-interest">I'm interested in... *</label>
+          <select id="contact-interest" name="interest" required>
+            <option value="">Select...</option>
+            <option value="sample">Seeing a sample trip package</option>
+            <option value="walkthrough">Scheduling a walkthrough / demo</option>
+            <option value="pricing">Pricing for my organization</option>
+            <option value="compliance">Compliance and security questions</option>
+            <option value="pilot">Starting a pilot trip</option>
+            <option value="general">General question</option>
+          </select>
+          <span class="st-field-error" id="contact-interest-error">Please select what you are interested in</span>
+        </div>
+
+        <div class="st-form-group">
+          <label for="contact-message">Tell us more (optional)</label>
+          <textarea id="contact-message" name="message" placeholder="How many trips does your organization run per year? Any upcoming trips you're planning? Any specific questions?"></textarea>
+        </div>
+
+        <div class="st-form-submit">
+          <button type="submit" class="st-marketing-cta-primary" id="contact-submit">
+            Send Request
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Success State (hidden by default) -->
+      <div class="st-contact-form st-contact-success" id="contact-success" style="display: none;">
+        <span class="material-symbols-outlined">check_circle</span>
+        <h2 style="margin-bottom: var(--st-spacing-sm);">Request Received</h2>
+        <p style="opacity: 0.8; max-width: 480px; margin: 0 auto;">
+          Thank you for your interest in Safetrekr. Our team will respond within one business day.
+          In the meantime, feel free to explore our resources below.
+        </p>
+        <div style="margin-top: var(--st-spacing-xl);">
+          <a href="./resources.html" class="st-marketing-cta-secondary">
+            Download Free Trip Safety Checklist
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Trust Indicators -->
+  <!-- What You'll See Section -->
   <section class="st-marketing-section st-marketing-section-alt">
     <div class="st-marketing-container">
       <div class="st-marketing-section-header">
-        <h2 class="st-marketing-section-title">Why Organizations Choose Safetrekr</h2>
+        <h2 class="st-marketing-section-title">What's in a Safetrekr trip package</h2>
       </div>
 
       <div class="st-marketing-feature-grid">
         <div class="st-marketing-feature-card">
           <div class="st-marketing-feature-icon">
-            <span class="material-symbols-outlined">security</span>
+            <span class="material-symbols-outlined">verified</span>
           </div>
-          <h3 class="st-marketing-feature-title">Bank-Level Security</h3>
+          <h3 class="st-marketing-feature-title">Professional Analyst Review</h3>
           <p class="st-marketing-feature-description">
-            All data encrypted in transit and at rest. SOC 2 Type II certified. Your trip details and participant information stay secure.
+            Every trip independently reviewed across 18 safety dimensions by a trained analyst.
+            Every review decision documented with a full audit trail.
           </p>
         </div>
 
         <div class="st-marketing-feature-card">
           <div class="st-marketing-feature-icon">
-            <span class="material-symbols-outlined">verified_user</span>
+            <span class="material-symbols-outlined">emergency</span>
           </div>
-          <h3 class="st-marketing-feature-title">Professional Analysts</h3>
+          <h3 class="st-marketing-feature-title">Emergency Preparedness Plan</h3>
           <p class="st-marketing-feature-description">
-            Every trip reviewed by experienced safety professionals with backgrounds in education, risk management, and emergency response.
+            Structured plan with emergency contacts, local services, medical facilities mapped with
+            trauma levels, evacuation tiers with rally points, and recommended emergency kits.
           </p>
         </div>
 
         <div class="st-marketing-feature-card">
           <div class="st-marketing-feature-icon">
-            <span class="material-symbols-outlined">support_agent</span>
+            <span class="material-symbols-outlined">smartphone</span>
           </div>
-          <h3 class="st-marketing-feature-title">Dedicated Support</h3>
+          <h3 class="st-marketing-feature-title">Traveler App Experience</h3>
           <p class="st-marketing-feature-description">
-            Get help when you need it. Our team is available via email, phone, and live chat to answer questions and guide you through the process.
+            Live safety checklists, real-time alerts, day-by-day itineraries, and emergency information
+            delivered to every participant -- with acknowledgment tracking.
+          </p>
+        </div>
+
+        <div class="st-marketing-feature-card">
+          <div class="st-marketing-feature-icon">
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <h3 class="st-marketing-feature-title">Board-Ready Documentation</h3>
+          <p class="st-marketing-feature-description">
+            Role-based trip packets in 4 variants (traveler, chaperone, guardian, administrator)
+            with your organization's branding and complete compliance documentation.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- Direct Contact -->
   <section class="st-marketing-section">
     <div class="st-marketing-container st-marketing-container-narrow">
-      <div class="st-marketing-section-header">
-        <h2 class="st-marketing-section-title">Frequently Asked Questions</h2>
-      </div>
-
-      <div class="st-faq-list">
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>What happens after I request a quote?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>After submitting your request, you'll receive an email confirmation within minutes. If you chose "Pay Now," you'll get immediate account access. For invoice requests, we'll send an invoice within 1 business day. For quote downloads, you'll receive a PDF immediately and a follow-up call within 1 business day.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>Can I change my tier or add-ons later?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>Yes! You can add features anytime from your dashboard. If your trip complexity changes, we can adjust your tier before the analyst review begins. Just contact our support team.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>Do you offer discounts for multiple trips?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>Yes! Organizations planning 5+ trips per year qualify for volume discounts. Contact sales@safetrekr.com for custom pricing.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>What payment methods do you accept?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>We accept credit cards (Visa, Mastercard, Amex, Discover), ACH transfers, checks, and purchase orders. Payment is due before analyst review begins.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>Is there a money-back guarantee?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>Yes! If you're not satisfied with your trip packet for any reason, we'll revise it until you are or provide a full refund. No questions asked.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="st-faq-item">
-          <button class="st-faq-question" type="button">
-            <span>How long does the analyst review take?</span>
-            <span class="material-symbols-outlined">expand_more</span>
-          </button>
-          <div class="st-faq-answer">
-            <div class="st-faq-answer-content">
-              <p>Standard turnaround is 3-5 business days. For international or complex trips, allow 5-7 business days. Rush service (24 hours) is available for an additional fee.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact CTA -->
-  <section class="st-marketing-section st-marketing-section-alt">
-    <div class="st-marketing-container st-marketing-container-narrow">
       <div style="text-align: center;">
-        <h2 class="st-marketing-section-title">Have questions before you start?</h2>
+        <h2 class="st-marketing-section-title">Prefer to reach us directly?</h2>
         <p class="st-marketing-section-subtitle">
-          Our team is here to help. We'll walk you through the process and answer any questions about pricing, features, or your specific trip needs.
+          Our team is available to answer questions about pricing, compliance, implementation,
+          or anything else about trip safety management.
         </p>
         <div class="st-marketing-hero-actions" style="margin-top: var(--st-spacing-xl);">
           <a href="mailto:sales@safetrekr.com" class="st-marketing-cta-primary">
             <span class="material-symbols-outlined">email</span>
-            Email Sales
-          </a>
-          <a href="tel:+15555551234" class="st-marketing-cta-secondary">
-            <span class="material-symbols-outlined">phone</span>
-            (555) 555-1234
+            sales@safetrekr.com
           </a>
         </div>
       </div>
     </div>
   </section>
 
+  </main>
+
   <!-- JavaScript -->
   <script type="module">
-    import { MarketingHeader, MarketingFooter, QuoteForm, Analytics } from './components/index.js';
+    import { MarketingHeader, MarketingFooter, Analytics } from './components/index.js';
 
     // Initialize header
     const header = new MarketingHeader({ currentPage: 'request-quote' });
     header.mount('body');
-
-    // Initialize quote form
-    const quoteForm = new QuoteForm();
-    quoteForm.mount('#quote-form-root');
 
     // Initialize footer
     const footer = new MarketingFooter();
     footer.mount('body');
 
     // Initialize analytics
-    Analytics.init('request-quote');
+    Analytics.init('contact');
 
-    // FAQ accordion functionality
-    const faqItems = document.querySelectorAll('.st-faq-item');
-    faqItems.forEach(item => {
-      const question = item.querySelector('.st-faq-question');
-      question.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const contactSuccess = document.getElementById('contact-success');
 
-        // Close all other items
-        faqItems.forEach(otherItem => {
-          otherItem.classList.remove('active');
+    // Helper: show field error
+    function showFieldError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.add('st-field-invalid');
+      input.setAttribute('aria-invalid', 'true');
+      if (error) error.style.display = 'block';
+    }
+
+    // Helper: clear field error
+    function clearFieldError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.remove('st-field-invalid');
+      input.removeAttribute('aria-invalid');
+      if (error) error.style.display = 'none';
+    }
+
+    // Clear errors on input
+    ['contact-name', 'contact-email', 'contact-interest'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const event = el.tagName === 'SELECT' ? 'change' : 'input';
+        el.addEventListener(event, () => {
+          clearFieldError(id, id + '-error');
         });
-
-        // Toggle current item
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      });
+      }
     });
 
-    console.log('Safetrekr Request Quote Page: Initialized');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const interest = document.getElementById('contact-interest').value;
+        const submitBtn = document.getElementById('contact-submit');
+
+        // Clear all previous errors
+        clearFieldError('contact-name', 'contact-name-error');
+        clearFieldError('contact-email', 'contact-email-error');
+        clearFieldError('contact-interest', 'contact-interest-error');
+
+        // Validate required fields
+        let firstInvalid = null;
+
+        if (!name) {
+          showFieldError('contact-name', 'contact-name-error');
+          if (!firstInvalid) firstInvalid = 'contact-name';
+        }
+
+        if (!email) {
+          showFieldError('contact-email', 'contact-email-error');
+          if (!firstInvalid) firstInvalid = 'contact-email';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showFieldError('contact-email', 'contact-email-error');
+          if (!firstInvalid) firstInvalid = 'contact-email';
+        }
+
+        if (!interest) {
+          showFieldError('contact-interest', 'contact-interest-error');
+          if (!firstInvalid) firstInvalid = 'contact-interest';
+        }
+
+        if (firstInvalid) {
+          document.getElementById(firstInvalid).focus();
+          return;
+        }
+
+        // Collect form data
+        const formData = {
+          name,
+          email,
+          organization: document.getElementById('contact-org').value.trim(),
+          org_type: document.getElementById('contact-org-type').value,
+          interest,
+          message: document.getElementById('contact-message').value.trim(),
+          submitted_at: new Date().toISOString(),
+          source: 'marketing-site-contact'
+        };
+
+        try {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = 'Sending... <span class="material-symbols-outlined">hourglass_top</span>';
+
+          // Submit to Supabase
+          const { default: supabase } = await import('/services/supabaseClient.js');
+          const { error } = await supabase
+            .from('contact_inquiries')
+            .insert([formData]);
+
+          if (error) {
+            console.error('Submission error:', error);
+            // Fallback: mailto link
+            const subject = encodeURIComponent(`Safetrekr Inquiry: ${interest}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${formData.organization}\nType: ${formData.org_type}\nInterest: ${interest}\nMessage: ${formData.message}`);
+            window.location.href = `mailto:sales@safetrekr.com?subject=${subject}&body=${body}`;
+            return;
+          }
+
+          // Show success state
+          contactForm.style.display = 'none';
+          contactSuccess.style.display = 'block';
+
+          // Track analytics
+          if (window.gtag) {
+            gtag('event', 'contact_form_submit', {
+              event_category: 'conversion',
+              event_label: interest
+            });
+          }
+        } catch (err) {
+          console.error('Form submission error:', err);
+          // Fallback: mailto
+          const subject = encodeURIComponent(`Safetrekr Inquiry: ${interest}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${formData.organization}\nInterest: ${interest}\nMessage: ${formData.message}`);
+          window.location.href = `mailto:sales@safetrekr.com?subject=${subject}&body=${body}`;
+        }
+      });
+    }
+
+    if (import.meta.env.DEV) console.log('Safetrekr Contact Page: Initialized');
   </script>
 
 </body>

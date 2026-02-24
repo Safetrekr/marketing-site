@@ -289,7 +289,9 @@
   </style>
 </head>
 <body class="st-marketing-page">
+  <a href="#main-content" class="st-skip-nav">Skip to main content</a>
 
+  <main id="main-content">
   <!-- Hero Section with Segment Selector -->
   <section class="st-marketing-hero">
     <div class="st-marketing-hero-background"></div>
@@ -1259,6 +1261,7 @@
       </div>
     </section>
   </div>
+  </main>
 
   <!-- JavaScript -->
   <script type="module">
@@ -1350,7 +1353,7 @@
       segment: initialSegment
     });
 
-    console.log('Safetrekr Marketing Solutions: Initialized with segment:', initialSegment);
+    if (import.meta.env.DEV) console.log('Safetrekr Marketing Solutions: Initialized with segment:', initialSegment);
   </script>
 
 </body>

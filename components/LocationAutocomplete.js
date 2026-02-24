@@ -4,6 +4,7 @@
  */
 
 import { searchLocations, debounce } from '/services/geocodingService.js';
+import { escapeHtml } from '../utils/escapeHtml.js';
 
 export class LocationAutocomplete {
   constructor(options = {}) {
@@ -35,7 +36,7 @@ export class LocationAutocomplete {
     this.input = document.getElementById(this.options.inputId);
     
     if (!this.input) {
-      console.error(`[LocationAutocomplete] Input element not found: #${this.options.inputId}`);
+      if (import.meta.env.DEV) console.error(`[LocationAutocomplete] Input element not found: #${this.options.inputId}`);
       return;
     }
 
@@ -61,7 +62,7 @@ export class LocationAutocomplete {
 
     document.addEventListener('click', this.handleClickOutside);
 
-    console.log(`[LocationAutocomplete] Initialized for #${this.options.inputId}`);
+    if (import.meta.env.DEV) console.log(`[LocationAutocomplete] Initialized for #${this.options.inputId}`);
   }
 
   /**
@@ -178,7 +179,7 @@ export class LocationAutocomplete {
       <div class="autocomplete-item" data-index="${index}">
         <div class="autocomplete-item-main">
           <span class="material-symbols-outlined">location_on</span>
-          <span class="autocomplete-item-name">${this.escapeHtml(location.displayName)}</span>
+          <span class="autocomplete-item-name">${escapeHtml(location.displayName)}</span>
         </div>
         <div class="autocomplete-item-meta">
           <span class="badge bg-${location.isDomestic ? 'success' : 'info'}" style="font-size: 0.7rem;">
@@ -253,7 +254,7 @@ export class LocationAutocomplete {
     // Trigger callback
     this.options.onSelect(location);
 
-    console.log('[LocationAutocomplete] Location selected:', location);
+    if (import.meta.env.DEV) console.log('[LocationAutocomplete] Location selected:', location);
   }
 
   /**
@@ -297,15 +298,6 @@ export class LocationAutocomplete {
   }
 
   /**
-   * Escape HTML to prevent XSS
-   */
-  escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  /**
    * Validate selection
    */
   validate() {
@@ -334,6 +326,6 @@ export class LocationAutocomplete {
       this.dropdown.parentNode.removeChild(this.dropdown);
     }
 
-    console.log(`[LocationAutocomplete] Destroyed for #${this.options.inputId}`);
+    if (import.meta.env.DEV) console.log(`[LocationAutocomplete] Destroyed for #${this.options.inputId}`);
   }
 }

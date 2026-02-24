@@ -22,6 +22,6 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 
-console.log('[Supabase] Client initialized:', SUPABASE_URL);
+if (import.meta.env.DEV) console.log('[Supabase] Client initialized:', SUPABASE_URL);
 
 export default supabase;
