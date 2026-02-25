@@ -118,7 +118,7 @@ serve(async (req) => {
         po_number: poNumber || '',
         ap_email: apEmail || '',
       },
-      description: `SafeTrekr ${tier} - ${tripName}`,
+      description: `Safetrekr ${tier} - ${tripName}`,
       footer: poNumber ? `PO Number: ${poNumber}` : undefined,
     });
 
@@ -128,7 +128,7 @@ serve(async (req) => {
       invoice: invoice.id,
       price: priceId,
       quantity: 1,
-      description: `SafeTrekr ${tier} - ${tripName}`,
+      description: `Safetrekr ${tier} - ${tripName}`,
     });
 
     // Finalize invoice if in invoice mode

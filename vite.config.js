@@ -18,8 +18,7 @@ export default defineConfig({
         resources: path.resolve(__dirname, 'resources.html'),
         security: path.resolve(__dirname, 'security.html'),
         about: path.resolve(__dirname, 'about.html'),
-        integrations: path.resolve(__dirname, 'integrations.html'),
-        procurement: path.resolve(__dirname, 'procurement.html'),
+
         'checkout-success': path.resolve(__dirname, 'checkout-success.html'),
       },
     },

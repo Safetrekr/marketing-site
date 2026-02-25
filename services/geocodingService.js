@@ -68,7 +68,7 @@ export async function searchLocations(query, options = {}) {
     
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'SafeTrekr/1.0 (trip safety management platform)'
+        'User-Agent': 'Safetrekr/1.0 (trip safety management platform)'
       }
     });
 

@@ -1,62 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/about.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/about</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/how-it-works.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/how-it-works</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/integrations.html</loc>
-    <lastmod>2025-10-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/solutions.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/solutions</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/resources.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/resources</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/request-quote.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/contact</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/security.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/security</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/procurement.html</loc>
-    <lastmod>2025-10-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jessedo81.github.io/safetrekr-app/marketing/pricing.html</loc>
-    <lastmod>2025-10-12</lastmod>
+    <loc>https://safetrekr.com/pricing</loc>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

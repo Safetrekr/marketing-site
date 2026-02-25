@@ -35,7 +35,7 @@ export class MarketingFooter {
                 <li><a href="./how-it-works.html" class="st-marketing-footer-link">How it Works</a></li>
                 <li><a href="./solutions.html" class="st-marketing-footer-link">Solutions</a></li>
                 <li><a href="./pricing.html" class="st-marketing-footer-link">Pricing</a></li>
-                <li><a href="./integrations.html" class="st-marketing-footer-link">Integrations</a></li>
+
                 <li><a href="./request-quote.html" class="st-marketing-footer-link">Contact Us</a></li>
               </ul>
             </div>
@@ -68,7 +68,7 @@ export class MarketingFooter {
             <div class="st-marketing-footer-section">
               <h4 class="st-marketing-footer-section-title">Legal</h4>
               <ul class="st-marketing-footer-links">
-                <li><a href="./procurement.html" class="st-marketing-footer-link">Procurement</a></li>
+
                 <li><a href="./legal/terms.html" class="st-marketing-footer-link">Terms of Service <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
                 <li><a href="./legal/privacy.html" class="st-marketing-footer-link">Privacy Policy <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
                 <li><a href="./legal/dpa.html" class="st-marketing-footer-link">Data Processing <span style="font-size: 0.75em; opacity: 0.7;">(coming soon)</span></a></li>
