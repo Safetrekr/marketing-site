@@ -10,11 +10,19 @@ npm-debug.log*
 
 # OS files
 .DS_Store
+Thumbs.db
 
 # Editor
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Environment
+# Environment & secrets
 .env
-.env.local
+.env.*
+!.env.*.example
+.mcp.json
+
+# Claude
+.claude/
